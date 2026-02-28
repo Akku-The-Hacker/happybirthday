@@ -1,73 +1,85 @@
 // --- CONFIGURATION ---
-const birthdayDate = "2026-03-04T00:00:00"; // EDIT THIS DATE (YYYY-MM-DD)
-const youtubeVideoId = "dQw4w9WgXcQ"; // Replace with your YouTube Video ID
+const birthdayDate = new Date("2026-03-04T00:00:00");
+const VIDEO_ID = "dQw4w9WgXcQ"; // Your YouTube ID
 
-// --- 1. COUNTDOWN SYSTEM ---
-function updateCountdown() {
-    const target = new Date(birthdayDate).getTime();
-    const now = new Date().getTime();
-    const diff = target - now;
+// --- 1. DYNAMIC BACKGROUND SYSTEM ---
+function applyRandomBackground() {
+    const body = document.getElementById('dynamic-body');
+    const backgrounds = ['bg-pastel-collage', 'bg-night-sky', 'bg-luxury-gold', 'bg-animated-emoji'];
+    const randomBG = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+    
+    body.classList.add(randomBG);
 
-    if (diff < 0) {
-        document.getElementById('timer').innerHTML = "<h3 style='color:#ff8da1'>The Celebration Has Begun! 🎂</h3>";
-        return;
+    // If "Night Sky" is chosen, add stars
+    if (randomBG === 'bg-night-sky') {
+        for(let i=0; i<50; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.cssText = `position:fixed; width:2px; height:2px; background:white; top:${Math.random()*100}%; left:${Math.random()*100}%; opacity:${Math.random()}; border-radius:50%;`;
+            document.body.appendChild(star);
+        }
     }
-
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-    document.getElementById('days').innerText = d.toString().padStart(2, '0');
-    document.getElementById('hours').innerText = h.toString().padStart(2, '0');
-    document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
-    document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
 }
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+// --- 2. DATE LOGIC & COUNTDOWN ---
+function checkDateStatus() {
+    const now = new Date();
+    const overlay = document.getElementById('countdown-overlay');
+    const mainWrapper = document.getElementById('main-wrapper');
 
-// --- 2. REVEAL ON SCROLL (Intersection Observer) ---
-const revealOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
+    if (now < birthdayDate) {
+        // COUNTDOWN MODE
+        overlay.classList.remove('overlay-hidden');
+        mainWrapper.classList.add('content-blurred');
+        updateCountdownDisplay();
+    } else {
+        // BIRTHDAY MODE (UNLOCK)
+        overlay.classList.add('overlay-hidden');
+        mainWrapper.classList.remove('content-blurred');
+        setTimeout(() => overlay.remove(), 1000); // Clean up DOM
+    }
+}
+
+function updateCountdownDisplay() {
+    const now = new Date().getTime();
+    const diff = birthdayDate.getTime() - now;
+
+    if (diff > 0) {
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        // Update Overlay Timer
+        document.getElementById('pre-days').innerText = d.toString().padStart(2, '0');
+        document.getElementById('pre-hours').innerText = h.toString().padStart(2, '0');
+        document.getElementById('pre-minutes').innerText = m.toString().padStart(2, '0');
+        document.getElementById('pre-seconds').innerText = s.toString().padStart(2, '0');
+    }
+}
+
+// --- 3. INITIALIZATION ---
+window.onload = () => {
+    applyRandomBackground();
+    checkDateStatus();
+    setInterval(checkDateStatus, 1000); // Real-time check for midnight transition
 };
 
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            // Trigger fireworks if the last section is reached
-            if (entry.target.id === 'fireworks-section') {
-                if (typeof startFireworks === "function") startFireworks();
-            }
-        }
-    });
-}, revealOptions);
-
-document.querySelectorAll('.reveal-section').forEach(section => {
-    revealObserver.observe(section);
-});
-
-// --- 3. YOUTUBE MUSIC INTEGRATION ---
+// --- 4. YOUTUBE & SURPRISE BUTTON ---
 let player;
 function onYouTubeIframeAPIReady() {
-    // This function is ready for future full API integration
+    player = new YT.Player('player', {
+        height: '0', width: '0', videoId: VIDEO_ID,
+        playerVars: { 'loop': 1, 'playlist': VIDEO_ID, 'controls': 0 },
+        events: { 'onReady': (e) => e.target.setVolume(40) }
+    });
 }
 
-function playYouTubeMusic(videoId) {
-    const container = document.getElementById('music-container');
-    container.innerHTML = `<iframe width="0" height="0" src="https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}" frameborder="0" allow="autoplay"></iframe>`;
-}
-
-// --- 4. BUTTON BEHAVIOR ---
-document.getElementById('surprise-btn').addEventListener('click', function() {
-    // Smooth scroll to countdown
-    document.getElementById('countdown-section').scrollIntoView({ behavior: 'smooth' });
-    
-    // Future Music Trigger
-    // playYouTubeMusic(youtubeVideoId); 
+document.getElementById('surprise-btn').addEventListener('click', () => {
+    if (player && player.playVideo) player.playVideo();
+    intensifyHearts(); // Use your existing heart function
+    document.getElementById('message').scrollIntoView({ behavior: 'smooth' });
 });
 
-// --- KEEP EXISTING HEARTS/FIREWORKS LOGIC BELOW ---
-// (Ensure your existing heart/fireworks functions are pasted here)
+// --- KEEP YOUR EXISTING FIREWORKS AND HEARTS FUNCTIONS HERE ---
+// Ensure createHeart() and startFireworks() logic remains from previous versions.
