@@ -5,23 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Shona 💖</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Elegant Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
-<body class="loading">
+<body>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="heart-loader"></div>
-    </div>
-
-    <!-- Background Audio (Hidden) -->
-    <!-- Replace 'music.mp3' with your romantic track file -->
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Floating Hearts Container -->
+    <!-- Existing Hearts Container -->
     <div id="hearts-container"></div>
 
     <!-- Hero Section -->
@@ -33,46 +21,53 @@
         </div>
     </section>
 
-    <!-- Countdown Section -->
-    <section id="countdown-section" class="section hidden">
-        <h2 class="section-title">The Celebration Starts In...</h2>
-        <div id="countdown" class="countdown-grid">
-            <div class="time-box"><span id="days">00</span><small>Days</small></div>
-            <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
-            <div class="time-box"><span id="minutes">00</span><small>Mins</small></div>
-            <div class="time-box"><span id="seconds">00</span><small>Secs</small></div>
+    <!-- NEW: Countdown Section (Fade-in enabled) -->
+    <section id="countdown-section" class="reveal-section">
+        <div class="glass-card countdown-container">
+            <h2 class="section-title">The Big Day</h2>
+            <div id="timer" class="timer-grid">
+                <div class="time-unit"><span id="days">00</span><p>Days</p></div>
+                <div class="time-unit"><span id="hours">00</span><p>Hours</p></div>
+                <div class="time-unit"><span id="minutes">00</span><p>Mins</p></div>
+                <div class="time-unit"><span id="seconds">00</span><p>Secs</p></div>
+            </div>
         </div>
     </section>
 
-    <!-- Love Message Section -->
-    <section id="message" class="section hidden">
+    <!-- Love Message (Existing, Upgraded Styles) -->
+    <section id="message" class="reveal-section">
         <div class="glass-card">
-            <p>To my dearest Shona, every moment with you feels like a beautiful dream. You bring so much light into my life, and today, I want to celebrate the incredible person you are. Here's to more laughter, more love, and a lifetime of happiness together.</p>
+            <h2 class="section-title">My Heart to Yours</h2>
+            <p class="romantic-text">
+                To my dearest Shona, every moment with you feels like a beautiful dream. 
+                You bring so much light into my life, and today, I want to celebrate 
+                the incredible person you are. Here's to more laughter, more love, 
+                and a lifetime of happiness together.
+            </p>
         </div>
     </section>
 
-    <!-- Memory Gallery -->
-    <section id="gallery" class="section hidden">
+    <!-- Gallery (Existing) -->
+    <section id="gallery" class="reveal-section">
         <h2 class="section-title">Our Best Memories</h2>
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="https://picsum.photos/400/500?random=1" alt="Memory 1" class="lightbox-trigger"></div>
-            <div class="gallery-item"><img src="https://picsum.photos/400/500?random=2" alt="Memory 2" class="lightbox-trigger"></div>
-            <div class="gallery-item"><img src="https://picsum.photos/400/500?random=3" alt="Memory 3" class="lightbox-trigger"></div>
+            <div class="gallery-item"><img src="images/photo1.jpg" alt="Memory 1"></div>
+            <div class="gallery-item"><img src="images/photo2.jpg" alt="Memory 2"></div>
+            <div class="gallery-item"><img src="images/photo3.jpg" alt="Memory 3"></div>
         </div>
     </section>
 
-    <!-- Special Message & Fireworks -->
-    <section id="fireworks-section" class="section hidden">
+    <!-- Final Message & Fireworks (Existing) -->
+    <section id="fireworks-section" class="reveal-section">
         <div class="final-msg">
             <h2 class="glow-text-large">“I don’t need a perfect world… I just need you in mine.”</h2>
         </div>
         <canvas id="fireworks-canvas"></canvas>
     </section>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="modal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="modal-img">
+    <!-- Hidden YouTube Container -->
+    <div id="music-container" style="display:none;">
+        <div id="player"></div>
     </div>
 
     <script src="script.js"></script>
