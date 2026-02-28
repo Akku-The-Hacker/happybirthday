@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Shona 💖</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Elegant Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="loading">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="heart-loader"></div>
+    </div>
+
+    <!-- Background Audio (Hidden) -->
+    <!-- Replace 'music.mp3' with your romantic track file -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Hearts Container -->
+    <div id="hearts-container"></div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="full-screen">
+        <div class="hero-content">
+            <h1 class="glow-text">Happy Birthday Shona 💖</h1>
+            <p class="subtitle">A day made special because you were born.</p>
+            <button id="surprise-btn" class="btn-primary">✨ Open Your Surprise ✨</button>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section id="countdown-section" class="section hidden">
+        <h2 class="section-title">The Celebration Starts In...</h2>
+        <div id="countdown" class="countdown-grid">
+            <div class="time-box"><span id="days">00</span><small>Days</small></div>
+            <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+            <div class="time-box"><span id="minutes">00</span><small>Mins</small></div>
+            <div class="time-box"><span id="seconds">00</span><small>Secs</small></div>
+        </div>
+    </section>
+
+    <!-- Love Message Section -->
+    <section id="message" class="section hidden">
+        <div class="glass-card">
+            <p>To my dearest Shona, every moment with you feels like a beautiful dream. You bring so much light into my life, and today, I want to celebrate the incredible person you are. Here's to more laughter, more love, and a lifetime of happiness together.</p>
+        </div>
+    </section>
+
+    <!-- Memory Gallery -->
+    <section id="gallery" class="section hidden">
+        <h2 class="section-title">Our Best Memories</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://picsum.photos/400/500?random=1" alt="Memory 1" class="lightbox-trigger"></div>
+            <div class="gallery-item"><img src="https://picsum.photos/400/500?random=2" alt="Memory 2" class="lightbox-trigger"></div>
+            <div class="gallery-item"><img src="https://picsum.photos/400/500?random=3" alt="Memory 3" class="lightbox-trigger"></div>
+        </div>
+    </section>
+
+    <!-- Special Message & Fireworks -->
+    <section id="fireworks-section" class="section hidden">
+        <div class="final-msg">
+            <h2 class="glow-text-large">“I don’t need a perfect world… I just need you in mine.”</h2>
+        </div>
+        <canvas id="fireworks-canvas"></canvas>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
