@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const layer2 = document.getElementById('layer2-countdown');
     const layer3 = document.getElementById('layer3-main');
     
-    const targetDate = new Date("March 04, 2026 00:00:00").getTime();
+    const targetDate = new Date("March 04, 2020 00:00:00").getTime();
 
     // 1. PASSWORD LOGIC
     const loginBtn = document.getElementById('loginBtn');
