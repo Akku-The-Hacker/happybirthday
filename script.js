@@ -1,248 +1,178 @@
-// --- MUSIC CONFIGURATION ---
-const YOUTUBE_VIDEO_ID = "orYf6VDtj_k"; // <--- CHANGE THIS TO YOUR VIDEO ID
+document.addEventListener('DOMContentLoaded', () => {
+    const layer1 = document.getElementById('layer1-password');
+    const layer2 = document.getElementById('layer2-countdown');
+    const layer3 = document.getElementById('layer3-main');
+    
+    const targetDate = new Date("March 04, 2026 00:00:00").getTime();
 
-let player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube-player', {
-        height: '0',
-        width: '0',
-        videoId: YOUTUBE_VIDEO_ID,
-        playerVars: {
-            'autoplay': 0,
-            'loop': 1,
-            'playlist': YOUTUBE_VIDEO_ID,
-            'controls': 0
-        },
-        events: {
-            'onReady': (event) => {
-                event.target.setVolume(50); // Set volume to 50%
+    // 1. PASSWORD LOGIC
+    const loginBtn = document.getElementById('loginBtn');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginCard = document.getElementById('login-card');
+
+    function checkAccess() {
+        if (sessionStorage.getItem('unlocked') === 'true') {
+            transitionToCountdown();
+        }
+    }
+
+    loginBtn.addEventListener('click', () => {
+        if (passwordInput.value === 'Akki@7489') {
+            sessionStorage.setItem('unlocked', 'true');
+            transitionToCountdown();
+        } else {
+            loginCard.classList.add('shake');
+            setTimeout(() => loginCard.classList.remove('shake'), 400);
+            passwordInput.value = '';
+        }
+    });
+
+    function transitionToCountdown() {
+        layer1.style.opacity = '0';
+        setTimeout(() => {
+            layer1.classList.add('hidden');
+            layer2.classList.remove('hidden');
+            setTimeout(() => layer2.style.opacity = '1', 50);
+            startCountdown();
+        }, 1000);
+    }
+
+    // 2. COUNTDOWN LOGIC
+    function startCountdown() {
+        const timerInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                transitionToMain();
+                return;
+            }
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+        }, 1000);
+    }
+
+    function transitionToMain() {
+        layer2.style.opacity = '0';
+        setTimeout(() => {
+            layer2.classList.add('hidden');
+            layer3.classList.remove('hidden');
+            setTimeout(() => {
+                layer3.style.opacity = '1';
+                initScrollAnimations();
+            }, 50);
+        }, 1000);
+    }
+
+    // 3. MAIN EXPERIENCE LOGIC
+    function initScrollAnimations() {
+        // Line by line reveal
+        const revealLines = document.querySelectorAll('.reveal-line');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        revealLines.forEach(line => observer.observe(line));
+
+        // Intimate section tap
+        const memoryImg = document.getElementById('memory-img');
+        memoryImg.parentElement.addEventListener('click', () => {
+            memoryImg.classList.toggle('clear');
+        });
+
+        // Signature Underline
+        const underline = document.querySelector('.underline');
+        const signObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) underline.classList.add('grow');
+        });
+        signObserver.observe(underline);
+
+        // Fireworks Init
+        const finale = document.getElementById('finale');
+        const finaleObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) startFireworks();
+        });
+        finaleObserver.observe(finale);
+
+        // Floating Hearts in Hero
+        setInterval(createHeart, 500);
+    }
+
+    function createHeart() {
+        const container = document.querySelector('.hearts-container');
+        if (!container) return;
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+    }
+
+    // FIREWORKS CANVAS
+    function startFireworks() {
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x; this.y = y; this.color = color;
+                this.velocity = { x: (Math.random() - 0.5) * 8, y: (Math.random() - 0.5) * 8 };
+                this.alpha = 1;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+            update() {
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.01;
             }
         }
-    });
-}
 
-function startMusic() {
-    if (player && player.playVideo) {
-        player.playVideo();
+        function spawn() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const colors = ['#ff0077', '#ffb6c1', '#ffd700', '#ffffff'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            for (let i = 0; i < 30; i++) particles.push(new Particle(x, y, color));
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                if (p.alpha <= 0) particles.splice(i, 1);
+                else { p.update(); p.draw(); }
+            });
+            requestAnimationFrame(animate);
+        }
+        setInterval(spawn, 600);
+        animate();
     }
-}
 
-// --- CONFIGURATION ---
-const TARGET_DATE = new Date("March 4, 2020 00:00:00").getTime();
-const PASSWORD = "Akki@7489";
-
-// --- LAYER HANDLERS ---
-const L1 = document.getElementById('layer1-password');
-const L2 = document.getElementById('layer2-countdown');
-const L3 = document.getElementById('layer3-main');
-
-function switchLayer(from, to) {
-    from.classList.add('hidden');
-    setTimeout(() => {
-        from.style.display = 'none';
-        to.style.display = 'block';
-        setTimeout(() => to.classList.remove('hidden'), 50);
-    }, 800);
-}
-
-// --- PASSWORD SYSTEM ---
-document.getElementById('unlockBtn').addEventListener('click', handleUnlock);
-document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handleUnlock();
+    checkAccess();
 });
-
-function handleUnlock() {
-    const input = document.getElementById('passwordInput');
-    const error = document.getElementById('login-error');
-    
-    if (input.value === PASSWORD) {
-        sessionStorage.setItem('shona_unlocked', 'true');
-        checkDateAndSwitch();
-    } else {
-        input.parentElement.classList.add('shake');
-        error.classList.remove('hidden');
-        setTimeout(() => input.parentElement.classList.remove('shake'), 400);
-        input.value = "";
-    }
-}
-
-function checkDateAndSwitch() {
-    const now = new Date().getTime();
-    if (now >= TARGET_DATE) {
-        switchLayer(L1, L3);
-        initMain();
-    } else {
-        switchLayer(L1, L2);
-        startCountdown();
-    }
-}
-
-// --- COUNTDOWN SYSTEM ---
-function startCountdown() {
-    const timerBox = document.getElementById('timer');
-    
-    const interval = setInterval(() => {
-        const now = new Date().getTime();
-        const diff = TARGET_DATE - now;
-
-        if (diff <= 0) {
-            clearInterval(interval);
-            switchLayer(L2, L3);
-            initMain();
-            return;
-        }
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-        timerBox.innerHTML = `
-            <div class="time-unit"><span>${days}</span>Days</div>
-            <div class="time-unit"><span>${hours}</span>Hrs</div>
-            <div class="time-unit"><span>${mins}</span>Min</div>
-            <div class="time-unit"><span>${secs}</span>Sec</div>
-        `;
-    }, 1000);
-}
-
-// --- MAIN WEBSITE INIT ---
-function initMain() {
-    initSlideshow();
-    initMessage();
-    initGallery();
-    initPrivate();
-    initFireworks();
-}
-
-// 1. Slideshow
-function initSlideshow() {
-    const slides = document.querySelectorAll('.slide');
-    let idx = 0;
-    setInterval(() => {
-        slides[idx].classList.remove('active');
-        idx = (idx + 1) % slides.length;
-        slides[idx].classList.add('active');
-    }, 7000);
-}
-
-// 2. Typewriter Message
-function initMessage() {
-    const lines = [
-        "To my dearest Shona...",
-        "Every day with you is a gift.",
-        "You are my heart's greatest joy.",
-        "Today we celebrate the best day...",
-        "The day you were born. ❤️"
-    ];
-    const container = document.getElementById('animated-message');
-    
-    let lineIdx = 0;
-    const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && lineIdx === 0) {
-            const showLine = () => {
-                if (lineIdx < lines.length) {
-                    const p = document.createElement('p');
-                    p.innerText = lines[lineIdx];
-                    container.appendChild(p);
-                    setTimeout(() => p.classList.add('visible'), 50);
-                    lineIdx++;
-                    setTimeout(showLine, 1500);
-                }
-            };
-            showLine();
-        }
-    });
-    observer.observe(container);
-}
-
-// 3. Gallery Lightbox
-function initGallery() {
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightbox-img');
-    
-    document.querySelectorAll('.gallery-img').forEach(img => {
-        img.addEventListener('click', () => {
-            lbImg.src = img.src;
-            lb.classList.remove('hidden');
-        });
-    });
-    
-    lb.addEventListener('click', () => lb.classList.add('hidden'));
-}
-
-// 4. Private Unlock
-function initPrivate() {
-    const container = document.querySelector('.private-container');
-    const img = document.getElementById('private-img');
-    const hint = document.getElementById('private-tap-hint');
-    
-    container.addEventListener('click', () => {
-        img.classList.add('unblur');
-        hint.style.display = 'none';
-    });
-}
-
-// 5. Fireworks
-function initFireworks() {
-    const canvas = document.getElementById("fireworks");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = 300;
-
-    let particles = [];
-
-    class Particle {
-        constructor() {
-            this.reset();
-        }
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = canvas.height;
-            this.vx = Math.random() * 4 - 2;
-            this.vy = -(Math.random() * 5 + 5);
-            this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-            this.alpha = 1;
-        }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.vy += 0.1;
-            this.alpha -= 0.01;
-            if (this.alpha <= 0) this.reset();
-        }
-        draw() {
-            ctx.globalAlpha = this.alpha;
-            ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < 50; i++) particles.push(new Particle());
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animate);
-    }
-    animate();
-}
-
-// --- GLOBAL HEARTS ---
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.innerHTML = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
-    document.getElementById('hearts-container').appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
-}
-setInterval(createHeart, 600);
-
-// Session check
-if (sessionStorage.getItem('shona_unlocked') === 'true') {
-    checkDateAndSwitch();
-}
