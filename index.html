@@ -2,120 +2,146 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday Shona 💖</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 </head>
-<body class="locked"> <!-- Prevent scrolling initially -->
+<body>
 
-    <!-- PASSWORD OVERLAY SYSTEM -->
-    <div id="lock-overlay" class="lock-overlay">
-        <div class="lock-bg-hearts" id="lock-hearts"></div>
-        <div class="lock-card">
-            <div class="lock-icon">🔒</div>
-            <h2 class="lock-title">Private Surprise</h2>
-            <p class="lock-subtitle">Enter the password to unlock</p>
-            <div class="input-group">
-                <input type="password" id="passwordInput" placeholder="Password..." autocomplete="off">
-                <p id="error-msg" class="error-msg"></p>
+    <!-- 🔐 PASSWORD SCREEN -->
+    <div id="lock-screen" class="full-screen">
+        <div class="lock-overlay"></div>
+        <div class="glass-card lock-card">
+            <div class="heart-icon">💖</div>
+            <h2>Private Surprise</h2>
+            <p>Enter the password to unlock</p>
+            <div class="input-wrapper">
+                <input type="password" id="passwordField" placeholder="Enter Password...">
+                <div class="error-msg" id="errorMsg">Wrong password... Try again 💔</div>
             </div>
-            <button id="unlockBtn" class="premium-btn unlock-btn">Unlock Experience</button>
+            <button id="unlockBtn" class="glow-btn">Unlock My Heart</button>
         </div>
     </div>
 
-    <!-- YouTube Hidden Player -->
-    <div id="youtube-player"></div>
+    <!-- 🎵 MUSIC CONTROL -->
+    <div id="music-container">
+        <div id="youtube-player"></div>
+        <button id="musicToggle" class="music-fab">
+            <span class="icon">🎵</span>
+        </button>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hearts-container" id="hearts-container"></div>
-        <div class="hero-content">
-            <h1 class="glow-text">Happy Birthday Shona 💖</h1>
-            <p class="subtitle">A day made special because you were born.</p>
-            <button id="startBtn" class="premium-btn">✨ Open Your Surprise ✨</button>
-        </div>
-    </section>
+    <!-- 📱 MAIN CONTENT (Initially Hidden) -->
+    <main id="main-content" class="hidden">
 
-    <!-- Countdown Section -->
-    <section class="countdown-section fade-in-up" id="countdown-trigger">
-        <h2 class="section-title">The Celebration Begins In...</h2>
-        <div class="countdown-container">
-            <div class="count-card">
-                <span id="days">00</span>
-                <p>Days</p>
+        <!-- 1️⃣ HERO SLIDESHOW SECTION -->
+        <section id="hero" class="vh-section">
+            <div class="slideshow-container">
+                <div class="slide active" style="background-image: url('CPL1.jpg');"></div>
+                <div class="slide" style="background-image: url('CPL2.jpg');"></div>
+                <div class="slide" style="background-image: url('CPL3.jpg');"></div>
+                <div class="slide" style="background-image: url('CPL4.jpg');"></div>
             </div>
-            <div class="count-card">
-                <span id="hours">00</span>
-                <p>Hours</p>
+            <div class="overlay-gradient"></div>
+            <div class="content-box">
+                <h1 class="hero-title">Happy Birthday Shona 💖</h1>
+                <button class="scroll-btn" onclick="document.getElementById('countdown').scrollIntoView()">Open My Heart</button>
             </div>
-            <div class="count-card">
-                <span id="minutes">00</span>
-                <p>Minutes</p>
+            <div class="floating-hearts" id="hero-hearts"></div>
+        </section>
+
+        <!-- 2️⃣ COUNTDOWN SECTION -->
+        <section id="countdown" class="vh-section" style="background-image: url('CPL5.jpg');">
+            <div class="overlay-blur"></div>
+            <div class="content-box">
+                <div id="timer-wrapper">
+                    <h2 class="section-title">Counting Down To Your Day...</h2>
+                    <div class="timer">
+                        <div class="time-block"><span id="days">00</span><p>Days</p></div>
+                        <div class="time-block"><span id="hours">00</span><p>Hours</p></div>
+                        <div class="time-block"><span id="minutes">00</span><p>Mins</p></div>
+                        <div class="time-block"><span id="seconds">00</span><p>Secs</p></div>
+                    </div>
+                </div>
+                <div id="birthday-msg" class="hidden">
+                    <h2 class="hero-title pulse">It’s Your Day Shona ❤️</h2>
+                </div>
+                <div class="shayari-box">
+                    <p class="shayari">"Teri muskurahat se chamakti hai duniya meri,<br>Tere hone se hi mukammal hai zindagi meri..."</p>
+                </div>
             </div>
-            <div class="count-card">
-                <span id="seconds">00</span>
-                <p>Seconds</p>
+        </section>
+
+        <!-- 3️⃣ LOVE MESSAGE SECTION -->
+        <section id="love-letter" class="vh-section" style="background-image: url('CPL6.jpg');">
+            <div class="overlay-dark"></div>
+            <div class="letter-content glass-card">
+                <div id="typed-text"></div>
             </div>
-        </div>
-    </section>
+            <div class="sparkles" id="sparkle-container"></div>
+        </section>
 
-    <!-- Shayari Section -->
-    <section class="shayari-section fade-in-up">
-        <div class="shayari-content">
-            <p class="poetic-text">
-                "Teri muskurahat se chamakti hai duniya meri,<br>
-                Tere hone se hi mukammal hai zindagi meri...<br>
-                Khuda kare tujhe har khushi mil jaye,<br>
-                Kyuki teri khushi mein hi basi hai jaan meri."
-            </p>
-        </div>
-    </section>
+        <!-- 4️⃣ GALLERY SECTION -->
+        <section id="gallery" class="scroll-section">
+            <h2 class="gallery-title">Our Beautiful Memories</h2>
+            <div class="gallery-stack">
+                <img src="CPL7.jpg" class="gallery-card" alt="Memory">
+                <img src="CPL8.jpg" class="gallery-card" alt="Memory">
+                <img src="CPL9.jpg" class="gallery-card" alt="Memory">
+                <img src="IMG_20260223_155313.jpg" class="gallery-card" alt="Memory">
+                <img src="IMG_20260224_151237.jpg" class="gallery-card" alt="Memory">
+            </div>
+        </section>
 
-    <!-- Love Message Section -->
-    <section class="message-section fade-in-up">
-        <div class="message-card">
-            <h2 class="section-title">My Heart's Message</h2>
-            <p>
-                To the most beautiful soul I know, today is a celebration of the light you bring into my life. Every moment spent with you feels like a beautiful dream I never want to wake up from. You are my peace, my joy, and my greatest blessing. May your year be as wonderful as the love you give so effortlessly.
-            </p>
-        </div>
-    </section>
+        <!-- 5️⃣ ONLY HER SECTION -->
+        <section id="only-her" class="vh-section">
+            <div class="her-slides">
+                <div class="her-slide active" style="background-image: url('Single1.jpg');">
+                    <div class="caption">The most beautiful girl in the world...</div>
+                </div>
+                <div class="her-slide" style="background-image: url('Single2.jpg');">
+                    <div class="caption">...And she is all mine. ❤️</div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Memory Gallery -->
-    <section class="gallery-section fade-in-up">
-        <h2 class="section-title">Captured Moments</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="images/photo1.jpg" alt="Memory 1" onerror="this.src='https://via.placeholder.com/600x800?text=Our+Memory+1'"></div>
-            <div class="gallery-item"><img src="images/photo2.jpg" alt="Memory 2" onerror="this.src='https://via.placeholder.com/600x800?text=Our+Memory+2'"></div>
-            <div class="gallery-item"><img src="images/photo3.jpg" alt="Memory 3" onerror="this.src='https://via.placeholder.com/600x800?text=Our+Memory+3'"></div>
-            <div class="gallery-item"><img src="images/photo4.jpg" alt="Memory 4" onerror="this.src='https://via.placeholder.com/600x800?text=Our+Memory+4'"></div>
-            <div class="gallery-item"><img src="images/photo5.jpg" alt="Memory 5" onerror="this.src='https://via.placeholder.com/600x800?text=Our+Memory+5'"></div>
-            <div class="gallery-item"><img src="images/photo6.jpg" alt="Memory 6" onerror="this.src='https://via.placeholder.com/600x800?text=Our+Memory+6'"></div>
-        </div>
-    </section>
+        <!-- 6️⃣ SPECIAL MEMORY SECTION -->
+        <section id="forever" class="vh-section" style="background-image: url('Name.jpg');">
+            <div class="overlay-blur"></div>
+            <div class="content-box">
+                <h2 class="forever-title">Our Forever Story ❤️</h2>
+                <div class="underline"></div>
+            </div>
+        </section>
 
-    <!-- Special Message Section -->
-    <section class="special-quote-section fade-in-up">
-        <h2 class="glowing-quote">“I don’t need a perfect world… I just need you in mine.”</h2>
-    </section>
+        <!-- 7️⃣ PRIVATE MEMORY SECTION -->
+        <section id="private" class="vh-section">
+            <div class="private-card" onclick="this.classList.toggle('unlocked')">
+                <img src="Hicckey.jpg" alt="Secret">
+                <div class="private-overlay">
+                    <span>Tap to reveal... 😘</span>
+                    <p>Our Naughty Memory</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- Finale Section -->
-    <section class="finale-section" id="finale">
-        <canvas id="fireworksCanvas"></canvas>
-        <div class="finale-content fade-in-up">
-            <h2 class="script-font">Forever Yours.</h2>
-            <p>Happy Birthday, My Love.</p>
-        </div>
-    </section>
+        <!-- 8️⃣ FINALE SECTION -->
+        <section id="finale" class="vh-section">
+            <canvas id="fireworksCanvas"></canvas>
+            <div class="content-box">
+                <h1 class="finale-text">Happy Birthday My Shona ❤️</h1>
+                <p class="finale-sub">I love you more than words can say.</p>
+            </div>
+        </section>
 
-    <!-- Lightbox Modal -->
+    </main>
+
+    <!-- LIGHTBOX MODAL -->
     <div id="lightbox" class="lightbox">
         <span class="close-lightbox">&times;</span>
-        <img class="lightbox-content" id="lightbox-img">
+        <img class="lightbox-img" src="" alt="Zoomed">
     </div>
 
     <script src="script.js"></script>
