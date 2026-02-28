@@ -1,3 +1,32 @@
+// --- MUSIC CONFIGURATION ---
+const YOUTUBE_VIDEO_ID = "orYf6VDtj_k"; // <--- CHANGE THIS TO YOUR VIDEO ID
+
+let player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube-player', {
+        height: '0',
+        width: '0',
+        videoId: YOUTUBE_VIDEO_ID,
+        playerVars: {
+            'autoplay': 0,
+            'loop': 1,
+            'playlist': YOUTUBE_VIDEO_ID,
+            'controls': 0
+        },
+        events: {
+            'onReady': (event) => {
+                event.target.setVolume(50); // Set volume to 50%
+            }
+        }
+    });
+}
+
+function startMusic() {
+    if (player && player.playVideo) {
+        player.playVideo();
+    }
+}
+
 // --- CONFIGURATION ---
 const TARGET_DATE = new Date("March 4, 2020 00:00:00").getTime();
 const PASSWORD = "Akki@7489";
