@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-const TARGET_DATE = new Date("March 4, 2026 00:00:00").getTime();
+const TARGET_DATE = new Date("March 4, 2020 00:00:00").getTime();
 const PASSWORD = "Akki@7489";
 
 // --- LAYER HANDLERS ---
