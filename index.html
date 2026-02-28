@@ -3,139 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday Shona 💖</title>
+    <title>For My Shona ❤️</title>
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- LAYER 1: PASSWORD LOCK -->
-    <div id="layer1-password" class="layer">
-        <div class="image-container">
-            <img src="images/Baby.jpg" alt="Baby" class="layer-image">
-            <div class="overlay-box glass">
-                <div class="lock-icon">🔒</div>
-                <h2>Private Surprise</h2>
-                <p>Enter password to unlock my heart</p>
-                <input type="password" id="passwordInput" placeholder="Password...">
-                <button id="unlockBtn">Unlock Experience</button>
-                <p id="login-error" class="error-text hidden">Wrong password... Try again 💔</p>
+    <!-- LAYER 1: PASSWORD -->
+    <div id="layer1-password" class="layer active">
+        <div class="section-wrapper">
+            <img src="images/Flower1.jpg" class="bg-img" alt="Rose">
+            <div class="overlay"></div>
+            <div class="content-center">
+                <div class="glass-card" id="login-card">
+                    <p class="poetic-text">“Some things bloom only for one person…”</p>
+                    <input type="password" id="passwordInput" placeholder="Enter Password..." autocomplete="off">
+                    <button id="loginBtn">Unlock Heart</button>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- LAYER 2: COUNTDOWN -->
     <div id="layer2-countdown" class="layer hidden">
-        <div class="image-container">
-            <img src="images/CPL5.jpg" alt="Countdown" class="layer-image">
-            <div class="overlay-box glass">
-                <h2 class="section-heading">Counting Down...</h2>
-                <div id="timer" class="timer-display">
-                    <!-- Timer injected via JS -->
-                </div>
-                <div class="shayari-container">
-                    <p class="shayari">"Teri muskurahat se chamakti hai duniya meri,<br>Tere hone se hi mukammal hai zindagi meri..."</p>
+        <div class="section-wrapper">
+            <img src="images/Flower2.jpg" class="bg-img" alt="Flowers">
+            <div class="overlay"></div>
+            <div class="content-center">
+                <div class="timer-container">
+                    <div id="countdown-timer">
+                        <div class="time-block"><span id="days">00</span><label>Days</label></div>
+                        <div class="time-block"><span id="hours">00</span><label>Hours</label></div>
+                        <div class="time-block"><span id="minutes">00</span><label>Mins</label></div>
+                        <div class="time-block"><span id="seconds">00</span><label>Secs</label></div>
+                    </div>
+                    <p class="shayari-text">
+                        “Har pal jo tere naam ho jaaye,<br>
+                        Wohi meri zindagi ka sabse haseen ehsaas hai…”
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- LAYER 3: MAIN WEBSITE -->
+    <!-- LAYER 3: MAIN EXPERIENCE -->
     <div id="layer3-main" class="layer hidden">
         
-        <!-- 1️⃣ HERO SLIDESHOW -->
-        <section class="slideshow-section">
-            <div class="slides-container">
-                <img src="images/CPL1.jpg" class="slide active">
-                <img src="images/CPL2.jpg" class="slide">
-                <img src="images/CPL3.jpg" class="slide">
-                <img src="images/CPL4.jpg" class="slide">
-            </div>
-            <div class="slideshow-overlay">
-                <h1 class="hero-text">Happy Birthday Shona 💖</h1>
+        <!-- HERO SECTION -->
+        <section class="section-wrapper">
+            <img src="images/Handhold.jpg" class="bg-img">
+            <div class="overlay"></div>
+            <div class="content-center">
+                <h1 class="hero-title">Happy Birthday Shona 💖</h1>
+                <p class="hero-sub">Aaj ka din sirf tumhaare naam...</p>
+                <div class="hearts-container"></div>
             </div>
         </section>
 
-        <!-- 2️⃣ LOVE MESSAGE -->
-        <section class="message-section">
-            <div class="image-container">
-                <img src="images/CPL6.jpg" class="layer-image">
-                <div class="message-overlay glass">
-                    <div id="animated-message" class="typewriter-text">
-                        <!-- Text injected via JS -->
-                    </div>
+        <!-- SHAYARI SECTION -->
+        <section class="section-wrapper">
+            <img src="images/Tea.jpg" class="bg-img">
+            <div class="overlay dark"></div>
+            <div class="content-center">
+                <div class="reveal-container">
+                    <p class="reveal-line">Tumhari ek muskurahat se,</p>
+                    <p class="reveal-line">Meri duniya roshan hoti hai...</p>
+                    <p class="reveal-line">Chai ki chuskiyon jaisa sukoon,</p>
+                    <p class="reveal-line">Sirf tumhare saath milta hai.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 3️⃣ GALLERY -->
-        <section class="gallery-section">
-            <h2 class="section-title">Our Best Moments</h2>
-            <div class="gallery-grid">
-                <img src="images/CPL7.jpg" class="gallery-img">
-                <img src="images/CPL8.jpg" class="gallery-img">
-                <img src="images/CPL9.jpg" class="gallery-img">
-                <img src="images/IMG_20260223_155313.jpg" class="gallery-img">
-                <img src="images/IMG_20260224_151237.jpg" class="gallery-img">
-            </div>
-        </section>
-
-        <!-- 4️⃣ ONLY HER -->
-        <section class="only-her">
-            <div class="image-container">
-                <img src="images/Single1.jpg" class="layer-image">
-                <div class="caption-overlay">You define beauty...</div>
-            </div>
-            <div class="image-container">
-                <img src="images/Single2.jpg" class="layer-image">
-                <div class="caption-overlay">Purest soul I've ever known ❤️</div>
-            </div>
-        </section>
-
-        <!-- 5️⃣ MEMORY SECTION -->
-        <section class="memory-section">
-            <div class="image-container">
-                <img src="images/Name.jpg" class="layer-image">
-                <div class="memory-overlay">
-                    <h2 class="forever-text">Our Forever Story ❤️</h2>
-                    <div class="line"></div>
+        <!-- LOVE LETTER SECTION -->
+        <section class="section-wrapper">
+            <img src="images/HandonHand.jpg" class="bg-img">
+            <div class="overlay"></div>
+            <div class="content-left">
+                <div class="letter-box">
+                    <p class="letter-text fade-in-up">
+                        Dear Shona,<br><br>
+                        Kabhi socha nahi tha ki zindagi itni khoobsurat ho sakti hai. 
+                        Tumhare aane se har din ek naya tyohaar ban gaya hai. 
+                        Bas hamesha mere saath rehna...
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- 6️⃣ PRIVATE MEMORY -->
-        <section class="private-section">
-            <div class="private-container">
-                <img src="images/Hicckey.jpg" id="private-img" class="blurred-img">
-                <div id="private-tap-hint" class="tap-hint">Tap to reveal... 😘</div>
+        <!-- INTIMATE MEMORY SECTION -->
+        <section class="section-wrapper" id="intimate-section">
+            <img src="images/Hikkey.jpg" class="bg-img blur-img" id="memory-img">
+            <div class="overlay"></div>
+            <div class="content-center">
+                <div class="memory-text">
+                    <p>“Kuch yaadein kabhi dhundhli nahi hoti…”</p>
+                    <small>(Tap to see clearly)</small>
+                </div>
             </div>
         </section>
 
-        <!-- 7️⃣ FINALE -->
-        <section id="finale" class="finale-section">
-            <canvas id="fireworks"></canvas>
-            <div class="finale-content">
-                <h2 class="finale-text">Happy Birthday My Shona ❤️</h2>
-                <div class="heart-pulse">❤️</div>
+        <!-- SIGNATURE SECTION -->
+        <section class="section-wrapper">
+            <img src="images/Name.jpg" class="bg-img">
+            <div class="overlay"></div>
+            <div class="content-center">
+                <div class="signature-container">
+                    <h2 class="story-title">Our Forever Story ❤️</h2>
+                    <div class="underline"></div>
+                    <p class="sign-name">– Akki</p>
+                </div>
             </div>
         </section>
-    </div>
 
-    <!-- LIGHTBOX -->
-    <div id="lightbox" class="lightbox hidden">
-        <span class="close-lightbox">&times;</span>
-        <img src="" id="lightbox-img">
-    </div>
+        <!-- FINALE SECTION -->
+        <section class="section-wrapper finale-bg" id="finale">
+            <canvas id="fireworksCanvas"></canvas>
+            <div class="content-center">
+                <h1 class="glow-text">Happy Birthday My Shona ❤️</h1>
+            </div>
+        </section>
 
-    <!-- BACKGROUND HEARTS -->
-    <div id="hearts-container"></div>
+    </div>
 
     <script src="script.js"></script>
-<!-- Hidden YouTube Player -->
-    <div id="youtube-player" style="display:none;"></div>
-
-    <!-- YouTube API Script (Place this BELOW your script.js) -->
-    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
