@@ -1,7 +1,7 @@
 // CONFIGURATION
 const BIRTHDAY_DATE = "March 4, 2026 00:00:00";
 const PASSWORD = "Akki@7489";
-const YOUTUBE_ID = "l482T0yNkeo"; // Replace with your favorite romantic song ID
+const YOUTUBE_ID = "l482T0yNkeo"; // Change this to your YouTube Video ID
 
 // DOM ELEMENTS
 const lockScreen = document.getElementById('lock-screen');
@@ -10,13 +10,7 @@ const passwordField = document.getElementById('passwordField');
 const unlockBtn = document.getElementById('unlockBtn');
 const errorMsg = document.getElementById('errorMsg');
 
-// --- 1. PASSWORD SYSTEM ---
-function checkUnlock() {
-    if (sessionStorage.getItem('unlocked') === 'true') {
-        showMainContent();
-    }
-}
-
+// --- 🔐 PASSWORD LOGIC ---
 unlockBtn.addEventListener('click', () => {
     if (passwordField.value === PASSWORD) {
         sessionStorage.setItem('unlocked', 'true');
@@ -27,33 +21,26 @@ unlockBtn.addEventListener('click', () => {
             showMainContent();
         }, 1000);
     } else {
-        passwordField.parentElement.classList.add('shake');
+        passwordField.classList.add('shake');
         errorMsg.style.display = 'block';
-        setTimeout(() => {
-            passwordField.parentElement.classList.remove('shake');
-        }, 400);
+        setTimeout(() => passwordField.classList.remove('shake'), 400);
+        passwordField.value = "";
     }
 });
 
 function showMainContent() {
-    lockScreen.classList.add('hidden');
     mainContent.classList.remove('hidden');
     initApp();
 }
 
-// --- 2. MUSIC SYSTEM (YouTube API) ---
+// --- 🎵 MUSIC (YOUTUBE API) ---
 let player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-player', {
-        height: '0',
-        width: '0',
+        height: '0', width: '0',
         videoId: YOUTUBE_ID,
         playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': YOUTUBE_ID },
-        events: {
-            'onReady': (event) => {
-                event.target.mute(); // Autoplay requires mute in many browsers
-            }
-        }
+        events: { 'onReady': (e) => e.target.mute() }
     });
 }
 
@@ -66,27 +53,35 @@ document.getElementById('musicToggle').addEventListener('click', () => {
     }
 });
 
-// --- 3. HERO SLIDESHOW ---
+// --- 📸 SLIDESHOW ---
 function initSlideshow() {
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
+    const slides = document.querySelectorAll('#hero .slide');
+    let current = 0;
     setInterval(() => {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active');
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
     }, 7000);
 }
 
-// --- 4. COUNTDOWN SYSTEM ---
+function initHerSlides() {
+    const slides = document.querySelectorAll('.her-slide');
+    let current = 0;
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 4000);
+}
+
+// --- ⏳ COUNTDOWN ---
 function initCountdown() {
     const target = new Date(BIRTHDAY_DATE).getTime();
-    
-    const timerFunc = setInterval(() => {
+    setInterval(() => {
         const now = new Date().getTime();
         const diff = target - now;
 
         if (diff <= 0) {
-            clearInterval(timerFunc);
             document.getElementById('timer-wrapper').classList.add('hidden');
             document.getElementById('birthday-msg').classList.remove('hidden');
             return;
@@ -104,7 +99,7 @@ function initCountdown() {
     }, 1000);
 }
 
-// --- 5. TYPEWRITER EFFECT ---
+// --- ✍️ TYPEWRITER ---
 function initTypewriter() {
     const text = "To the most amazing person in my life... Every day feels like a blessing with you. You are my joy, my peace, and my home. Today is all about you. Happy Birthday Shona! 💖";
     const container = document.getElementById('typed-text');
@@ -122,24 +117,11 @@ function initTypewriter() {
             type();
             observer.disconnect();
         }
-    });
+    }, { threshold: 0.5 });
     observer.observe(document.getElementById('love-letter'));
 }
 
-// --- 6. FLOATING HEARTS ---
-function createHeart(containerId) {
-    const container = document.getElementById(containerId);
-    const heart = document.createElement('div');
-    heart.className = 'heart-particle';
-    heart.innerHTML = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-    heart.style.duration = (Math.random() * 3 + 2) + 's';
-    container.appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
-}
-
-// --- 7. FIREWORKS ---
+// --- ✨ FIREWORKS ---
 function initFireworks() {
     const canvas = document.getElementById('fireworksCanvas');
     const ctx = canvas.getContext('2d');
@@ -155,16 +137,10 @@ function initFireworks() {
         }
         draw() {
             ctx.globalAlpha = this.alpha;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = this.color; ctx.fill();
         }
-        update() {
-            this.x += this.velocity.x;
-            this.y += this.velocity.y;
-            this.alpha -= 0.01;
-        }
+        update() { this.x += this.velocity.x; this.y += this.velocity.y; this.alpha -= 0.01; }
     }
 
     function animate() {
@@ -188,7 +164,7 @@ function initFireworks() {
     observer.observe(document.getElementById('finale'));
 }
 
-// --- 8. LIGHTBOX ---
+// --- 🖼️ LIGHTBOX ---
 function initGallery() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
@@ -201,18 +177,19 @@ function initGallery() {
     document.querySelector('.close-lightbox').onclick = () => lightbox.style.display = 'none';
 }
 
-// --- 9. ONLY HER TRANSITION ---
-function initHerSlides() {
-    const slides = document.querySelectorAll('.her-slide');
-    let current = 0;
-    setInterval(() => {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-    }, 4000);
+// --- ❤️ HEART PARTICLES ---
+function createHeart(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const heart = document.createElement('div');
+    heart.className = 'heart-particle';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    container.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
 }
 
-// INITIALIZE APP
 function initApp() {
     initSlideshow();
     initCountdown();
@@ -223,4 +200,6 @@ function initApp() {
     setInterval(() => createHeart('hero-hearts'), 600);
 }
 
-window.onload = checkUnlock;
+window.onload = () => {
+    if (sessionStorage.getItem('unlocked') === 'true') showMainContent();
+};
