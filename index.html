@@ -10,141 +10,127 @@
 </head>
 <body>
 
-    <!-- 🔐 PASSWORD SCREEN -->
-    <div id="lock-screen" class="full-screen">
-        <div class="lock-overlay"></div>
-        <div class="glass-card lock-card">
-            <div class="heart-icon">💖</div>
-            <h2>Private Surprise</h2>
-            <p>Enter the password to unlock</p>
-            <div class="input-wrapper">
-                <input type="password" id="passwordField" placeholder="Enter Password...">
-                <div class="error-msg" id="errorMsg">Wrong password... Try again 💔</div>
+    <!-- LAYER 1: PASSWORD LOCK -->
+    <div id="layer1-password" class="layer">
+        <div class="image-container">
+            <img src="images/Baby.jpg" alt="Baby" class="layer-image">
+            <div class="overlay-box glass">
+                <div class="lock-icon">🔒</div>
+                <h2>Private Surprise</h2>
+                <p>Enter password to unlock my heart</p>
+                <input type="password" id="passwordInput" placeholder="Password...">
+                <button id="unlockBtn">Unlock Experience</button>
+                <p id="login-error" class="error-text hidden">Wrong password... Try again 💔</p>
             </div>
-            <button id="unlockBtn" class="glow-btn">Unlock My Heart</button>
         </div>
     </div>
 
-    <!-- 🎵 MUSIC CONTROL -->
-    <div id="music-container">
-        <div id="youtube-player"></div>
-        <button id="musicToggle" class="music-fab">
-            <span class="icon">🎵</span>
-        </button>
-    </div>
-
-    <!-- 📱 MAIN CONTENT -->
-    <main id="main-content" class="hidden">
-
-        <!-- 1️⃣ HERO SLIDESHOW SECTION -->
-        <section id="hero" class="vh-section">
-            <div class="slideshow-container">
-                <div class="slide active" style="background-image: url('images/CPL1.jpg');"></div>
-                <div class="slide" style="background-image: url('images/CPL2.jpg');"></div>
-                <div class="slide" style="background-image: url('images/CPL3.jpg');"></div>
-                <div class="slide" style="background-image: url('images/CPL4.jpg');"></div>
-            </div>
-            <div class="overlay-gradient"></div>
-            <div class="content-box">
-                <h1 class="hero-title">Happy Birthday Shona 💖</h1>
-                <button class="scroll-btn" onclick="document.getElementById('countdown').scrollIntoView({behavior: 'smooth'})">Open My Heart</button>
-            </div>
-            <div class="floating-hearts" id="hero-hearts"></div>
-        </section>
-
-        <!-- 2️⃣ COUNTDOWN SECTION -->
-        <section id="countdown" class="vh-section" style="background-image: url('images/CPL5.jpg');">
-            <div class="overlay-blur"></div>
-            <div class="content-box">
-                <div id="timer-wrapper">
-                    <h2 class="section-title">Counting Down To Your Day...</h2>
-                    <div class="timer">
-                        <div class="time-block"><span id="days">00</span><p>Days</p></div>
-                        <div class="time-block"><span id="hours">00</span><p>Hours</p></div>
-                        <div class="time-block"><span id="minutes">00</span><p>Mins</p></div>
-                        <div class="time-block"><span id="seconds">00</span><p>Secs</p></div>
-                    </div>
+    <!-- LAYER 2: COUNTDOWN -->
+    <div id="layer2-countdown" class="layer hidden">
+        <div class="image-container">
+            <img src="images/CPL5.jpg" alt="Countdown" class="layer-image">
+            <div class="overlay-box glass">
+                <h2 class="section-heading">Counting Down...</h2>
+                <div id="timer" class="timer-display">
+                    <!-- Timer injected via JS -->
                 </div>
-                <div id="birthday-msg" class="hidden">
-                    <h2 class="hero-title pulse">It’s Your Day Shona ❤️</h2>
-                </div>
-                <div class="shayari-box">
+                <div class="shayari-container">
                     <p class="shayari">"Teri muskurahat se chamakti hai duniya meri,<br>Tere hone se hi mukammal hai zindagi meri..."</p>
                 </div>
             </div>
-        </section>
-
-        <!-- 3️⃣ LOVE MESSAGE SECTION -->
-        <section id="love-letter" class="vh-section" style="background-image: url('images/CPL6.jpg');">
-            <div class="overlay-dark"></div>
-            <div class="letter-content glass-card">
-                <div id="typed-text"></div>
-            </div>
-            <div class="sparkles" id="sparkle-container"></div>
-        </section>
-
-        <!-- 4️⃣ GALLERY SECTION -->
-        <section id="gallery" class="scroll-section">
-            <h2 class="gallery-title">Our Beautiful Memories</h2>
-            <div class="gallery-stack">
-                <img src="images/CPL7.jpg" class="gallery-card" alt="Memory">
-                <img src="images/CPL8.jpg" class="gallery-card" alt="Memory">
-                <img src="images/CPL9.jpg" class="gallery-card" alt="Memory">
-                <img src="images/IMG_20260223_155313.jpg" class="gallery-card" alt="Memory">
-                <img src="images/IMG_20260224_151237.jpg" class="gallery-card" alt="Memory">
-            </div>
-        </section>
-
-        <!-- 5️⃣ ONLY HER SECTION -->
-        <section id="only-her" class="vh-section">
-            <div class="her-slides">
-                <div class="her-slide active" style="background-image: url('images/Single1.jpg');">
-                    <div class="caption">The most beautiful girl in the world...</div>
-                </div>
-                <div class="her-slide" style="background-image: url('images/Single2.jpg');">
-                    <div class="caption">...And she is all mine. ❤️</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6️⃣ SPECIAL MEMORY SECTION -->
-        <section id="forever" class="vh-section" style="background-image: url('images/Name.jpg');">
-            <div class="overlay-blur"></div>
-            <div class="content-box">
-                <h2 class="forever-title">Our Forever Story ❤️</h2>
-                <div class="underline"></div>
-            </div>
-        </section>
-
-        <!-- 7️⃣ PRIVATE MEMORY SECTION -->
-        <section id="private" class="vh-section">
-            <div class="private-card" onclick="this.classList.toggle('unlocked')">
-                <img src="images/Hicckey.jpg" alt="Secret">
-                <div class="private-overlay">
-                    <span>Tap to reveal... 😘</span>
-                    <p>Our Naughty Memory</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 8️⃣ FINALE SECTION -->
-        <section id="finale" class="vh-section">
-            <canvas id="fireworksCanvas"></canvas>
-            <div class="content-box">
-                <h1 class="finale-text">Happy Birthday My Shona ❤️</h1>
-                <p class="finale-sub">I love you more than words can say.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- LIGHTBOX MODAL -->
-    <div id="lightbox" class="lightbox">
-        <span class="close-lightbox">&times;</span>
-        <img class="lightbox-img" src="" alt="Zoomed">
+        </div>
     </div>
 
+    <!-- LAYER 3: MAIN WEBSITE -->
+    <div id="layer3-main" class="layer hidden">
+        
+        <!-- 1️⃣ HERO SLIDESHOW -->
+        <section class="slideshow-section">
+            <div class="slides-container">
+                <img src="images/CPL1.jpg" class="slide active">
+                <img src="images/CPL2.jpg" class="slide">
+                <img src="images/CPL3.jpg" class="slide">
+                <img src="images/CPL4.jpg" class="slide">
+            </div>
+            <div class="slideshow-overlay">
+                <h1 class="hero-text">Happy Birthday Shona 💖</h1>
+            </div>
+        </section>
+
+        <!-- 2️⃣ LOVE MESSAGE -->
+        <section class="message-section">
+            <div class="image-container">
+                <img src="images/CPL6.jpg" class="layer-image">
+                <div class="message-overlay glass">
+                    <div id="animated-message" class="typewriter-text">
+                        <!-- Text injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3️⃣ GALLERY -->
+        <section class="gallery-section">
+            <h2 class="section-title">Our Best Moments</h2>
+            <div class="gallery-grid">
+                <img src="images/CPL7.jpg" class="gallery-img">
+                <img src="images/CPL8.jpg" class="gallery-img">
+                <img src="images/CPL9.jpg" class="gallery-img">
+                <img src="images/IMG_20260223_155313.jpg" class="gallery-img">
+                <img src="images/IMG_20260224_151237.jpg" class="gallery-img">
+            </div>
+        </section>
+
+        <!-- 4️⃣ ONLY HER -->
+        <section class="only-her">
+            <div class="image-container">
+                <img src="images/Single1.jpg" class="layer-image">
+                <div class="caption-overlay">You define beauty...</div>
+            </div>
+            <div class="image-container">
+                <img src="images/Single2.jpg" class="layer-image">
+                <div class="caption-overlay">Purest soul I've ever known ❤️</div>
+            </div>
+        </section>
+
+        <!-- 5️⃣ MEMORY SECTION -->
+        <section class="memory-section">
+            <div class="image-container">
+                <img src="images/Name.jpg" class="layer-image">
+                <div class="memory-overlay">
+                    <h2 class="forever-text">Our Forever Story ❤️</h2>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6️⃣ PRIVATE MEMORY -->
+        <section class="private-section">
+            <div class="private-container">
+                <img src="images/Hicckey.jpg" id="private-img" class="blurred-img">
+                <div id="private-tap-hint" class="tap-hint">Tap to reveal... 😘</div>
+            </div>
+        </section>
+
+        <!-- 7️⃣ FINALE -->
+        <section id="finale" class="finale-section">
+            <canvas id="fireworks"></canvas>
+            <div class="finale-content">
+                <h2 class="finale-text">Happy Birthday My Shona ❤️</h2>
+                <div class="heart-pulse">❤️</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox hidden">
+        <span class="close-lightbox">&times;</span>
+        <img src="" id="lightbox-img">
+    </div>
+
+    <!-- BACKGROUND HEARTS -->
+    <div id="hearts-container"></div>
+
     <script src="script.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
