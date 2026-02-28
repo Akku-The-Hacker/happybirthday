@@ -1,7 +1,6 @@
 :root {
     --pink: #ff85a2;
     --rose-gold: #e5b0a3;
-    --soft-purple: #9b59b6;
     --white: #ffffff;
     --glass: rgba(255, 255, 255, 0.2);
 }
@@ -35,8 +34,8 @@ body {
 .lock-overlay {
     position: absolute;
     width: 100%; height: 100%;
-    background: url('Baby.jpg') center/cover no-repeat;
-    filter: blur(8px) brightness(0.6);
+    background: url('images/Baby.jpg') center/cover no-repeat;
+    filter: blur(10px) brightness(0.6);
 }
 
 .glass-card {
@@ -51,8 +50,6 @@ body {
     box-shadow: 0 10px 32px rgba(0, 0, 0, 0.3);
 }
 
-.input-wrapper { margin: 20px 0; }
-
 #passwordField {
     width: 100%;
     padding: 12px;
@@ -62,12 +59,7 @@ body {
     color: white;
     text-align: center;
     outline: none;
-    transition: 0.3s;
-}
-
-#passwordField:focus {
-    border-color: var(--pink);
-    box-shadow: 0 0 15px var(--pink);
+    margin: 20px 0;
 }
 
 .glow-btn {
@@ -78,7 +70,6 @@ body {
     border-radius: 25px;
     font-weight: 600;
     box-shadow: 0 0 20px var(--pink);
-    transition: 0.3s;
 }
 
 .error-msg {
@@ -95,13 +86,12 @@ body {
     75% { transform: translateX(10px); }
 }
 
-/* 🌸 LAYOUT RULES */
+/* 🌸 SECTIONS */
 .vh-section {
     position: relative;
     height: 100vh;
     width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-size: cover;
@@ -111,43 +101,32 @@ body {
 
 .content-box { position: relative; z-index: 5; text-align: center; width: 90%; }
 
-/* 1️⃣ HERO SLIDESHOW */
+/* 1️⃣ SLIDESHOW */
 .slideshow-container, .slide {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
 }
-
 .slide {
     background-size: cover;
     background-position: center;
     opacity: 0;
     transition: opacity 1.5s ease-in-out, transform 7s linear;
 }
-
-.slide.active {
-    opacity: 1;
-    transform: scale(1.08);
-}
-
+.slide.active { opacity: 1; transform: scale(1.1); }
 .overlay-gradient {
     position: absolute;
-    bottom: 0; left: 0; width: 100%; height: 50%;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    bottom: 0; left: 0; width: 100%; height: 60%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
 }
 
-.hero-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3rem;
-    color: var(--white);
-    text-shadow: 0 0 10px var(--pink);
-}
+.hero-title { font-family: 'Great Vibes', cursive; font-size: 3rem; text-shadow: 0 0 15px var(--pink); }
 
 .scroll-btn {
-    margin-top: 20px;
+    margin-top: 30px;
     background: transparent;
-    border: 2px solid var(--white);
+    border: 2px solid white;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 25px;
     border-radius: 25px;
 }
 
@@ -155,64 +134,22 @@ body {
 .overlay-blur {
     position: absolute;
     width: 100%; height: 100%;
-    backdrop-filter: blur(4px);
-    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+    background: rgba(0,0,0,0.4);
 }
+.timer { display: flex; justify-content: space-around; margin-top: 30px; }
+.time-block span { font-size: 2.2rem; font-weight: bold; display: block; color: var(--pink); }
 
-.timer {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
-}
-
-.time-block span {
-    font-size: 2rem;
-    font-weight: bold;
-    display: block;
-}
-
-.shayari-box { margin-top: 40px; }
-.shayari {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-/* 3️⃣ LOVE LETTER */
-.letter-content {
-    width: 85%;
-    min-height: 300px;
-    padding: 40px 20px;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
+.shayari { font-family: 'Playfair Display', serif; font-style: italic; margin-top: 40px; line-height: 1.6; }
 
 /* 4️⃣ GALLERY */
-.scroll-section { padding: 50px 0; background: #000; text-align: center; }
-.gallery-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; margin-bottom: 30px; }
-.gallery-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-}
-
-.gallery-card {
-    width: 90%;
-    max-width: 400px;
-    border-radius: 18px;
-    box-shadow: 0 10px 20px rgba(255, 133, 162, 0.3);
-    transition: 0.3s;
-}
+.scroll-section { padding: 60px 0; background: #000; text-align: center; }
+.gallery-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; margin-bottom: 40px; }
+.gallery-stack { display: flex; flex-direction: column; align-items: center; gap: 40px; }
+.gallery-card { width: 90%; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 133, 162, 0.2); }
 
 /* 5️⃣ ONLY HER */
-.her-slides, .her-slide {
-    position: absolute;
-    width: 100%; height: 100%;
-}
-
+.her-slides, .her-slide { position: absolute; width: 100%; height: 100%; }
 .her-slide {
     background-size: cover;
     background-position: center;
@@ -220,35 +157,15 @@ body {
     transition: opacity 1s;
     display: flex;
     align-items: flex-end;
-    padding-bottom: 100px;
     justify-content: center;
+    padding-bottom: 80px;
 }
-
 .her-slide.active { opacity: 1; }
+.caption { background: rgba(0,0,0,0.6); padding: 15px; border-radius: 10px; font-size: 1.1rem; }
 
-.caption {
-    background: rgba(0,0,0,0.5);
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 1.2rem;
-}
-
-/* 7️⃣ PRIVATE MEMORY */
-.private-card {
-    width: 80%;
-    aspect-ratio: 3/4;
-    position: relative;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.private-card img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: blur(30px);
-    transition: 0.5s;
-}
-
+/* 7️⃣ PRIVATE */
+.private-card { width: 85%; aspect-ratio: 3/4; position: relative; border-radius: 20px; overflow: hidden; }
+.private-card img { width: 100%; height: 100%; object-fit: cover; filter: blur(40px); transition: 0.6s; }
 .private-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -256,55 +173,44 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.4);
-    transition: 0.5s;
+    background: rgba(0,0,0,0.5);
 }
-
 .private-card.unlocked img { filter: blur(0); }
-.private-card.unlocked .private-overlay { opacity: 0; pointer-events: none; }
+.private-card.unlocked .private-overlay { opacity: 0; }
 
-/* 8️⃣ FINALE */
-#finale { background: #000; }
-#fireworksCanvas { position: absolute; width: 100%; height: 100%; }
-
-/* 🎵 MUSIC FAB */
+/* 🎵 MUSIC */
 .music-fab {
     position: fixed;
-    bottom: 20px; right: 20px;
-    width: 50px; height: 50px;
+    bottom: 25px; right: 25px;
+    width: 55px; height: 55px;
     border-radius: 50%;
     background: var(--pink);
     border: none;
     z-index: 1000;
-    box-shadow: 0 0 15px var(--pink);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 0 20px var(--pink);
+    color: white; font-size: 1.5rem;
 }
 
 /* LIGHTBOX */
 .lightbox {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.95);
     display: none;
     z-index: 10001;
     justify-content: center;
     align-items: center;
 }
-
-.lightbox-img { max-width: 95%; max-height: 80%; border-radius: 10px; }
+.lightbox-img { max-width: 90%; max-height: 80%; border-radius: 10px; }
 .close-lightbox { position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; }
 
-/* FLOATING HEARTS */
+/* PARTICLES */
 .heart-particle {
     position: absolute;
     color: var(--pink);
     animation: floatUp 4s linear forwards;
     pointer-events: none;
-    z-index: 1;
 }
-
 @keyframes floatUp {
     0% { transform: translateY(0) scale(1); opacity: 1; }
     100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
