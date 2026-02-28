@@ -1,237 +1,148 @@
 :root {
-    --dusty-pink: #d63384;
-    --rose-gold: #b76e79;
-    --soft-cream: #f8f9fa;
-    --neon-pink: #ff007f;
-    --glass: rgba(255, 255, 255, 0.15);
+    --pink: #ff2d75;
+    --rose-gold: #e5b1b1;
+    --glass-bg: rgba(0, 0, 0, 0.75);
+    --gold: #ffd700;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background-color: #121212;
-    color: var(--soft-cream);
+    background: #000;
     font-family: 'Poppins', sans-serif;
+    color: #fff;
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
-.script-font {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3.5rem;
-}
-
-/* Transitions */
+/* Layer Management */
 .layer {
-    transition: opacity 1s ease-in-out, visibility 1s;
-    height: 100vh;
-    width: 100%;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    transition: opacity 1.2s ease, visibility 1.2s;
     z-index: 10;
 }
 
-.layer.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
+.layer.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.layer.active { opacity: 1; visibility: visible; }
 
-.layer.active {
-    opacity: 1;
-    visibility: visible;
-}
+.script-font { font-family: 'Great Vibes', cursive; }
 
-/* Layer 1 Styles */
+/* LAYER 1: PASSWORD SCREEN */
 #layer1-password {
     background: url('images/Flower1.jpg') center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
-}
-
-.glass-card {
-    background: var(--glass);
-    backdrop-filter: blur(15px);
-    padding: 2.5rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-    z-index: 2;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-}
-
-#passwordInput {
-    width: 100%;
-    padding: 12px;
-    margin: 20px 0;
-    background: transparent;
-    border: 2px solid var(--rose-gold);
-    border-radius: 50px;
-    color: white;
-    text-align: center;
-    outline: none;
-    box-shadow: 0 0 10px var(--dusty-pink);
-}
-
-/* Layer 2 Styles */
-#layer2-countdown {
-    background: url('images/Flower2.jpg') center/cover;
-}
-
-.pink-purple-gradient {
-    background: linear-gradient(45deg, rgba(214, 51, 132, 0.3), rgba(111, 66, 193, 0.3));
-    animation: gradientMove 10s infinite alternate;
-}
-
-@keyframes gradientMove {
-    0% { filter: hue-rotate(0deg); }
-    100% { filter: hue-rotate(45deg); }
-}
-
-.timer-grid {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-}
-
-.time-card {
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    padding: 15px;
-    border-radius: 15px;
-    min-width: 80px;
-    text-align: center;
-    box-shadow: 0 0 15px var(--neon-pink);
-}
-
-.time-card span {
-    font-size: 2rem;
-    font-weight: bold;
-    display: block;
-}
-
-.separator {
-    font-size: 2rem;
-    color: var(--neon-pink);
-    animation: blink 1s infinite;
-}
-
-.shayari-box {
-    margin-top: 50px;
-    font-style: italic;
-    font-size: 1.2rem;
-    padding: 20px;
-    background: linear-gradient(90deg, #ff9a9e, #fad0c4, #ffd1ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    max-width: 80%;
-    text-align: center;
-}
-
-/* Layer 3 Logic */
-#layer3-main {
-    position: relative;
-    height: auto;
-    overflow-y: scroll;
-    z-index: 5;
-}
-
-.v-section {
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
+    display: flex; justify-content: center; align-items: center;
 }
 
 .dark-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.6);
 }
 
-.content {
-    position: relative;
-    z-index: 5;
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    width: 85%; max-width: 400px;
+    position: relative; z-index: 2;
 }
 
-/* Special Memory Blur */
-.blurred-bg {
-    filter: blur(10px);
-    transition: filter 1s ease;
-    cursor: pointer;
+input[type="password"] {
+    width: 100%; padding: 12px; margin: 20px 0;
+    background: transparent; border: 2px solid var(--pink);
+    border-radius: 30px; color: #fff; text-align: center;
+    outline: none; box-shadow: 0 0 10px var(--pink);
 }
 
-.blurred-bg.active-reveal {
-    filter: blur(0px);
+button {
+    background: var(--pink); border: none; padding: 12px 30px;
+    border-radius: 30px; color: white; font-weight: 600;
+    cursor: pointer; width: 100%; transition: 0.3s;
 }
 
-/* Animations */
-.shake { animation: shake 0.4s; }
+/* LAYER 2: COUNTDOWN */
+#layer2-countdown {
+    background: url('images/Flower2.jpg') center/cover;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.countdown-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(40,10,25,0.85) 100%);
+}
+
+.timer-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 15px; margin: 30px 0; width: 100%;
+}
+
+@media (min-width: 500px) { .timer-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.time-card {
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid var(--pink);
+    border-radius: 15px; padding: 15px 5px; text-align: center;
+}
+
+.time-card span {
+    font-size: 2.4rem; font-weight: 800;
+    color: #fff; text-shadow: 0 0 10px var(--pink);
+}
+
+.time-card p { font-size: 0.75rem; color: var(--rose-gold); text-transform: uppercase; }
+
+.shayari-box {
+    padding: 20px; border-left: 3px solid var(--pink);
+    background: rgba(255,255,255,0.05); margin-top: 20px;
+}
+
+/* LAYER 3: MAIN */
+#layer3-main { overflow-y: scroll; position: relative; height: 100vh; z-index: 5; }
+
+.scroll-section {
+    height: 100vh; width: 100%;
+    position: relative; background-size: cover; background-position: center;
+    display: flex; justify-content: center; align-items: center;
+    text-align: center;
+}
+
+.section-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.45); }
+.section-overlay.more-dark { background: rgba(0,0,0,0.7); }
+.section-overlay.intense-dark { background: rgba(0,0,0,0.85); transition: 0.8s; }
+
+.content-reveal { opacity: 0; transform: translateY(40px); transition: 1.2s ease-out; position: relative; z-index: 5; padding: 20px;}
+.content-reveal.active { opacity: 1; transform: translateY(0); }
+
+/* Custom Intimate Blur Logic */
+#memory-sec.revealed .section-overlay.intense-dark { background: rgba(0,0,0,0.3); }
+
+/* Animation Utils */
+.shake { animation: shake 0.5s; }
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-10px); }
     75% { transform: translateX(10px); }
 }
 
-@keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.1; } }
-
-.reveal { opacity: 0; transform: translateY(30px); transition: 1s; }
-.reveal.show { opacity: 1; transform: translateY(0); }
-
-/* Signature line animation */
-.signature-line {
-    width: 0;
-    height: 2px;
-    background: var(--rose-gold);
-    margin: 10px auto;
-    transition: width 1.5s ease;
-}
-.show .signature-line { width: 150px; }
-
-/* Finale Styles */
-.finale-section {
-    background: linear-gradient(to top, #0f0c29, #302b63, #24243e);
-}
-canvas { position: absolute; inset: 0; pointer-events: none; }
-.glow-text {
-    text-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink);
-    font-size: 4rem;
-}
-
-#music-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-}
 .music-btn {
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    border: 1px solid white;
-    padding: 15px;
-    border-radius: 50%;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
+    position: fixed; bottom: 20px; right: 20px;
+    z-index: 100; background: rgba(255, 45, 117, 0.6);
+    backdrop-filter: blur(10px); border: 1px solid white;
+    padding: 10px 20px; border-radius: 50px; color: white; cursor: pointer;
 }
+
+.signature-underline { width: 0; height: 2px; background: var(--pink); margin: 5px auto; transition: 1.5s ease 0.5s; }
+.content-reveal.active .signature-underline { width: 120px; }
+
+canvas { position: absolute; top: 0; left: 0; pointer-events: none; }
+.finale-bg { background: radial-gradient(circle, #200122, #000000); }
+.gold-text { color: var(--gold); }
+.finale-text { font-size: 3rem; text-shadow: 0 0 20px var(--pink); }
+
+/* Poetry reveal */
+.poem-line { opacity: 0; transform: translateY(10px); transition: 0.8s; }
+.poetry-container.active .poem-line { opacity: 1; transform: translateY(0); margin-bottom: 5px;}
