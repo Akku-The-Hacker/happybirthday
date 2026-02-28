@@ -1,49 +1,5 @@
-:root {
-    --pink: #f8c8dc;
-    --rose-gold: #b76e79;
-    --cream: #fffdf5;
-    --dark: #121212;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    background: var(--dark);
-    font-family: 'Poppins', sans-serif;
-    color: var(--cream);
-    overflow-x: hidden;
-}
-
-/* Layer Transitions */
-.layer {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100vh;
-    transition: opacity 1.2s ease, visibility 1.2s;
-    z-index: 10;
-}
-
-.layer.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-#layer3-main {
-    position: relative; /* Allows scrolling */
-    height: auto;
-}
-
-/* Full Screen Backgrounds */
-.full-bg, .abs-img {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
-.v-section {
+/* --- LAYER 2: ADVANCED STYLING --- */
+.countdown-container {
     position: relative;
     width: 100%;
     height: 100vh;
@@ -53,111 +9,128 @@ body {
     overflow: hidden;
 }
 
-/* Overlays */
-.overlay-dark { background: rgba(0,0,0,0.4); position: absolute; inset: 0; }
-.overlay-darker { background: rgba(0,0,0,0.7); position: absolute; inset: 0; }
-.overlay-gradient { background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8)); position: absolute; inset: 0; }
+/* Pink-Purple Animated Overlay */
+.animated-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #ff007766, #9d00ff66, #ff80bf66, #7000ff66);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+    z-index: 1;
+}
 
-/* Password Screen */
-.glass-content {
-    height: 100%;
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Glassmorphism Timer Boxes */
+.glass-timer-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    z-index: 5;
+    margin-bottom: 40px;
 }
 
-.card {
+.timer-box {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
-    padding: 40px 30px;
-    border-radius: 30px;
-    border: 1px solid rgba(255,255,255,0.2);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 15px 10px;
+    width: 75px;
     text-align: center;
-    width: 85%;
-    max-width: 350px;
+    box-shadow: 0 0 20px rgba(255, 0, 119, 0.4);
 }
 
-.quote { font-family: 'Dancing Script', cursive; font-size: 1.5rem; margin-bottom: 30px; }
-
-#passwordInput {
-    width: 100%;
-    padding: 12px;
-    border-radius: 50px;
-    border: 1px solid var(--rose-gold);
-    background: transparent;
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
-    outline: none;
-}
-
-#unlockBtn {
-    background: var(--rose-gold);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-weight: 600;
-}
-
-/* Timer */
-#timer { display: flex; gap: 15px; margin-bottom: 30px; }
-.t-segment span { display: block; font-size: 2.2rem; font-family: 'Playfair Display', serif; color: var(--pink); }
-.t-segment label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
-.shayari { font-family: 'Dancing Script', cursive; font-size: 1.3rem; line-height: 1.6; }
-
-/* Main Content Styles */
-.v-content { text-align: center; width: 90%; z-index: 5; }
-.v-content-left { padding: 40px; z-index: 5; width: 100%; }
-
-.hero-title { font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--pink); }
-
-.letter-paper {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.4rem;
-    line-height: 1.8;
-    max-width: 400px;
-    animation: fadeIn 2s ease;
-}
-
-.reveal-text {
+.timer-box span {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 10px #ff0077, 0 0 20px #ff0077;
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    margin: 15px 0;
+}
+
+.timer-box label {
+    font-size: 0.65rem;
+    color: var(--pink);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Neon Pulse Animation */
+.pulse-num {
+    animation: softPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes softPulse {
+    from { transform: scale(1); opacity: 0.9; }
+    to { transform: scale(1.08); opacity: 1; }
+}
+
+/* Heartbeat Separators */
+.separator {
+    font-size: 1.2rem;
+    color: #ff0077;
+    animation: heartBeat 1.2s infinite;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(0.8); }
+    15% { transform: scale(1.2); }
+    30% { transform: scale(0.9); }
+    45% { transform: scale(1.3); }
+    60% { transform: scale(1); }
+}
+
+/* Random Shayari Style */
+.shayari-gradient-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-align: center;
+    padding: 0 20px;
+    background: linear-gradient(to right, #fff, #f8c8dc, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     opacity: 0;
     transform: translateY(20px);
-    transition: 1s;
+    animation: smoothFadeIn 2s forwards 1s;
+    z-index: 5;
 }
 
-.reveal-text.active { opacity: 1; transform: translateY(0); }
-
-/* Intimate Section */
-.blur-reveal { filter: blur(25px); transition: 2s filter ease; }
-.blur-reveal.clear { filter: blur(0); }
-.reveal-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: 1px solid white;
-    background: transparent;
-    color: white;
-    border-radius: 50px;
+@keyframes smoothFadeIn {
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Finale */
-.finale { background: #000; }
-.glow-text {
+/* Floating Particles */
+.particle {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(1px);
+    z-index: 2;
+    animation: floatParticle 10s linear infinite;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    50% { opacity: 0.7; }
+    100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
+}
+
+.waiting-text {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
-    color: white;
-    text-shadow: 0 0 10px var(--rose-gold), 0 0 20px var(--rose-gold);
-}
-
-/* Animations */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-.shake { animation: shake 0.4s; }
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    z-index: 5;
 }
