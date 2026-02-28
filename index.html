@@ -2,114 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For My Shona ❤️</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts: Elegant Script & Clean Modern Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Optional Music Controls -->
-    <div id="music-container">
-        <button id="music-toggle" class="music-btn">🎵</button>
-        <div id="player" class="hidden"></div> <!-- YouTube Iframe Placeholder -->
-    </div>
-
     <!-- LAYER 1: PASSWORD -->
     <section id="layer1-password" class="layer active">
-        <div class="overlay"></div>
-        <div class="glass-card">
-            <p class="subtitle">Some things bloom only for one person…</p>
-            <input type="password" id="passwordInput" placeholder="Enter password...">
-            <button onclick="checkPassword()">Unlock My Heart</button>
-            <p id="error-msg" class="error hidden">Wrong password… Try again 💔</p>
+        <div class="dark-overlay"></div>
+        <div class="glass-card login-card">
+            <h2 class="script-font">Welcome</h2>
+            <p class="prompt-text">“Some things bloom only for one person…”</p>
+            <input type="password" id="passwordInput" placeholder="Enter password..." autocomplete="off">
+            <button onclick="checkPassword()" id="unlockBtn">Unlock My Heart</button>
+            <p id="error-msg" class="error-text hidden">Wrong password… Try again 💔</p>
         </div>
     </section>
 
-    <!-- LAYER 2: COUNTDOWN -->
+    <!-- LAYER 2: COUNTDOWN (High Visibility Mode) -->
     <section id="layer2-countdown" class="layer hidden">
-        <div class="overlay pink-purple-gradient"></div>
-        <div id="particles-js"></div>
+        <div class="countdown-overlay"></div>
+        <div class="sparkles"></div>
         
-        <div class="countdown-content">
+        <div class="container">
+            <h2 class="script-font gold-text">Counting down to your day...</h2>
+            
             <div class="timer-grid">
                 <div class="time-card"><span id="days">00</span><p>💖 Days</p></div>
-                <div class="separator">:</div>
                 <div class="time-card"><span id="hours">00</span><p>💫 Hours</p></div>
-                <div class="separator">:</div>
                 <div class="time-card"><span id="minutes">00</span><p>⏳ Minutes</p></div>
-                <div class="separator">:</div>
                 <div class="time-card"><span id="seconds">00</span><p>✨ Seconds</p></div>
             </div>
 
-            <div id="shayari-container" class="shayari-box">
-                <!-- Random Shayari Injected via JS -->
+            <div class="shayari-box">
+                <p id="shayari-text"></p>
             </div>
         </div>
     </section>
 
-    <!-- LAYER 3: MAIN EXPERIENCE -->
+    <!-- LAYER 3: MAIN EMOTIONAL EXPERIENCE -->
     <main id="layer3-main" class="layer hidden">
         
-        <!-- Hero Section -->
-        <section class="v-section" style="background-image: url('images/Handhold.jpg');">
-            <div class="dark-overlay"></div>
-            <div class="floating-hearts"></div>
-            <div class="content reveal">
-                <h1 class="script-font">Happy Birthday Shona 💖</h1>
-                <p>Aaj ka din sirf tumhaare naam…</p>
+        <!-- Music Button -->
+        <div id="music-container">
+            <button id="music-toggle" class="music-btn">🎵 Play Music</button>
+        </div>
+
+        <!-- 3.1 Hero Section -->
+        <section class="scroll-section" style="background-image: url('images/Handhold.jpg');">
+            <div class="section-overlay"></div>
+            <div class="content-reveal">
+                <h1 class="script-font hero-title">Happy Birthday Shona 💖</h1>
+                <p class="sub-hero">Aaj ka din sirf tumhaare naam…</p>
             </div>
+            <div class="heart-animation"></div>
         </section>
 
-        <!-- Shayari Section -->
-        <section class="v-section" style="background-image: url('images/Tea.jpg');">
-            <div class="dark-overlay"></div>
-            <div class="content poetry-reveal">
+        <!-- 3.2 Poetry Section -->
+        <section class="scroll-section" style="background-image: url('images/Tea.jpg');">
+            <div class="section-overlay more-dark"></div>
+            <div class="content-reveal poetry-container">
                 <p class="poem-line">Ek cup chai,</p>
                 <p class="poem-line">Aur tumhara saath...</p>
                 <p class="poem-line">Isse zyada khubsurat</p>
-                <p class="poem-line">Kya hogi baat?</p>
+                <p class="poem-line">Kya hogi baat? ☕❤️</p>
             </div>
         </section>
 
-        <!-- Love Letter Section -->
-        <section class="v-section" style="background-image: url('images/HandonHand.jpg');">
-            <div class="dark-overlay"></div>
-            <div class="content reveal letter-container">
+        <!-- 3.3 Love Letter -->
+        <section class="scroll-section" style="background-image: url('images/HandonHand.jpg');">
+            <div class="section-overlay"></div>
+            <div class="content-reveal letter-card">
                 <h2 class="script-font">Dear Shona,</h2>
                 <p>Kabhi socha nahi tha ki zindagi itni khoobsurat ho sakti hai... Tumse milne se lekar aaj tak, har pal mere dil ki dhadkan ban gaya hai.</p>
-                <p>I promise to hold your hand through every high and low.</p>
+                <p>Har muskurahat mein tum ho, har dua mein tum ho.</p>
             </div>
         </section>
 
-        <!-- Intimate Memory Section -->
-        <section class="v-section blurred-bg" id="intimate-sec" style="background-image: url('images/Hikkey.jpg');">
-            <div class="dark-overlay"></div>
-            <div class="content">
-                <p class="tap-hint">Kuch yaadein kabhi dhundhli nahi hoti… <br> <span>(Tap to clear)</span></p>
+        <!-- 3.4 Intimate Memory -->
+        <section class="scroll-section blur-trigger" id="memory-sec" style="background-image: url('images/Hikkey.jpg');">
+            <div class="section-overlay intense-dark"></div>
+            <div class="content-reveal">
+                <p class="tap-hint">Kuch yaadein kabhi dhundhli nahi hoti… <br> <span>(Tap to see clearly)</span></p>
             </div>
         </section>
 
-        <!-- Signature Section -->
-        <section class="v-section" style="background-image: url('images/Name.jpg');">
-            <div class="dark-overlay"></div>
-            <div class="content reveal">
-                <h2 class="script-font">Our Forever Story ❤️</h2>
-                <div class="signature-line"></div>
-                <p class="signature-text">– Akki</p>
+        <!-- 3.5 Signature -->
+        <section class="scroll-section" style="background-image: url('images/Name.jpg');">
+            <div class="section-overlay"></div>
+            <div class="content-reveal">
+                <h2 class="script-font title-reveal">Our Forever Story ❤️</h2>
+                <div class="signature-underline"></div>
+                <p class="sig-name">– Akki</p>
             </div>
         </section>
 
-        <!-- Finale Section -->
-        <section class="v-section finale-section" id="finale">
+        <!-- 3.6 Finale Fireworks -->
+        <section class="scroll-section finale-bg" id="finale-sec">
             <canvas id="fireworksCanvas"></canvas>
-            <div class="content reveal">
-                <h1 class="glow-text">Happy Birthday My Shona ❤️</h1>
-                <p>I love you forever.</p>
+            <div class="content-reveal">
+                <h1 class="finale-text">Happy Birthday My Shona ❤️</h1>
+                <p>Forever yours.</p>
             </div>
         </section>
     </main>
+
+    <!-- Invisible Iframe for music -->
+    <div id="player" style="display:none"></div>
 
     <script src="script.js"></script>
 </body>
