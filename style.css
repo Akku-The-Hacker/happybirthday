@@ -1,133 +1,77 @@
-/* --- Root Variables & Theme --- */
+/* --- Root Styles & Transitions --- */
 :root {
-    --soft-pink: #fff5f7;
-    --accent-pink: #ff8da1;
-    --deep-romantic: #d63384;
-    --card-bg: rgba(255, 255, 255, 0.85);
-    --shadow: 0 10px 30px rgba(255, 141, 161, 0.15);
-    --transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    --gold: #d4af37;
+    --soft-white: rgba(255, 255, 255, 0.9);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(180deg, var(--soft-pink) 0%, #ffffff 100%);
-    color: #4a4a4a;
+    transition: background 1.5s ease;
     overflow-x: hidden;
-    line-height: 1.6;
 }
 
-/* --- Section Spacing & Hierarchy --- */
-section {
-    padding: 100px 24px; /* Mobile-first padding */
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-}
+/* --- Dynamic Background Options --- */
+.bg-pastel-collage { background: linear-gradient(135deg, #fce4ec, #f3e5f5, #e1f5fe); background-size: 400% 400%; animation: gradShift 15s infinite; }
+.bg-night-sky { background: radial-gradient(circle at bottom, #1a237e 0%, #000010 100%); }
+.bg-luxury-gold { background: linear-gradient(135deg, #ff8da1 0%, #d4af37 100%); }
+.bg-animated-emoji { background: #fff5f7; }
 
-@media (min-width: 768px) {
-    section { padding: 140px 40px; }
-}
+@keyframes gradShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-.section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: var(--deep-romantic);
-    margin-bottom: 2rem;
-    font-weight: 700;
-}
-
-/* --- Hero Section Upgrade --- */
-.full-screen {
-    height: 100vh;
+/* --- Countdown Overlay (Lock Screen) --- */
+#countdown-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1000;
+    background: rgba(255, 245, 247, 0.6);
+    backdrop-filter: blur(5px);
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding-top: 0;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    transition: opacity 1s ease;
 }
 
-.glow-text {
-    font-family: 'Playfair Display', serif;
+.overlay-hidden { opacity: 0; pointer-events: none; }
+
+.content-blurred { filter: blur(15px); pointer-events: none; user-select: none; }
+#main-wrapper { transition: filter 1.2s ease; }
+
+.lock-icon { font-size: 4rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
+.unlock-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #555; margin-bottom: 30px; }
+
+/* --- Timer Styling --- */
+.large-timer .time-unit span {
     font-size: 3rem;
-    color: var(--accent-pink);
-    text-shadow: 0 0 20px rgba(255, 141, 161, 0.3);
-    margin-bottom: 1rem;
-}
-
-.subtitle {
-    font-size: 1.1rem;
-    color: #888;
-    margin-bottom: 2rem;
-}
-
-/* --- Glass Card Styling --- */
-.glass-card {
-    background: var(--card-bg);
-    padding: 40px 24px;
-    border-radius: 30px;
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-/* --- Countdown Layout --- */
-.timer-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
-.time-unit span {
-    display: block;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--accent-pink);
     font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    color: #ff4d6d;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
 }
 
-.time-unit p {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #aaa;
-}
+.timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 500px; margin: 0 auto; }
 
-/* --- Reveal Animation Classes --- */
-.reveal-section {
+/* --- Shayari Style --- */
+.shayari-container { margin-top: 50px; padding: 20px; max-width: 600px; }
+.shayari-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: #d63384;
+    line-height: 1.6;
     opacity: 0;
-    transform: translateY(30px);
-    transition: var(--transition);
+    animation: fadeIn 3s forwards 1s;
 }
 
-.reveal-section.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- Mobile Fixes --- */
+@media (max-width: 600px) {
+    .large-timer .time-unit span { font-size: 1.8rem; }
+    .shayari-text { font-size: 1.4rem; }
+    .timer-grid { gap: 8px; }
 }
 
-/* --- Buttons --- */
-.btn-primary {
-    background: var(--accent-pink);
-    color: white;
-    border: none;
-    padding: 16px 36px;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 141, 161, 0.4);
-    transition: 0.3s ease;
-}
-
-.btn-primary:hover {
-    transform: scale(1.05);
-    background: var(--deep-romantic);
-}
-
-/* Maintain existing Fireworks/Hearts styles below... */
-#fireworks-canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 10; }
-#hearts-container { position: fixed; top: 0; left: 0; pointer-events: none; }
+/* Include your previous button, hero, and section styles below */
