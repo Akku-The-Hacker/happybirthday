@@ -1,205 +1,219 @@
-// CONFIGURATION
-const BIRTHDAY_DATE = "March 4, 2026 00:00:00";
+// --- CONFIGURATION ---
+const TARGET_DATE = new Date("March 4, 2026 00:00:00").getTime();
 const PASSWORD = "Akki@7489";
-const YOUTUBE_ID = "l482T0yNkeo"; // Change this to your YouTube Video ID
 
-// DOM ELEMENTS
-const lockScreen = document.getElementById('lock-screen');
-const mainContent = document.getElementById('main-content');
-const passwordField = document.getElementById('passwordField');
-const unlockBtn = document.getElementById('unlockBtn');
-const errorMsg = document.getElementById('errorMsg');
+// --- LAYER HANDLERS ---
+const L1 = document.getElementById('layer1-password');
+const L2 = document.getElementById('layer2-countdown');
+const L3 = document.getElementById('layer3-main');
 
-// --- 🔐 PASSWORD LOGIC ---
-unlockBtn.addEventListener('click', () => {
-    if (passwordField.value === PASSWORD) {
-        sessionStorage.setItem('unlocked', 'true');
-        lockScreen.style.transition = "opacity 1s ease";
-        lockScreen.style.opacity = "0";
-        setTimeout(() => {
-            lockScreen.classList.add('hidden');
-            showMainContent();
-        }, 1000);
-    } else {
-        passwordField.classList.add('shake');
-        errorMsg.style.display = 'block';
-        setTimeout(() => passwordField.classList.remove('shake'), 400);
-        passwordField.value = "";
-    }
+function switchLayer(from, to) {
+    from.classList.add('hidden');
+    setTimeout(() => {
+        from.style.display = 'none';
+        to.style.display = 'block';
+        setTimeout(() => to.classList.remove('hidden'), 50);
+    }, 800);
+}
+
+// --- PASSWORD SYSTEM ---
+document.getElementById('unlockBtn').addEventListener('click', handleUnlock);
+document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleUnlock();
 });
 
-function showMainContent() {
-    mainContent.classList.remove('hidden');
-    initApp();
-}
-
-// --- 🎵 MUSIC (YOUTUBE API) ---
-let player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube-player', {
-        height: '0', width: '0',
-        videoId: YOUTUBE_ID,
-        playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': YOUTUBE_ID },
-        events: { 'onReady': (e) => e.target.mute() }
-    });
-}
-
-document.getElementById('musicToggle').addEventListener('click', () => {
-    if (player.isMuted()) {
-        player.unMute();
-        player.playVideo();
+function handleUnlock() {
+    const input = document.getElementById('passwordInput');
+    const error = document.getElementById('login-error');
+    
+    if (input.value === PASSWORD) {
+        sessionStorage.setItem('shona_unlocked', 'true');
+        checkDateAndSwitch();
     } else {
-        player.mute();
+        input.parentElement.classList.add('shake');
+        error.classList.remove('hidden');
+        setTimeout(() => input.parentElement.classList.remove('shake'), 400);
+        input.value = "";
     }
-});
-
-// --- 📸 SLIDESHOW ---
-function initSlideshow() {
-    const slides = document.querySelectorAll('#hero .slide');
-    let current = 0;
-    setInterval(() => {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-    }, 7000);
 }
 
-function initHerSlides() {
-    const slides = document.querySelectorAll('.her-slide');
-    let current = 0;
-    setInterval(() => {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-    }, 4000);
+function checkDateAndSwitch() {
+    const now = new Date().getTime();
+    if (now >= TARGET_DATE) {
+        switchLayer(L1, L3);
+        initMain();
+    } else {
+        switchLayer(L1, L2);
+        startCountdown();
+    }
 }
 
-// --- ⏳ COUNTDOWN ---
-function initCountdown() {
-    const target = new Date(BIRTHDAY_DATE).getTime();
-    setInterval(() => {
+// --- COUNTDOWN SYSTEM ---
+function startCountdown() {
+    const timerBox = document.getElementById('timer');
+    
+    const interval = setInterval(() => {
         const now = new Date().getTime();
-        const diff = target - now;
+        const diff = TARGET_DATE - now;
 
         if (diff <= 0) {
-            document.getElementById('timer-wrapper').classList.add('hidden');
-            document.getElementById('birthday-msg').classList.remove('hidden');
+            clearInterval(interval);
+            switchLayer(L2, L3);
+            initMain();
             return;
         }
 
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById('days').innerText = d;
-        document.getElementById('hours').innerText = h;
-        document.getElementById('minutes').innerText = m;
-        document.getElementById('seconds').innerText = s;
+        timerBox.innerHTML = `
+            <div class="time-unit"><span>${days}</span>Days</div>
+            <div class="time-unit"><span>${hours}</span>Hrs</div>
+            <div class="time-unit"><span>${mins}</span>Min</div>
+            <div class="time-unit"><span>${secs}</span>Sec</div>
+        `;
     }, 1000);
 }
 
-// --- ✍️ TYPEWRITER ---
-function initTypewriter() {
-    const text = "To the most amazing person in my life... Every day feels like a blessing with you. You are my joy, my peace, and my home. Today is all about you. Happy Birthday Shona! 💖";
-    const container = document.getElementById('typed-text');
-    let i = 0;
-
-    const observer = new IntersectionObserver((entries) => {
-        if(entries[0].isIntersecting) {
-            function type() {
-                if (i < text.length) {
-                    container.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, 50);
-                }
-            }
-            type();
-            observer.disconnect();
-        }
-    }, { threshold: 0.5 });
-    observer.observe(document.getElementById('love-letter'));
+// --- MAIN WEBSITE INIT ---
+function initMain() {
+    initSlideshow();
+    initMessage();
+    initGallery();
+    initPrivate();
+    initFireworks();
 }
 
-// --- ✨ FIREWORKS ---
+// 1. Slideshow
+function initSlideshow() {
+    const slides = document.querySelectorAll('.slide');
+    let idx = 0;
+    setInterval(() => {
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+    }, 7000);
+}
+
+// 2. Typewriter Message
+function initMessage() {
+    const lines = [
+        "To my dearest Shona...",
+        "Every day with you is a gift.",
+        "You are my heart's greatest joy.",
+        "Today we celebrate the best day...",
+        "The day you were born. ❤️"
+    ];
+    const container = document.getElementById('animated-message');
+    
+    let lineIdx = 0;
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && lineIdx === 0) {
+            const showLine = () => {
+                if (lineIdx < lines.length) {
+                    const p = document.createElement('p');
+                    p.innerText = lines[lineIdx];
+                    container.appendChild(p);
+                    setTimeout(() => p.classList.add('visible'), 50);
+                    lineIdx++;
+                    setTimeout(showLine, 1500);
+                }
+            };
+            showLine();
+        }
+    });
+    observer.observe(container);
+}
+
+// 3. Gallery Lightbox
+function initGallery() {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    
+    document.querySelectorAll('.gallery-img').forEach(img => {
+        img.addEventListener('click', () => {
+            lbImg.src = img.src;
+            lb.classList.remove('hidden');
+        });
+    });
+    
+    lb.addEventListener('click', () => lb.classList.add('hidden'));
+}
+
+// 4. Private Unlock
+function initPrivate() {
+    const container = document.querySelector('.private-container');
+    const img = document.getElementById('private-img');
+    const hint = document.getElementById('private-tap-hint');
+    
+    container.addEventListener('click', () => {
+        img.classList.add('unblur');
+        hint.style.display = 'none';
+    });
+}
+
+// 5. Fireworks
 function initFireworks() {
-    const canvas = document.getElementById('fireworksCanvas');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = 300;
 
     let particles = [];
+
     class Particle {
-        constructor(x, y, color) {
-            this.x = x; this.y = y; this.color = color;
-            this.velocity = { x: (Math.random() - 0.5) * 8, y: (Math.random() - 0.5) * 8 };
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height;
+            this.vx = Math.random() * 4 - 2;
+            this.vy = -(Math.random() * 5 + 5);
+            this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
             this.alpha = 1;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.vy += 0.1;
+            this.alpha -= 0.01;
+            if (this.alpha <= 0) this.reset();
         }
         draw() {
             ctx.globalAlpha = this.alpha;
-            ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
-            ctx.fillStyle = this.color; ctx.fill();
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+            ctx.fill();
         }
-        update() { this.x += this.velocity.x; this.y += this.velocity.y; this.alpha -= 0.01; }
     }
+
+    for (let i = 0; i < 50; i++) particles.push(new Particle());
 
     function animate() {
-        ctx.fillStyle = 'rgba(0,0,0,0.1)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        if (Math.random() < 0.1) {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height;
-            for(let i=0; i<30; i++) particles.push(new Particle(x, y, `hsl(${Math.random()*360}, 100%, 50%)`));
-        }
-        particles.forEach((p, idx) => {
-            if (p.alpha <= 0) particles.splice(idx, 1);
-            else { p.update(); p.draw(); }
-        });
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
         requestAnimationFrame(animate);
     }
-
-    const observer = new IntersectionObserver((entries) => {
-        if(entries[0].isIntersecting) animate();
-    });
-    observer.observe(document.getElementById('finale'));
+    animate();
 }
 
-// --- 🖼️ LIGHTBOX ---
-function initGallery() {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-    document.querySelectorAll('.gallery-card').forEach(img => {
-        img.addEventListener('click', () => {
-            lightboxImg.src = img.src;
-            lightbox.style.display = 'flex';
-        });
-    });
-    document.querySelector('.close-lightbox').onclick = () => lightbox.style.display = 'none';
-}
-
-// --- ❤️ HEART PARTICLES ---
-function createHeart(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
+// --- GLOBAL HEARTS ---
+function createHeart() {
     const heart = document.createElement('div');
-    heart.className = 'heart-particle';
+    heart.className = 'heart';
     heart.innerHTML = '❤️';
     heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-    container.appendChild(heart);
+    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    document.getElementById('hearts-container').appendChild(heart);
     setTimeout(() => heart.remove(), 4000);
 }
+setInterval(createHeart, 600);
 
-function initApp() {
-    initSlideshow();
-    initCountdown();
-    initTypewriter();
-    initGallery();
-    initHerSlides();
-    initFireworks();
-    setInterval(() => createHeart('hero-hearts'), 600);
+// Session check
+if (sessionStorage.getItem('shona_unlocked') === 'true') {
+    checkDateAndSwitch();
 }
-
-window.onload = () => {
-    if (sessionStorage.getItem('unlocked') === 'true') showMainContent();
-};
