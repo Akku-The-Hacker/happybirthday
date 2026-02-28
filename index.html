@@ -1,130 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Shona ❤️</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
-<body>
+<!-- LAYER 2: UPGRADED COUNTDOWN -->
+<div id="layer2-countdown" class="layer hidden">
+    <div class="countdown-container">
+        <!-- Background Image & Animated Overlays -->
+        <img src="images/Flower2.jpg" class="abs-img" alt="Background">
+        <div class="animated-gradient-overlay"></div>
+        <div id="particles-container"></div>
 
-    <!-- Background Music (Hidden YouTube Player) -->
-    <div id="player" style="position: absolute; top: -9999px;"></div>
-
-    <!-- LAYER 1: PASSWORD -->
-    <div id="layer1-password" class="layer active">
-        <div class="full-bg">
-            <img src="images/Flower1.jpg" alt="Bg">
-            <div class="overlay-dark"></div>
-        </div>
-        <div class="glass-content">
-            <div class="card">
-                <p class="quote">“Some things bloom only for one person…”</p>
-                <div class="input-wrapper">
-                    <input type="password" id="passwordInput" placeholder="Passcode...">
+        <div class="countdown-content">
+            <h2 class="waiting-text">Counting down to your special day...</h2>
+            
+            <div class="glass-timer-wrapper">
+                <div class="timer-box">
+                    <span id="days" class="pulse-num">00</span>
+                    <label>🗓️ Days</label>
                 </div>
-                <button id="unlockBtn">Open My Heart</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- LAYER 2: COUNTDOWN -->
-    <div id="layer2-countdown" class="layer hidden">
-        <div class="full-bg">
-            <img src="images/Flower2.jpg" alt="Bg">
-            <div class="overlay-dark"></div>
-        </div>
-        <div class="center-content">
-            <div class="timer-card">
-                <div id="timer">
-                    <div class="t-segment"><span id="days">00</span><label>Days</label></div>
-                    <div class="t-segment"><span id="hours">00</span><label>Hours</label></div>
-                    <div class="t-segment"><span id="mins">00</span><label>Mins</label></div>
-                    <div class="t-segment"><span id="secs">00</span><label>Secs</label></div>
+                <div class="separator">❤️</div>
+                <div class="timer-box">
+                    <span id="hours" class="pulse-num">00</span>
+                    <label>⏰ Hours</label>
                 </div>
-                <p class="shayari">
-                    “Har pal jo tere naam ho jaaye,<br>
-                    Wohi meri zindagi ka sabse haseen ehsaas hai…”
-                </p>
+                <div class="separator">❤️</div>
+                <div class="timer-box">
+                    <span id="mins" class="pulse-num">00</span>
+                    <label>✨ Mins</label>
+                </div>
+                <div class="separator">❤️</div>
+                <div class="timer-box">
+                    <span id="secs" class="pulse-num">00</span>
+                    <label>💓 Secs</label>
+                </div>
             </div>
+
+            <!-- Randomized Shayari Area -->
+            <div id="shayari-display" class="shayari-gradient-text"></div>
         </div>
     </div>
-
-    <!-- LAYER 3: MAIN EXPERIENCE -->
-    <div id="layer3-main" class="layer hidden">
-        
-        <!-- HERO -->
-        <section class="v-section">
-            <img src="images/Handhold.jpg" class="abs-img">
-            <div class="overlay-gradient"></div>
-            <div class="v-content">
-                <h1 class="fade-up">Happy Birthday Shona 💖</h1>
-                <p class="fade-up delay-1">Aaj ka din sirf tumhaare naam...</p>
-                <div class="floating-hearts"></div>
-            </div>
-        </section>
-
-        <!-- SHAYARI -->
-        <section class="v-section">
-            <img src="images/Tea.jpg" class="abs-img">
-            <div class="overlay-darker"></div>
-            <div class="v-content">
-                <div class="poetic-lines">
-                    <p class="reveal-text">Tumhari ek muskurahat se,</p>
-                    <p class="reveal-text">Meri duniya roshan hoti hai...</p>
-                    <p class="reveal-text">Chai ki chuskiyon jaisa sukoon,</p>
-                    <p class="reveal-text">Sirf tumhare saath milta hai.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- LOVE LETTER -->
-        <section class="v-section">
-            <img src="images/HandonHand.jpg" class="abs-img">
-            <div class="overlay-dark"></div>
-            <div class="v-content-left">
-                <div class="letter-paper">
-                    <p>Dear Shona,</p>
-                    <p>Kabhi socha nahi tha ki zindagi itni khoobsurat ho sakti hai. Tumhare aane se har din ek naya tyohaar ban gaya hai. Bas hamesha mere saath rehna...</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- MEMORY (Blur Reveal) -->
-        <section class="v-section">
-            <img src="images/Hikkey.jpg" class="abs-img blur-reveal" id="intimate-img">
-            <div class="overlay-dark"></div>
-            <div class="v-content">
-                <p class="hint-text">“Kuch yaadein kabhi dhundhli nahi hoti…”</p>
-                <button class="reveal-btn" onclick="revealMemory()">Tap to Feel</button>
-            </div>
-        </section>
-
-        <!-- SIGNATURE -->
-        <section class="v-section">
-            <img src="images/Name.jpg" class="abs-img">
-            <div class="overlay-gradient"></div>
-            <div class="v-content">
-                <h2 class="story-title">Our Forever Story ❤️</h2>
-                <div class="draw-line"></div>
-                <p class="signature-name">– Akki</p>
-            </div>
-        </section>
-
-        <!-- FINALE -->
-        <section class="v-section finale">
-            <canvas id="fireworks"></canvas>
-            <div class="v-content">
-                <h1 class="glow-text">Happy Birthday My Shona ❤️</h1>
-            </div>
-        </section>
-
-    </div>
-
-    <!-- YouTube API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+</div>
