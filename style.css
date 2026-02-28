@@ -1,77 +1,315 @@
-/* --- Root Styles & Transitions --- */
+/* --- Variables & Reset --- */
 :root {
+    --soft-pink: #ffebf0;
+    --deep-pink: #ff85a2;
     --gold: #d4af37;
-    --soft-white: rgba(255, 255, 255, 0.9);
+    --white: #ffffff;
+    --text-color: #4a4a4a;
+    --transition-smooth: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: 'Poppins', sans-serif;
-    transition: background 1.5s ease;
+    background-color: var(--soft-pink);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color);
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
-/* --- Dynamic Background Options --- */
-.bg-pastel-collage { background: linear-gradient(135deg, #fce4ec, #f3e5f5, #e1f5fe); background-size: 400% 400%; animation: gradShift 15s infinite; }
-.bg-night-sky { background: radial-gradient(circle at bottom, #1a237e 0%, #000010 100%); }
-.bg-luxury-gold { background: linear-gradient(135deg, #ff8da1 0%, #d4af37 100%); }
-.bg-animated-emoji { background: #fff5f7; }
+/* --- Typography --- */
+h1, h2, .section-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
 
-@keyframes gradShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+.script-font {
+    font-family: 'Great Vibes', cursive;
+}
 
-/* --- Countdown Overlay (Lock Screen) --- */
-#countdown-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1000;
-    background: rgba(255, 245, 247, 0.6);
-    backdrop-filter: blur(5px);
+/* --- Layout Spacing --- */
+section {
+    padding: 80px 20px;
+    min-height: 60vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    background: linear-gradient(-45deg, #ffebf0, #ffffff, #ffe4e9, #ffffff);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero-content {
+    z-index: 10;
+}
+
+.glow-text {
+    font-size: 3.5rem;
+    color: var(--deep-pink);
+    text-shadow: 0 0 20px rgba(255, 133, 162, 0.4);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 30px;
+    color: #888;
+}
+
+/* --- Buttons --- */
+.premium-btn {
+    padding: 15px 40px;
+    font-size: 1rem;
+    background: var(--white);
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.premium-btn:hover {
+    background: var(--gold);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+}
+
+.premium-btn.active-glow {
+    animation: buttonGlow 2s infinite;
+}
+
+@keyframes buttonGlow {
+    0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+/* --- Countdown --- */
+.countdown-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.count-card {
+    background: var(--white);
+    padding: 20px;
+    min-width: 100px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.count-card span {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--deep-pink);
+}
+
+.count-card p {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #999;
+}
+
+/* --- Shayari Section --- */
+.shayari-section {
+    background: var(--white);
+}
+
+.poetic-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    max-width: 600px;
+    color: var(--deep-pink);
+    line-height: 1.4;
+}
+
+/* --- Message Card --- */
+.message-card {
+    max-width: 700px;
+    background: var(--white);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(255, 133, 162, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* --- Gallery --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 40px;
+}
+
+.gallery-item {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* --- Special Quote --- */
+.glowing-quote {
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--deep-pink);
+    max-width: 800px;
+    animation: subtlePulse 3s infinite ease-in-out;
+}
+
+@keyframes subtlePulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+}
+
+/* --- Finale & Canvas --- */
+.finale-section {
+    position: relative;
+    height: 80vh;
+    background: #000;
+    color: var(--white);
+    overflow: hidden;
+}
+
+#fireworksCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.finale-content {
+    z-index: 5;
+}
+
+.finale-content h2 {
+    font-size: 4rem;
+    color: var(--gold);
+}
+
+/* --- Animations --- */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: var(--transition-smooth);
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Floating Hearts --- */
+.heart {
+    position: absolute;
+    color: var(--deep-pink);
+    opacity: 0.3;
+    animation: floatUp 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- Lightbox --- */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(10px);
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 20px;
-    transition: opacity 1s ease;
 }
 
-.overlay-hidden { opacity: 0; pointer-events: none; }
-
-.content-blurred { filter: blur(15px); pointer-events: none; user-select: none; }
-#main-wrapper { transition: filter 1.2s ease; }
-
-.lock-icon { font-size: 4rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
-.unlock-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #555; margin-bottom: 30px; }
-
-/* --- Timer Styling --- */
-.large-timer .time-unit span {
-    font-size: 3rem;
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    color: #ff4d6d;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+.lightbox-content {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+    animation: zoomIn 0.3s ease;
 }
 
-.timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 500px; margin: 0 auto; }
-
-/* --- Shayari Style --- */
-.shayari-container { margin-top: 50px; padding: 20px; max-width: 600px; }
-.shayari-text {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
-    color: #d63384;
-    line-height: 1.6;
-    opacity: 0;
-    animation: fadeIn 3s forwards 1s;
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* --- Mobile Fixes --- */
-@media (max-width: 600px) {
-    .large-timer .time-unit span { font-size: 1.8rem; }
-    .shayari-text { font-size: 1.4rem; }
-    .timer-grid { gap: 8px; }
+.close-lightbox {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
 }
 
-/* Include your previous button, hero, and section styles below */
+/* --- Responsive --- */
+@media (min-width: 768px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .glow-text { font-size: 5rem; }
+}
+
+@media (min-width: 1024px) {
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    section { padding: 100px 40px; }
+}
+
+/* YouTube Hidden */
+#youtube-player {
+    display: none;
+}
