@@ -10,7 +10,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="locked"> <!-- Prevent scrolling initially -->
+
+    <!-- PASSWORD OVERLAY SYSTEM -->
+    <div id="lock-overlay" class="lock-overlay">
+        <div class="lock-bg-hearts" id="lock-hearts"></div>
+        <div class="lock-card">
+            <div class="lock-icon">🔒</div>
+            <h2 class="lock-title">Private Surprise</h2>
+            <p class="lock-subtitle">Enter the password to unlock</p>
+            <div class="input-group">
+                <input type="password" id="passwordInput" placeholder="Password..." autocomplete="off">
+                <p id="error-msg" class="error-msg"></p>
+            </div>
+            <button id="unlockBtn" class="premium-btn unlock-btn">Unlock Experience</button>
+        </div>
+    </div>
 
     <!-- YouTube Hidden Player -->
     <div id="youtube-player"></div>
@@ -88,7 +103,7 @@
         <h2 class="glowing-quote">“I don’t need a perfect world… I just need you in mine.”</h2>
     </section>
 
-    <!-- Finale Section with Canvas Fireworks -->
+    <!-- Finale Section -->
     <section class="finale-section" id="finale">
         <canvas id="fireworksCanvas"></canvas>
         <div class="finale-content fade-in-up">
