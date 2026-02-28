@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-const birthdayDate = "2024-12-31T00:00:00"; // EDIT THIS DATE (YYYY-MM-DD)
+const birthdayDate = "2026-03-04T00:00:00"; // EDIT THIS DATE (YYYY-MM-DD)
 const youtubeVideoId = "dQw4w9WgXcQ"; // Replace with your YouTube Video ID
 
 // --- 1. COUNTDOWN SYSTEM ---
