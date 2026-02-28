@@ -2,134 +2,162 @@
     --pink: #f8c8dc;
     --rose-gold: #b76e79;
     --cream: #fffdf5;
-    --glass: rgba(255, 255, 255, 0.15);
+    --dark: #121212;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background-color: #0c0c0c; /* Deep dark base */
+    background: var(--dark);
     font-family: 'Poppins', sans-serif;
     color: var(--cream);
     overflow-x: hidden;
 }
 
-/* --- LAYER SYSTEM --- */
+/* Layer Transitions */
 .layer {
-    width: 100%;
-    min-height: 100vh; /* Safety: ensures layer covers screen even if image fails */
-    transition: opacity 1s ease;
-    background: #0c0c0c; 
-}
-
-.hidden {
-    display: none !important;
-    opacity: 0;
-}
-
-/* --- CRITICAL IMAGE STRUCTURE --- */
-.section-wrapper {
-    position: relative;
-    width: 100%;
-    min-height: 300px; /* Safety: prevents 0px height if image is missing */
-    background: #1a1a1a; /* Fallback color */
-}
-
-.bg-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    position: relative;
-    z-index: 1;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
-    z-index: 2; /* Above image */
-}
-
-/* --- CONTENT POSITIONING --- */
-.content-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    text-align: center;
-    z-index: 10; /* Above EVERYTHING */
-}
-
-/* --- LAYER 1: GLASS CARD --- */
-.glass-card {
-    background: var(--glass);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-/* --- LAYER 2: TIMER --- */
-.timer-container {
-    background: rgba(0,0,0,0.4);
-    padding: 20px;
-    border-radius: 15px;
-}
-
-#countdown-timer {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.time-block span {
-    display: block;
-    font-size: 2.5rem;
-    font-family: 'Playfair Display', serif;
-    color: var(--pink);
-}
-
-/* --- LAYER 3: MAIN --- */
-.hero-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.8rem;
-    margin-bottom: 10px;
-}
-
-.letter-box {
-    position: absolute;
-    top: 10%;
-    left: 5%;
-    width: 90%;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    transition: opacity 1.2s ease, visibility 1.2s;
     z-index: 10;
-    padding: 20px;
 }
 
-/* --- ANIMATIONS --- */
-.fade-in {
-    animation: fadeIn 1.5s forwards;
+.layer.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+#layer3-main {
+    position: relative; /* Allows scrolling */
+    height: auto;
 }
 
-.blur-img {
-    filter: blur(10px);
-    transition: filter 1.2s ease;
+/* Full Screen Backgrounds */
+.full-bg, .abs-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
 
-.blur-img.clear {
-    filter: blur(0px);
+.v-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Overlays */
+.overlay-dark { background: rgba(0,0,0,0.4); position: absolute; inset: 0; }
+.overlay-darker { background: rgba(0,0,0,0.7); position: absolute; inset: 0; }
+.overlay-gradient { background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8)); position: absolute; inset: 0; }
+
+/* Password Screen */
+.glass-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 40px 30px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+    width: 85%;
+    max-width: 350px;
+}
+
+.quote { font-family: 'Dancing Script', cursive; font-size: 1.5rem; margin-bottom: 30px; }
+
+#passwordInput {
+    width: 100%;
+    padding: 12px;
+    border-radius: 50px;
+    border: 1px solid var(--rose-gold);
+    background: transparent;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+#unlockBtn {
+    background: var(--rose-gold);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+/* Timer */
+#timer { display: flex; gap: 15px; margin-bottom: 30px; }
+.t-segment span { display: block; font-size: 2.2rem; font-family: 'Playfair Display', serif; color: var(--pink); }
+.t-segment label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+.shayari { font-family: 'Dancing Script', cursive; font-size: 1.3rem; line-height: 1.6; }
+
+/* Main Content Styles */
+.v-content { text-align: center; width: 90%; z-index: 5; }
+.v-content-left { padding: 40px; z-index: 5; width: 100%; }
+
+.hero-title { font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--pink); }
+
+.letter-paper {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    line-height: 1.8;
+    max-width: 400px;
+    animation: fadeIn 2s ease;
+}
+
+.reveal-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin: 15px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 1s;
+}
+
+.reveal-text.active { opacity: 1; transform: translateY(0); }
+
+/* Intimate Section */
+.blur-reveal { filter: blur(25px); transition: 2s filter ease; }
+.blur-reveal.clear { filter: blur(0); }
+.reveal-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    border-radius: 50px;
+}
+
+/* Finale */
+.finale { background: #000; }
+.glow-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 0 0 10px var(--rose-gold), 0 0 20px var(--rose-gold);
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.shake { animation: shake 0.4s; }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
 }
