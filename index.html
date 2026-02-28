@@ -2,47 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Shona ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Shona ❤️</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <!-- Background Music (Hidden YouTube Player) -->
+    <div id="player" style="position: absolute; top: -9999px;"></div>
+
     <!-- LAYER 1: PASSWORD -->
     <div id="layer1-password" class="layer active">
-        <div class="section-wrapper">
-            <img src="images/Flower1.jpg" class="bg-img" alt="Rose">
-            <div class="overlay"></div>
-            <div class="content-center">
-                <div class="glass-card" id="login-card">
-                    <p class="poetic-text">“Some things bloom only for one person…”</p>
-                    <input type="password" id="passwordInput" placeholder="Enter Password..." autocomplete="off">
-                    <button id="loginBtn">Unlock Heart</button>
+        <div class="full-bg">
+            <img src="images/Flower1.jpg" alt="Bg">
+            <div class="overlay-dark"></div>
+        </div>
+        <div class="glass-content">
+            <div class="card">
+                <p class="quote">“Some things bloom only for one person…”</p>
+                <div class="input-wrapper">
+                    <input type="password" id="passwordInput" placeholder="Passcode...">
                 </div>
+                <button id="unlockBtn">Open My Heart</button>
             </div>
         </div>
     </div>
 
     <!-- LAYER 2: COUNTDOWN -->
     <div id="layer2-countdown" class="layer hidden">
-        <div class="section-wrapper">
-            <img src="images/Flower2.jpg" class="bg-img" alt="Flowers">
-            <div class="overlay"></div>
-            <div class="content-center">
-                <div class="timer-container">
-                    <div id="countdown-timer">
-                        <div class="time-block"><span id="days">00</span><label>Days</label></div>
-                        <div class="time-block"><span id="hours">00</span><label>Hours</label></div>
-                        <div class="time-block"><span id="minutes">00</span><label>Mins</label></div>
-                        <div class="time-block"><span id="seconds">00</span><label>Secs</label></div>
-                    </div>
-                    <p class="shayari-text">
-                        “Har pal jo tere naam ho jaaye,<br>
-                        Wohi meri zindagi ka sabse haseen ehsaas hai…”
-                    </p>
+        <div class="full-bg">
+            <img src="images/Flower2.jpg" alt="Bg">
+            <div class="overlay-dark"></div>
+        </div>
+        <div class="center-content">
+            <div class="timer-card">
+                <div id="timer">
+                    <div class="t-segment"><span id="days">00</span><label>Days</label></div>
+                    <div class="t-segment"><span id="hours">00</span><label>Hours</label></div>
+                    <div class="t-segment"><span id="mins">00</span><label>Mins</label></div>
+                    <div class="t-segment"><span id="secs">00</span><label>Secs</label></div>
                 </div>
+                <p class="shayari">
+                    “Har pal jo tere naam ho jaaye,<br>
+                    Wohi meri zindagi ka sabse haseen ehsaas hai…”
+                </p>
             </div>
         </div>
     </div>
@@ -50,82 +55,76 @@
     <!-- LAYER 3: MAIN EXPERIENCE -->
     <div id="layer3-main" class="layer hidden">
         
-        <!-- HERO SECTION -->
-        <section class="section-wrapper">
-            <img src="images/Handhold.jpg" class="bg-img">
-            <div class="overlay"></div>
-            <div class="content-center">
-                <h1 class="hero-title">Happy Birthday Shona 💖</h1>
-                <p class="hero-sub">Aaj ka din sirf tumhaare naam...</p>
-                <div class="hearts-container"></div>
+        <!-- HERO -->
+        <section class="v-section">
+            <img src="images/Handhold.jpg" class="abs-img">
+            <div class="overlay-gradient"></div>
+            <div class="v-content">
+                <h1 class="fade-up">Happy Birthday Shona 💖</h1>
+                <p class="fade-up delay-1">Aaj ka din sirf tumhaare naam...</p>
+                <div class="floating-hearts"></div>
             </div>
         </section>
 
-        <!-- SHAYARI SECTION -->
-        <section class="section-wrapper">
-            <img src="images/Tea.jpg" class="bg-img">
-            <div class="overlay dark"></div>
-            <div class="content-center">
-                <div class="reveal-container">
-                    <p class="reveal-line">Tumhari ek muskurahat se,</p>
-                    <p class="reveal-line">Meri duniya roshan hoti hai...</p>
-                    <p class="reveal-line">Chai ki chuskiyon jaisa sukoon,</p>
-                    <p class="reveal-line">Sirf tumhare saath milta hai.</p>
+        <!-- SHAYARI -->
+        <section class="v-section">
+            <img src="images/Tea.jpg" class="abs-img">
+            <div class="overlay-darker"></div>
+            <div class="v-content">
+                <div class="poetic-lines">
+                    <p class="reveal-text">Tumhari ek muskurahat se,</p>
+                    <p class="reveal-text">Meri duniya roshan hoti hai...</p>
+                    <p class="reveal-text">Chai ki chuskiyon jaisa sukoon,</p>
+                    <p class="reveal-text">Sirf tumhare saath milta hai.</p>
                 </div>
             </div>
         </section>
 
-        <!-- LOVE LETTER SECTION -->
-        <section class="section-wrapper">
-            <img src="images/HandonHand.jpg" class="bg-img">
-            <div class="overlay"></div>
-            <div class="content-left">
-                <div class="letter-box">
-                    <p class="letter-text fade-in-up">
-                        Dear Shona,<br><br>
-                        Kabhi socha nahi tha ki zindagi itni khoobsurat ho sakti hai. 
-                        Tumhare aane se har din ek naya tyohaar ban gaya hai. 
-                        Bas hamesha mere saath rehna...
-                    </p>
+        <!-- LOVE LETTER -->
+        <section class="v-section">
+            <img src="images/HandonHand.jpg" class="abs-img">
+            <div class="overlay-dark"></div>
+            <div class="v-content-left">
+                <div class="letter-paper">
+                    <p>Dear Shona,</p>
+                    <p>Kabhi socha nahi tha ki zindagi itni khoobsurat ho sakti hai. Tumhare aane se har din ek naya tyohaar ban gaya hai. Bas hamesha mere saath rehna...</p>
                 </div>
             </div>
         </section>
 
-        <!-- INTIMATE MEMORY SECTION -->
-        <section class="section-wrapper" id="intimate-section">
-            <img src="images/Hikkey.jpg" class="bg-img blur-img" id="memory-img">
-            <div class="overlay"></div>
-            <div class="content-center">
-                <div class="memory-text">
-                    <p>“Kuch yaadein kabhi dhundhli nahi hoti…”</p>
-                    <small>(Tap to see clearly)</small>
-                </div>
+        <!-- MEMORY (Blur Reveal) -->
+        <section class="v-section">
+            <img src="images/Hikkey.jpg" class="abs-img blur-reveal" id="intimate-img">
+            <div class="overlay-dark"></div>
+            <div class="v-content">
+                <p class="hint-text">“Kuch yaadein kabhi dhundhli nahi hoti…”</p>
+                <button class="reveal-btn" onclick="revealMemory()">Tap to Feel</button>
             </div>
         </section>
 
-        <!-- SIGNATURE SECTION -->
-        <section class="section-wrapper">
-            <img src="images/Name.jpg" class="bg-img">
-            <div class="overlay"></div>
-            <div class="content-center">
-                <div class="signature-container">
-                    <h2 class="story-title">Our Forever Story ❤️</h2>
-                    <div class="underline"></div>
-                    <p class="sign-name">– Akki</p>
-                </div>
+        <!-- SIGNATURE -->
+        <section class="v-section">
+            <img src="images/Name.jpg" class="abs-img">
+            <div class="overlay-gradient"></div>
+            <div class="v-content">
+                <h2 class="story-title">Our Forever Story ❤️</h2>
+                <div class="draw-line"></div>
+                <p class="signature-name">– Akki</p>
             </div>
         </section>
 
-        <!-- FINALE SECTION -->
-        <section class="section-wrapper finale-bg" id="finale">
-            <canvas id="fireworksCanvas"></canvas>
-            <div class="content-center">
+        <!-- FINALE -->
+        <section class="v-section finale">
+            <canvas id="fireworks"></canvas>
+            <div class="v-content">
                 <h1 class="glow-text">Happy Birthday My Shona ❤️</h1>
             </div>
         </section>
 
     </div>
 
+    <!-- YouTube API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
 </html>
