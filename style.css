@@ -1,8 +1,10 @@
+/* --- Variables & Reset --- */
 :root {
     --pink: #ff85a2;
     --rose-gold: #e5b0a3;
+    --dark: #1a1a1a;
     --white: #ffffff;
-    --glass: rgba(255, 255, 255, 0.2);
+    --glass: rgba(255, 255, 255, 0.15);
 }
 
 * {
@@ -13,70 +15,83 @@
 }
 
 body {
+    background: #000;
     font-family: 'Montserrat', sans-serif;
-    background-color: #000;
     color: var(--white);
     overflow-x: hidden;
+    width: 100%;
 }
 
-.hidden { display: none !important; }
-
-/* 🔐 PASSWORD SCREEN */
-.full-screen {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* --- Layer Transition Logic --- */
+.layer {
+    width: 100%;
+    min-height: 100vh;
+    transition: opacity 1s ease;
+    opacity: 1;
+    position: relative;
+    z-index: 10;
 }
 
-.lock-overlay {
-    position: absolute;
-    width: 100%; height: 100%;
-    background: url('images/Baby.jpg') center/cover no-repeat;
-    filter: blur(10px) brightness(0.6);
+.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    display: none;
 }
 
-.glass-card {
+/* --- Image Rules (Critical) --- */
+.image-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+img.layer-image, .gallery-img, .slide {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Overlays & Glassmorphism --- */
+.glass {
     background: var(--glass);
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
-    padding: 30px;
-    width: 85%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.3);
 }
 
-#passwordField {
+.overlay-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+/* --- Password Box --- */
+#passwordInput {
     width: 100%;
     padding: 12px;
+    margin: 20px 0;
     border-radius: 25px;
-    border: 2px solid var(--white);
+    border: 1px solid var(--white);
     background: transparent;
     color: white;
     text-align: center;
     outline: none;
-    margin: 20px 0;
 }
 
-.glow-btn {
+#unlockBtn {
     background: var(--pink);
     color: white;
     border: none;
     padding: 12px 30px;
     border-radius: 25px;
     font-weight: 600;
-    box-shadow: 0 0 20px var(--pink);
-}
-
-.error-msg {
-    color: #ff4757;
-    font-size: 12px;
-    margin-top: 10px;
-    display: none;
+    box-shadow: 0 0 15px var(--pink);
 }
 
 .shake { animation: shake 0.4s; }
@@ -86,132 +101,221 @@ body {
     75% { transform: translateX(10px); }
 }
 
-/* 🌸 SECTIONS */
-.vh-section {
-    position: relative;
-    height: 100vh;
-    width: 100%;
+/* --- Countdown Display --- */
+.timer-display {
     display: flex;
     justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.time-unit {
+    background: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 60px;
+}
+
+.time-unit span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--pink);
+}
+
+.shayari {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* --- Slideshow --- */
+.slideshow-section { position: relative; width: 100%; }
+.slide {
+    position: absolute;
+    top: 0; left: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+.slide.active {
+    position: relative;
+    opacity: 1;
+}
+
+.hero-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+    text-align: center;
+    text-shadow: 0 0 15px rgba(255,133,162,0.8);
+}
+
+/* --- Message Section --- */
+.message-overlay {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    width: 90%;
+    padding: 20px;
+}
+
+.typewriter-text p {
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.8s ease;
+}
+
+.typewriter-text p.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Gallery --- */
+.gallery-section { padding: 40px 0; }
+.section-title {
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: var(--pink);
+}
+
+.gallery-grid {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    background-size: cover;
-    background-position: center;
+    gap: 30px;
+}
+
+.gallery-img {
+    width: 90%;
+    border-radius: 18px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+/* --- Only Her & Memory --- */
+.caption-overlay {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    padding: 10px 0;
+    font-style: italic;
+}
+
+.memory-overlay {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translateY(-50%);
+}
+
+.forever-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+}
+
+.line {
+    width: 100px;
+    height: 2px;
+    background: var(--pink);
+    margin: 10px auto;
+}
+
+/* --- Private Section --- */
+.private-section { padding: 40px 0; display: flex; justify-content: center; }
+.private-container {
+    width: 85%;
+    position: relative;
+    border-radius: 20px;
     overflow: hidden;
 }
 
-.content-box { position: relative; z-index: 5; text-align: center; width: 90%; }
+.blurred-img {
+    filter: blur(25px);
+    transition: filter 1.2s ease;
+}
 
-/* 1️⃣ SLIDESHOW */
-.slideshow-container, .slide {
+.unblur { filter: blur(0) !important; }
+
+.tap-hint {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-}
-.slide {
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out, transform 7s linear;
-}
-.slide.active { opacity: 1; transform: scale(1.1); }
-.overlay-gradient {
-    position: absolute;
-    bottom: 0; left: 0; width: 100%; height: 60%;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.6);
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-weight: bold;
 }
 
-.hero-title { font-family: 'Great Vibes', cursive; font-size: 3rem; text-shadow: 0 0 15px var(--pink); }
-
-.scroll-btn {
-    margin-top: 30px;
-    background: transparent;
-    border: 2px solid white;
-    color: white;
-    padding: 10px 25px;
-    border-radius: 25px;
-}
-
-/* 2️⃣ COUNTDOWN */
-.overlay-blur {
-    position: absolute;
-    width: 100%; height: 100%;
-    backdrop-filter: blur(5px);
-    background: rgba(0,0,0,0.4);
-}
-.timer { display: flex; justify-content: space-around; margin-top: 30px; }
-.time-block span { font-size: 2.2rem; font-weight: bold; display: block; color: var(--pink); }
-
-.shayari { font-family: 'Playfair Display', serif; font-style: italic; margin-top: 40px; line-height: 1.6; }
-
-/* 4️⃣ GALLERY */
-.scroll-section { padding: 60px 0; background: #000; text-align: center; }
-.gallery-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; margin-bottom: 40px; }
-.gallery-stack { display: flex; flex-direction: column; align-items: center; gap: 40px; }
-.gallery-card { width: 90%; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 133, 162, 0.2); }
-
-/* 5️⃣ ONLY HER */
-.her-slides, .her-slide { position: absolute; width: 100%; height: 100%; }
-.her-slide {
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1s;
+/* --- Finale --- */
+.finale-section {
+    background: #000;
+    height: 300px;
+    position: relative;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 80px;
-}
-.her-slide.active { opacity: 1; }
-.caption { background: rgba(0,0,0,0.6); padding: 15px; border-radius: 10px; font-size: 1.1rem; }
-
-/* 7️⃣ PRIVATE */
-.private-card { width: 85%; aspect-ratio: 3/4; position: relative; border-radius: 20px; overflow: hidden; }
-.private-card img { width: 100%; height: 100%; object-fit: cover; filter: blur(40px); transition: 0.6s; }
-.private-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.5);
-}
-.private-card.unlocked img { filter: blur(0); }
-.private-card.unlocked .private-overlay { opacity: 0; }
-
-/* 🎵 MUSIC */
-.music-fab {
-    position: fixed;
-    bottom: 25px; right: 25px;
-    width: 55px; height: 55px;
-    border-radius: 50%;
-    background: var(--pink);
-    border: none;
-    z-index: 1000;
-    box-shadow: 0 0 20px var(--pink);
-    color: white; font-size: 1.5rem;
+    overflow: hidden;
 }
 
-/* LIGHTBOX */
+#fireworks { position: absolute; width: 100%; height: 100%; }
+
+.finale-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    color: var(--pink);
+    z-index: 5;
+    text-align: center;
+}
+
+.heart-pulse {
+    font-size: 40px;
+    margin-top: 10px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* --- Lightbox --- */
 .lightbox {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95);
-    display: none;
-    z-index: 10001;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-.lightbox-img { max-width: 90%; max-height: 80%; border-radius: 10px; }
-.close-lightbox { position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; }
 
-/* PARTICLES */
-.heart-particle {
-    position: absolute;
+#lightbox-img { max-width: 95%; max-height: 80%; border-radius: 10px; }
+.close-lightbox { position: absolute; top: 20px; right: 30px; font-size: 40px; }
+
+/* --- Particles --- */
+.heart {
+    position: fixed;
     color: var(--pink);
-    animation: floatUp 4s linear forwards;
+    font-size: 20px;
+    user-select: none;
     pointer-events: none;
+    z-index: 1;
+    animation: move 4s linear infinite;
 }
-@keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+
+@keyframes move {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
 }
