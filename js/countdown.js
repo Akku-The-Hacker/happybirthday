@@ -2,7 +2,7 @@
  * TARGET: March 4, 2026, 00:00:00 
  * In JS, months are 0-11. Jan=0, Feb=1, Mar=2.
  */
-const TARGET = new Date(2026, 2, 4, 0, 0, 0); 
+const TARGET = new Date(2027, 2, 4, 0, 0, 0); 
 const VIDEO_ID = "uBTEkj6Y2Kw";
 
 const lines = [
