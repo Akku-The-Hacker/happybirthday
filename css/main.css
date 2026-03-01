@@ -1,1 +1,22 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#000; color:#fff; font-family:'Poppins', sans-serif; overflow-x:hidden; }
+.st-section { 
+    height:100vh; position:relative; display:flex; align-items:center; justify-content:center;
+    background-size:cover; background-position:center; background-attachment:fixed;
+}
+.st-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.65); }
+.st-content { position:relative; z-index:10; text-align:center; padding:40px; opacity:0; transform:translateY(30px); transition:1.5s ease; }
+.active .st-content { opacity:1; transform:translateY(0); }
 
+h1, h2 { font-family:'Playfair Display', serif; color:#ffafbd; font-size:2rem; margin-bottom:15px; }
+p { font-size:1.1rem; line-height:1.7; font-style:italic; }
+
+.s-hero { background-image: url('../images/Handhold.jpg'); }
+.s-shayari { background-image: url('../images/Tea.jpg'); }
+.s-letter { background-image: url('../images/HandonHand.jpg'); }
+.s-memory { background-image: url('../images/Hikkey.jpg'); }
+.s-signature { background-image: url('../images/Name.jpg'); }
+
+.tap-reveal { width:70vw; max-width:300px; border-radius:20px; filter:blur(15px); transition:1s ease; border:1px solid #fff; margin-top:20px; cursor:pointer; }
+.tap-reveal.clear { filter:blur(0); }
+canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
