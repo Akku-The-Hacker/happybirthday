@@ -1,118 +1,118 @@
-// --- CONFIGURATION ---
-// Explicit date format: Year, Month (0-11, so March is 2), Day, Hour, Min, Sec
-const TARGET_DATE = new Date(2026, 2, 4, 0, 0, 0).getTime(); 
-const VIDEO_ID = "uBTEkj6Y2Kw";
+// --- LOGIC CONSTANTS ---
+// Explicit Epoch Timestamp for March 4, 2026, 00:00:00 (GMT+5:30)
+// This value is mathematically Mar 4, 2026 in Indian Time.
+const TARGET_EPOCH = 1772582400000; 
+
+const YOUTUBE_ID = "uBTEkj6Y2Kw";
 
 const SHAYARIS = [
-    "Tere aane ki khushi, aur tera intezaar... 🌸",
-    "Tumhaari hansi ka noor karega roshan ye jahaan... ✨",
-    "Bas kuch hi ghante bache hain, mere chaand se milne mein... 💖",
-    "Saja rakhi hain yaadein, bas tumhaara din aana baaki hai... ❤️"
+    "Saja rakhi hain yaadein, bas tera intezaar hai... ❤️",
+    "Tumhaari hansi ka noor, meri har khushi ka raaz... ✨",
+    "Faasle chaahe kitne ho, tum dil ke sabse paas ho... 🌸",
+    "Wait is short, for an eternal birthday surprise... 💫",
+    "Meri duniya tumhare din ka intezaar kar rahi hai... 💖"
 ];
 
-// --- DEBUGGER: REMOVE THIS ONCE FIXED ---
-function debugTime() {
-    const now = new Date();
-    const target = new Date(TARGET_DATE);
-    console.log("Device Time: " + now);
-    console.log("Target Time: " + target);
-    console.log("Difference (ms): " + (TARGET_DATE - now.getTime()));
-}
-
-// --- YOUTUBE API ---
-let player;
+// --- MUSIC LOGIC (YouTube) ---
+let ytPlayer;
 function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
+    ytPlayer = new YT.Player('yt-music-player', {
         height: '0', width: '0',
-        videoId: VIDEO_ID,
-        playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': VIDEO_ID, 'controls': 0, 'modestbranding': 1 },
+        videoId: YOUTUBE_ID,
+        playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': YOUTUBE_ID, 'controls': 0, 'modestbranding': 1 },
         events: {
-            'onReady': (e) => { e.target.setVolume(35); e.target.playVideo(); },
-            'onError': (e) => { console.log("YouTube Error: ", e); }
+            'onReady': (e) => { e.target.setVolume(35); e.target.playVideo(); }
         }
     });
 }
 
-function toggleMusic() {
-    if (!player) return;
-    const btn = document.getElementById('music-icon');
-    if (player.getPlayerState() === 1) { // Playing
-        player.pauseVideo();
-        btn.innerHTML = "🔇";
+function musicToggle() {
+    const label = document.getElementById('music-label');
+    const state = ytPlayer.getPlayerState();
+    if (state === 1) { // 1 = Playing
+        ytPlayer.pauseVideo();
+        label.innerHTML = "🔇";
     } else {
-        player.playVideo();
-        btn.innerHTML = "🎵";
+        ytPlayer.playVideo();
+        label.innerHTML = "🎵";
     }
 }
 
-// --- COUNTDOWN LOGIC ---
-let isRedirecting = false;
+// --- CORE TIMER ---
+let lock_Redirect = false;
 
-function updateTimer() {
-    const now = new Date().getTime();
-    const diff = TARGET_DATE - now;
+function refreshTimer() {
+    const currentTime = Date.now();
+    const remainingTime = TARGET_EPOCH - currentTime;
 
-    // PROTECTION: If it's earlier than March 4, DO NOT REDIRECT
-    if (diff <= 0) {
-        if (!isRedirecting) {
-            handleRedirect();
-        }
-        return;
+    // IF Target has NOT arrived yet
+    if (remainingTime > 0) {
+        const d = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        const h = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        setVal('d', d); setVal('h', h); setVal('m', m); setVal('s', s);
+    } 
+    // IF Target arrives right NOW
+    else if (!lock_Redirect) {
+        fireRedirectAnimation();
     }
-
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-    // Update the numbers if the elements exist
-    safeSetText('days', d);
-    safeSetText('hours', h);
-    safeSetText('minutes', m);
-    safeSetText('seconds', s);
 }
 
-function safeSetText(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.innerText = value.toString().padStart(2, '0');
+function setVal(id, v) {
+    document.getElementById(id).innerText = v.toString().padStart(2, '0');
 }
 
-function handleRedirect() {
-    isRedirecting = true;
-    console.log("Redirecting to Main Experience...");
+function fireRedirectAnimation() {
+    lock_Redirect = true;
+    const t = document.getElementById('main-timer');
+    const h = document.querySelector('.top-heading');
     
-    const bg = document.querySelector('.bg-image');
-    if (bg) {
-        bg.style.filter = "blur(0px)";
-        bg.style.transform = "scale(1)";
-    }
+    h.innerText = "It’s finally your day… 💖";
+    t.style.transition = "2s ease";
+    t.style.transform = "scale(1.2) translateY(-20px)";
+    t.style.opacity = "0";
 
+    document.querySelector('.handhold-bg').style.filter = "blur(1px) brightness(0.9)";
+    
     setTimeout(() => {
-        // IMPORTANT: Make sure you have created main.html in your folder!
-        window.location.href = "main.html"; 
-    }, 2000);
+        document.body.style.opacity = "0";
+        document.body.style.transition = "2s ease";
+        setTimeout(() => { window.location.href = "main.html"; }, 2000);
+    }, 1500);
 }
 
-// --- INITIALIZE ---
-function init() {
-    debugTime();
-
-    // 1. Session Protection (Is she logged in?)
+// --- BOOTSTRAP ---
+function initializePage() {
+    // 1. Double check security session from PIN page
     if (!sessionStorage.getItem("unlocked")) {
-        console.warn("Unauthorized access - Redirecting to Lock Screen");
         window.location.href = "index.html";
         return;
     }
 
-    // 2. Load random shayari
-    const sDisplay = document.getElementById('shayari-display');
-    if (sDisplay) {
-        sDisplay.innerText = SHAYARIS[Math.floor(Math.random() * SHAYARIS.length)];
+    // 2. Select Shayari
+    document.getElementById('shayari-box').innerText = SHAYARIS[Math.floor(Math.random() * SHAYARIS.length)];
+
+    // 3. Floating Sparkles Generator
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+        let p = document.createElement('span');
+        p.innerText = "✨";
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.top = Math.random() * 100 + 'vh';
+        p.style.animation = `floatingP ${8 + Math.random() * 8}s infinite ease-in-out`;
+        container.appendChild(p);
     }
 
-    // 3. Start Heartbeat timer
-    setInterval(updateTimer, 1000);
-    updateTimer(); 
+    // 4. Start Internal Ticking
+    setInterval(refreshTimer, 1000);
+    refreshTimer();
 }
 
-document.addEventListener('DOMContentLoaded', init);
+// Particle Floating Keyframe
+const s = document.createElement('style');
+s.innerHTML = `@keyframes floatingP { 0%, 100% { transform: translate(0,0); opacity: 0; } 50% { transform: translate(10px, -20px); opacity: 0.3; } }`;
+document.head.appendChild(s);
+
+document.addEventListener('DOMContentLoaded', initializePage);
