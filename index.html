@@ -3,31 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Entrance | An Eternal Story</title>
+    <title>An Eternal Story | Entry</title>
     <link rel="stylesheet" href="css/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="bg-image" id="bgImage"></div>
-    <div class="overlay"></div>
-    <div class="particles" id="particles"></div>
 
-    <main class="gate-wrapper">
-        <h1 class="hero-title">An Eternal Story Begins… ✨</h1>
-        <p class="shayari">“Har kahaani sabke liye nahi hoti,<br>Kuch pal sirf do dilon ke liye hote hain… 💕”</p>
+    <!-- LAYER 1: Background with Slow Zoom -->
+    <div class="bg-container">
+        <div class="bg-image" id="bgImage"></div>
+        <!-- LAYER 2: Cinematic Radial Spotlight -->
+        <div class="radial-focus"></div>
+        <!-- LAYER 3: Dark Depth Overlay -->
+        <div class="depth-overlay"></div>
+    </div>
+
+    <main class="lock-screen-ui" id="mainUI">
         
-        <div class="pin-display">
-            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-        </div>
+        <!-- SECTION 1: Heading (Delayed Reveal) -->
+        <header class="hero-header">
+            <h1 class="main-title">An Eternal Story Begins… ✨</h1>
+        </header>
 
-        <p id="status-msg">Enter our little secret… 🔐</p>
+        <!-- SECTION 2: Hindi Emotional Line (MAIN FOCUS) -->
+        <article class="poem-center">
+            <p class="hindi-shimmer">
+                तेरा कुछ पल का आना… 🌸<br>
+                मुझे हर पल तेरा कर जाता है 💖✨
+            </p>
+        </article>
 
-        <div class="numpad">
-            <button onclick="pressKey(1)">1</button><button onclick="pressKey(2)">2</button><button onclick="pressKey(3)">3</button>
-            <button onclick="pressKey(4)">4</button><button onclick="pressKey(5)">5</button><button onclick="pressKey(6)">6</button>
-            <button onclick="pressKey(7)">7</button><button onclick="pressKey(8)">8</button><button onclick="pressKey(9)">9</button>
-            <div class="empty"></div><button onclick="pressKey(0)">0</button><button class="del" onclick="deleteKey()">✕</button>
-        </div>
+        <!-- SECTION 3: PIN Input & Hints -->
+        <section class="interaction-zone">
+            <div class="dots-wrapper" id="dotsContainer">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <p class="hint-line">Enter our little secret… 🔐</p>
+
+            <!-- SECTION 4: Reduced Numpad (Bottom Priority) -->
+            <div class="numpad-small">
+                <button onclick="keyPress(1)">1</button>
+                <button onclick="keyPress(2)">2</button>
+                <button onclick="keyPress(3)">3</button>
+                <button onclick="keyPress(4)">4</button>
+                <button onclick="keyPress(5)">5</button>
+                <button onclick="keyPress(6)">6</button>
+                <button onclick="keyPress(7)">7</button>
+                <button onclick="keyPress(8)">8</button>
+                <button onclick="keyPress(9)">9</button>
+                <div class="empty"></div>
+                <button onclick="keyPress(0)">0</button>
+                <button class="delete-btn" onclick="backspace()">✕</button>
+            </div>
+        </section>
+
     </main>
 
     <script src="js/index.js"></script>
