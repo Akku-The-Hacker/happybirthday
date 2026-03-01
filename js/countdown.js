@@ -1,112 +1,71 @@
-/**
- * RE-BUILD LOGIC
- * Month in JS is index-based (March = 2).
- * Day is normal (4).
- */
-const TARGET_YEAR  = 2026;
-const TARGET_MONTH = 2; // March
-const TARGET_DAY   = 4;
+// MARCH 4, 2026 00:00:00
+const targetDate = new Date(2026, 2, 4, 0, 0, 0).getTime();
 
-const VIDEO_ID = "uBTEkj6Y2Kw";
-const LINES = [
+const shayaris = [
     "Saja rakhi hain yaadein, bas tera intezaar hai... ❤️",
-    "Faasle chaahe kitne ho, tum dil ke sabse paas ho... 🌸",
     "Tumhaari hansi ka noor karega roshan ye jahaan... ✨",
     "Meri duniya tumhare din ka intezaar kar rahi hai... 💖"
 ];
 
 let player;
-let isRedirecting = false;
 
-// 1. YouTube Audio Setup
+// YouTube API
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('audio-anchor', {
-        height: '0', width: '0', videoId: VIDEO_ID,
-        playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': VIDEO_ID, 'controls': 0, 'modestbranding': 1 },
-        events: {
-            'onReady': (e) => { e.target.setVolume(35); e.target.playVideo(); }
-        }
+        height: '0', width: '0', videoId: "uBTEkj6Y2Kw",
+        playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': "uBTEkj6Y2Kw", 'controls': 0 },
+        events: { 'onReady': (e) => { e.target.setVolume(30); e.target.playVideo(); }}
     });
 }
 
-function handleAudioControl() {
-    if (!player) return;
-    const icon = document.getElementById('music-icon-state');
-    const state = player.getPlayerState();
-    if (state === 1) { player.pauseVideo(); icon.innerHTML = "🔇"; } 
-    else { player.playVideo(); icon.innerHTML = "🎵"; }
-}
+function updateTimer() {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
 
-// 2. THE STABLE TIMER ENGINE
-function updateDisplay() {
-    const targetDate = new Date(TARGET_YEAR, TARGET_MONTH, TARGET_DAY, 0, 0, 0);
-    const now = new Date();
-    
-    // Difference in Milliseconds
-    const diff = targetDate.getTime() - now.getTime();
+    // Elements check to prevent crashing
+    const dEl = document.getElementById('d_val');
+    const hEl = document.getElementById('h_val');
+    const mEl = document.getElementById('m_val');
+    const sEl = document.getElementById('s_val');
 
-    // ERROR PROTECTION: 
-    // If browser creates a weird NaN result, STOP logic from redirecting
-    if (isNaN(diff)) {
-        console.error("Timer Math Failed: Invalid Date calculation.");
-        return;
-    }
-
-    // SCENARIO 1: Target time has NOT arrived yet (Future)
     if (diff > 0) {
         const d = Math.floor(diff / (1000 * 60 * 60 * 24));
         const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById('d_val').textContent = d.toString().padStart(2, '0');
-        document.getElementById('h_val').textContent = h.toString().padStart(2, '0');
-        document.getElementById('m_val').textContent = m.toString().padStart(2, '0');
-        document.getElementById('s_val').textContent = s.toString().padStart(2, '0');
-    } 
-    // SCENARIO 2: IT IS THE BIRTHDAY!
-    else {
-        if (!isRedirecting) {
-            triggerBirthdayTransition();
-        }
+        if (dEl) dEl.innerText = d.toString().padStart(2, '0');
+        if (hEl) hEl.innerText = h.toString().padStart(2, '0');
+        if (mEl) mEl.innerText = m.toString().padStart(2, '0');
+        if (sEl) sEl.innerText = s.toString().padStart(2, '0');
+    } else {
+        // IT IS TIME!
+        window.location.href = "main.html";
     }
 }
 
-function triggerBirthdayTransition() {
-    isRedirecting = true;
-    
-    // Update visual text first
-    document.querySelector('.intro-title').innerHTML = "It’s finally your day… 💖";
-    const view = document.getElementById('countdown-view');
-    view.style.opacity = "0";
-    view.style.transform = "scale(1.1)";
-    view.style.transition = "2s ease";
-
-    // 2-Second Delay for transition effect
-    setTimeout(() => {
-        document.body.style.opacity = "0";
-        document.body.style.transition = "1.5s ease";
-        setTimeout(() => {
-            window.location.href = "main.html"; // Final Landing Page
-        }, 1500);
-    }, 1000);
+// Simple Toggle
+window.handleAudioControl = function() {
+    if(!player) return;
+    if(player.getPlayerState() === 1) player.pauseVideo();
+    else player.playVideo();
 }
 
-// 3. PAGE LOAD BOOTSTRAP
-function initCountdown() {
-    // Session Guard (Checks for PIN Unlock)
-    if (sessionStorage.getItem("unlocked") !== "true") {
-        window.location.href = "index.html";
-        return;
+// BOOTSTRAP
+window.onload = function() {
+    // REDIRECT PROTECTION
+    const isUnlocked = sessionStorage.getItem("unlocked") || localStorage.getItem("unlocked");
+    if (isUnlocked !== "true") {
+        console.log("Not unlocked, returning...");
+        // If it's still sending you back, uncomment the next line to debug
+        // window.location.href = "index.html"; 
     }
 
-    // Set Shayari
-    document.getElementById('shayari-inject').innerText = LINES[Math.floor(Math.random() * LINES.length)];
+    // Set Shayari safely
+    const sBox = document.getElementById('shayari-inject');
+    if (sBox) sBox.innerText = shayaris[Math.floor(Math.random() * shayaris.length)];
 
-    // Fire Timer Every Second
-    updateDisplay(); 
-    setInterval(updateDisplay, 1000);
-}
-
-// Standard Browser Initiation
-window.onload = initCountdown;
+    // Start Ticking
+    setInterval(updateTimer, 1000);
+    updateTimer();
+};
