@@ -31,7 +31,17 @@ body { height:100vh; background:#000; font-family:'Poppins', sans-serif; overflo
 }
 
 /* Dots & Interaction */
-.dots-row { display:flex; gap:15px; margin-bottom:10px; opacity:0; animation: stagedFade 1s forwards 1.8s;}
+/* Change this in css/index.css */
+.dots-row { 
+    display: flex; 
+    justify-content: center; /* This centers the dots horizontally */
+    align-items: center;     /* This aligns them vertically within the row */
+    width: 100%;             /* Ensures the container takes full width */
+    gap: 15px; 
+    margin-bottom: 10px; 
+    opacity: 0; 
+    animation: stagedFade 1s forwards 1.8s;
+}
 .dot { width:14px; height:14px; border:1.5px solid rgba(255,255,255,0.7); border-radius:50%; transition:0.3s; }
 .dot.filled { background:#ffb7c5; box-shadow:0 0 15px #ff9ecb; transform:scale(1.2); }
 .hint-text { font-size:10px; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:20px; opacity:0; animation: stagedFade 1s forwards 2.2s; }
