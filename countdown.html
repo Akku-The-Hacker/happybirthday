@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Counting the Moments... ❤️</title>
+    <link rel="stylesheet" href="css/countdown.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+</head>
+<body id="timer-page">
+
+    <div id="yt-player"></div> <!-- YouTube Anchor -->
+
+    <div class="bg-wrapper">
+        <div class="bg-image" id="bgPhoto"></div>
+        <div class="vignette"></div>
+    </div>
+
+    <button class="music-pill" onclick="toggleAudio()">🎵</button>
+
+    <main class="content-frame">
+        <h1 class="main-heading">Counting the moments until your day… 💖</h1>
+
+        <!-- Modern Circular Timer -->
+        <section class="timer-grid">
+            <!-- Days -->
+            <div class="ring-item float-1">
+                <div class="ring rose-glow">
+                    <div class="ring-inner">
+                        <span id="days" class="number-glow">00</span>
+                        <p class="unit-label">Days 💖</p>
+                    </div>
+                    <div class="rotating-arc arc-rose"></div>
+                </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="ring-item float-2">
+                <div class="ring blue-glow">
+                    <div class="ring-inner">
+                        <span id="hours" class="number-glow">00</span>
+                        <p class="unit-label">Hours 💫</p>
+                    </div>
+                    <div class="rotating-arc arc-blue"></div>
+                </div>
+            </div>
+
+            <!-- Minutes -->
+            <div class="ring-item float-1">
+                <div class="ring peach-glow">
+                    <div class="ring-inner">
+                        <span id="minutes" class="number-glow">00</span>
+                        <p class="unit-label">Minutes 🌸</p>
+                    </div>
+                    <div class="rotating-arc arc-peach"></div>
+                </div>
+            </div>
+
+            <!-- Seconds -->
+            <div class="ring-item float-2">
+                <div class="ring gold-glow">
+                    <div class="ring-inner">
+                        <span id="seconds" class="number-glow">00</span>
+                        <p class="unit-label">Seconds ✨</p>
+                    </div>
+                    <div class="rotating-arc arc-gold"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer-area">
+            <p class="waiting-line">Every second brings me closer to celebrating you… 💫</p>
+            <div id="shayari-container">
+                <p id="shayari-text" class="shimmer-gold"></p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="js/countdown.js"></script>
+</body>
+</html>
