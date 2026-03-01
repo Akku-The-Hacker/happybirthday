@@ -8,47 +8,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Background Layers -->
     <div class="bg-image"></div>
     <div class="overlay"></div>
     <div class="particles" id="particles"></div>
 
     <main class="gate-wrapper">
         <div class="glass-card" id="main-card">
-            <!-- Header Section -->
             <header class="hero-text">
                 <h1 class="title">An Eternal Story Begins… <span class="heart-beat">💖</span></h1>
-                <p class="shayari">
-                    “Har kahaani sabke liye nahi hoti,<br>
-                    Kuch pal sirf do dilon ke liye hote hain… 💕<br>
-                    <span>Agar tum sach mein meri ho, toh yeh darwaza khul jaayega… ✨</span>”
-                </p>
+                <div class="shayari-container">
+                    <p class="shayari">
+                        “Har kahaani sabke liye nahi hoti,<br>
+                        Kuch pal sirf do dilon ke liye hote hain… 💕<br>
+                        <span>Agar tum sach mein meri ho,<br>
+                            toh yeh darwaza khul jaayega… ✨</span>”
+                    </p>
+                </div>
             </header>
 
-            <!-- PIN Indicators -->
-            <div class="pin-display">
-                <div class="dot" id="dot-0"></div>
-                <div class="dot" id="dot-1"></div>
-                <div class="dot" id="dot-2"></div>
-                <div class="dot" id="dot-3"></div>
-            </div>
+            <div class="pin-section">
+                <div class="pin-display">
+                    <div class="dot" id="dot-0"></div>
+                    <div class="dot" id="dot-1"></div>
+                    <div class="dot" id="dot-2"></div>
+                    <div class="dot" id="dot-3"></div>
+                </div>
+                <p id="status-msg">Is Kahaani Ki Chaabi Sirf Tum Ho 💫<br>
+                Prove It’s You… ✨</p>
 
-            <p id="status-msg">Enter Private PIN</p>
-
-            <!-- Romantic Numpad -->
-            <div class="numpad">
-                <button onclick="pressKey(1)">1</button>
-                <button onclick="pressKey(2)">2</button>
-                <button onclick="pressKey(3)">3</button>
-                <button onclick="pressKey(4)">4</button>
-                <button onclick="pressKey(5)">5</button>
-                <button onclick="pressKey(6)">6</button>
-                <button onclick="pressKey(7)">7</button>
-                <button onclick="pressKey(8)">8</button>
-                <button onclick="pressKey(9)">9</button>
-                <div class="empty"></div>
-                <button onclick="pressKey(0)">0</button>
-                <button class="delete" onclick="deleteKey()">✕</button>
+                <div class="numpad">
+                    <button onclick="pressKey(1)">1</button>
+                    <button onclick="pressKey(2)">2</button>
+                    <button onclick="pressKey(3)">3</button>
+                    <button onclick="pressKey(4)">4</button>
+                    <button onclick="pressKey(5)">5</button>
+                    <button onclick="pressKey(6)">6</button>
+                    <button onclick="pressKey(7)">7</button>
+                    <button onclick="pressKey(8)">8</button>
+                    <button onclick="pressKey(9)">9</button>
+                    <div class="empty"></div>
+                    <button onclick="pressKey(0)">0</button>
+                    <button class="delete" onclick="deleteKey()">✕</button>
+                </div>
             </div>
         </div>
     </main>
