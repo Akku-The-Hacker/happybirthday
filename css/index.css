@@ -1,149 +1,192 @@
 :root {
-    --rose-gold: #b76e79;
-    --dusty-pink: #d8a7b1;
-    --gold: #d4af37;
-    --glass: rgba(255, 255, 255, 0.12);
+    --pink-glow: #ffb7c5;
+    --gold-glow: #d4af37;
+    --text-white: rgba(255, 255, 255, 0.95);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-body {
-    height: 100vh;
+body, html {
+    height: 100%;
+    width: 100%;
     overflow: hidden;
     background: #000;
     font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-/* Background Logic */
-.bg-image {
+/* --- BACKGROUND SYSTEM --- */
+.bg-wrapper {
     position: fixed;
     inset: 0;
-    background: url('../images/Flower1.jpg') no-repeat center center/cover;
-    filter: blur(4px) brightness(0.6);
-    transition: filter 1s ease, transform 1.5s ease;
-    z-index: -2;
-}
-
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle, transparent 10%, rgba(0,0,0,0.8) 100%);
     z-index: -1;
 }
 
-.particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-.particle { position: absolute; animation: float 10s infinite linear; opacity: 0.4; }
-
-/* The Glass Box */
-.gate-wrapper { width: 92%; max-width: 420px; z-index: 10; }
-.glass-card {
-    background: var(--glass);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 35px;
-    padding: 2.5rem 1.5rem;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+.bg-image {
+    width: 100%;
+    height: 100%;
+    background: url('../images/Flower1.jpg') no-repeat center center/cover;
+    filter: blur(7px) brightness(0.65); /* Targeted blur */
+    transform: scale(1.05); /* Avoid white edges from blur */
+    transition: filter 1.5s ease, transform 2s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
-/* BIG SHAYARI Section */
-.title {
+.vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 100%);
+}
+
+.gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,0.5) 0%, 
+        transparent 30%, 
+        transparent 70%, 
+        rgba(0,0,0,0.8) 100%);
+}
+
+/* --- MAIN LAYOUT --- */
+.lock-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10vh 20px 8vh;
+    text-align: center;
+    z-index: 10;
+}
+
+/* --- TOP SECTION --- */
+.entry-title {
     font-family: 'Playfair Display', serif;
     color: white;
-    font-size: 1.4rem;
-    font-style: italic;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(255,255,255,0.4);
+    opacity: 0;
+    animation: fadeInScale 1.8s forwards;
 }
 
-.shayari-container {
-    padding: 0 10px;
-    margin-bottom: 35px;
-}
-
-.shayari {
-    color: white; /* Made brighter */
+/* --- CENTER SECTION --- */
+.hindi-line {
     font-family: 'Playfair Display', serif;
-    font-size: 1.25rem; /* Increased size significantly */
-    line-height: 1.8;
     font-style: italic;
-    background: linear-gradient(to bottom, #ffffff, var(--dusty-pink));
+    font-size: 1.45rem;
+    line-height: 1.8;
+    color: var(--text-white);
+    opacity: 0;
+    animation: fadeInScale 2s forwards 0.8s;
+}
+
+/* Shimmer Animation */
+.shimmer {
+    background: linear-gradient(90deg, #fff, #ffb7c5, #fff);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: fadeIn 3s ease;
+    animation: shine 5s linear infinite, fadeInScale 2s forwards 0.8s;
 }
 
-.shayari span {
-    display: block;
-    font-size: 0.95rem; /* Subtext remains elegant */
-    margin-top: 10px;
-    -webkit-text-fill-color: rgba(255,255,255,0.8);
-    font-family: 'Poppins', sans-serif;
-}
-
-/* Indicators */
-.pin-display {
+/* --- PIN INDICATORS --- */
+.pin-indicators {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 10px;
+    gap: 20px;
+    margin-bottom: 12px;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
-    border: 1px solid var(--dusty-pink);
+    width: 12px;
+    height: 12px;
+    border: 1px solid rgba(255,255,255,0.6);
     border-radius: 50%;
-    transition: 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.dot.active {
-    background: var(--gold);
-    box-shadow: 0 0 12px var(--gold);
-    transform: scale(1.3);
+.dot.filled {
+    background: var(--pink-glow);
+    border-color: var(--pink-glow);
+    box-shadow: 0 0 15px var(--pink-glow);
+    transform: scale(1.2);
 }
 
-#status-msg {
-    color: rgba(255,255,255,0.6);
+.hint-text {
     font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    margin-bottom: 30px;
 }
 
-/* SMALL NUMPAD Section */
+/* --- NUMPAD --- */
 .numpad {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    max-width: 200px; /* Constrained width for small look */
+    gap: 20px;
+    width: 100%;
+    max-width: 280px;
     margin: 0 auto;
 }
 
 .numpad button {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
     color: white;
-    width: 50px; /* Reduced button size */
-    height: 50px; /* Reduced button size */
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
-    font-size: 1.1rem; /* Smaller numbers */
-    margin: 0 auto;
+    font-size: 1.4rem;
+    font-weight: 300;
+    transition: 0.2s;
     outline: none;
 }
 
-.numpad button:active { background: var(--rose-gold); transform: scale(0.85); }
-.numpad button.delete { font-size: 0.9rem; border: none; background: transparent; }
+.numpad button:active {
+    background: rgba(255,255,255,0.15);
+    transform: scale(0.92);
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
 
-/* Animations */
-.heart-beat { display: inline-block; animation: heart 1.5s infinite; }
-@keyframes heart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes float { from { transform: translateY(100vh); opacity: 0; } 50% { opacity: 0.4; } to { transform: translateY(-10vh); opacity: 0; } }
+.numpad .del { border: none; font-size: 1.1rem; }
 
-.shake { animation: errorShake 0.4s ease; border-color: rgba(255,0,0,0.5); }
-@keyframes errorShake { 0%,100% {transform: translateX(0);} 25% {transform: translateX(-5px);} 75% {transform: translateX(5px);} }
+/* --- KEYFRAMES --- */
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(1.02) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+/* Particles & Heartbeat Glow */
+.sparkles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.lock-screen {
+    animation: heartPulse 6s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+    0%, 100% { filter: drop-shadow(0 0 0px transparent); }
+    50% { filter: drop-shadow(0 0 5px rgba(255,183,197,0.1)); }
+}
+
+/* Logic Classes */
+.shake { animation: shakeErr 0.4s ease; }
+@keyframes shakeErr {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.red-tint::after {
+    content: "";
+    position: fixed; inset: 0;
+    background: rgba(255, 0, 0, 0.05);
+    pointer-events: none;
+    z-index: 100;
+}
