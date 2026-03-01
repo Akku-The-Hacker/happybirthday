@@ -1,1 +1,124 @@
+:root {
+    --glass-white: rgba(255, 255, 255, 0.1);
+    --gold-text: #e2c08d;
+    --rose-gold: #b76e79;
+}
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    height: 100vh;
+    background: #000;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Background Layers */
+.bg-image {
+    position: fixed;
+    inset: 0;
+    background: url('../images/Flower2.jpg') no-repeat center center/cover;
+    filter: blur(5px) brightness(0.6);
+    z-index: -2;
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+    z-index: -1;
+}
+
+/* Content Layout */
+.content-wrapper {
+    width: 90%;
+    text-align: center;
+    z-index: 10;
+}
+
+.top-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+/* THE TIMER (Glassmorphism) */
+.timer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.timer-box {
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.timer-box span {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: white;
+    text-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
+.timer-box p {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    color: var(--gold-text);
+}
+
+/* Emotional Heart Animation */
+.heart-container { margin: 30px 0; }
+.main-heart {
+    font-size: 2.5rem;
+    display: inline-block;
+    animation: slowHeartbeat 2.5s infinite;
+}
+
+/* Shayari System */
+.poetry-reveal {
+    min-height: 80px;
+    margin-top: 40px;
+}
+
+.shimmer-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    background: linear-gradient(90deg, #fff, var(--rose-gold), #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 5s linear infinite, fadeIn 2s forwards;
+}
+
+/* Animations */
+@keyframes slowHeartbeat {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 10px pink); }
+}
+
+@keyframes shine { to { background-position: 200% center; } }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
