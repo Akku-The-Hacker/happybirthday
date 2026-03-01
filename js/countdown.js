@@ -4,8 +4,8 @@ const VIDEO_ID = "uBTEkj6Y2Kw";
 const lines = [
     "Saja rakhi hain yaadein, bas tera intezaar hai... ❤️",
     "Faasle dil ke sabse paas hain... 🌸",
-    "Tumhaari hansi ka noor karega roshan ye jahaan... ✨",
-    "Har pal tera kar jaata hai... 💫"
+    "हर गुजरता पल बस तेरा इंतज़ार करता है… 💖",
+    "वक़्त धीमे चले या तेज़, दिल सिर्फ़ तेरा ही रहता है… ✨"
 ];
 
 let ytPlayer;
