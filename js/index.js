@@ -1,80 +1,92 @@
 const PIN = "7489";
 let currentInput = "";
 
-// Generate Sparse Cinematic Sparkles
-function createSparkles() {
-    const container = document.getElementById('sparkles');
-    for (let i = 0; i < 8; i++) {
-        const s = document.createElement('div');
-        s.style.position = 'absolute';
-        s.style.width = '2px';
-        s.style.height = '2px';
-        s.style.background = '#fff';
-        s.style.left = Math.random() * 100 + '%';
-        s.style.top = Math.random() * 100 + '%';
-        s.style.opacity = '0.2';
-        s.style.borderRadius = '50%';
-        s.style.animation = `float ${5 + Math.random() * 5}s infinite alternate ease-in-out`;
-        container.appendChild(s);
+// Floating Romantic Sparkles/Emojis
+function initDrama() {
+    const layer = document.getElementById('emoji-layer');
+    const items = ['✨', '💖', '🌸', '💫', '🌹'];
+    
+    for (let i = 0; i < 15; i++) {
+        const span = document.createElement('span');
+        span.innerHTML = items[Math.floor(Math.random() * items.length)];
+        span.style.position = 'absolute';
+        span.style.left = Math.random() * 100 + 'vw';
+        span.style.top = Math.random() * 100 + 'vh';
+        span.style.opacity = '0.2';
+        span.style.fontSize = '20px';
+        span.style.pointerEvents = 'none';
+        span.style.animation = `floatBreath ${5 + Math.random() * 5}s infinite ease-in-out`;
+        layer.appendChild(span);
     }
 }
 
 function updateDots() {
     const dots = document.querySelectorAll('.dot');
-    dots.forEach((dot, index) => {
-        index < currentInput.length ? dot.classList.add('filled') : dot.classList.remove('filled');
+    dots.forEach((d, i) => {
+        i < currentInput.length ? d.classList.add('active') : d.classList.remove('active');
     });
 }
 
-function append(num) {
+function tap(n) {
     if (currentInput.length < 4) {
-        currentInput += num;
+        currentInput += n;
         updateDots();
-        if (currentInput.length === 4) setTimeout(validate, 300);
+        // Feedback haptic visual
+        if (currentInput.length === 4) setTimeout(verify, 300);
     }
 }
 
-function backspace() {
+function del() {
     currentInput = currentInput.slice(0, -1);
     updateDots();
 }
 
-function validate() {
-    const screen = document.getElementById('lock-screen');
-    const msg = document.getElementById('status-msg');
-    
+function verify() {
+    const body = document.body;
+    const label = document.getElementById('status-label');
+    const dots = document.getElementById('dot-row');
+
     if (currentInput === PIN) {
-        // Success Sequence
-        document.body.classList.add('unlocked');
-        msg.innerHTML = "Unlocking our world… 💫";
-        msg.style.color = "#d4af37";
+        // CORRECT: SUCCESS ANIMATION
+        label.innerHTML = "Our Story Unfolds… 🕊️";
+        label.style.color = "#e2c08d";
+        label.style.textShadow = "0 0 10px gold";
         
         const bg = document.querySelector('.bg-image');
-        bg.style.filter = "blur(1px) brightness(0.8)";
-        bg.style.transform = "scale(1.1)";
-
-        sessionStorage.setItem("unlocked", "true");
+        bg.style.filter = "blur(0px) brightness(1)"; // Final clarity
+        bg.style.transform = "scale(1)"; 
+        bg.style.transition = "2s ease";
 
         setTimeout(() => {
-            document.body.style.opacity = "0";
-            document.body.style.transition = "1.5s";
+            body.style.opacity = "0";
+            body.style.transition = "1.5s ease-out";
             setTimeout(() => window.location.href = "countdown.html", 1500);
         }, 1000);
 
     } else {
-        // Error Sequence
-        screen.classList.add('shake');
-        document.body.classList.add('red-tint');
-        msg.innerHTML = "Not yet, my love. 💔";
+        // WRONG: DRAMATIC REJECTION
+        label.innerHTML = "Not yet, my love. 💔";
+        label.style.color = "#ff4d4d";
+        dots.classList.add('shake-dramatic');
         
         setTimeout(() => {
-            screen.classList.remove('shake');
-            document.body.classList.remove('red-tint');
+            dots.classList.remove('shake-dramatic');
             currentInput = "";
             updateDots();
-            msg.innerHTML = "Enter our little secret… ✨";
-        }, 600);
+            label.innerHTML = "Enter our little secret… 🔐";
+            label.style.color = "rgba(255,255,255,0.6)";
+        }, 800);
     }
 }
 
-createSparkles();
+// Float Animation Script
+const style = document.createElement('style');
+style.innerHTML = `
+    @keyframes floatBreath {
+        0%, 100% { transform: translateY(0) scale(1); opacity: 0.1; }
+        50% { transform: translateY(-30px) scale(1.2); opacity: 0.4; }
+    }
+`;
+document.head.appendChild(style);
+
+initDrama();
