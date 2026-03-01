@@ -3,62 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Unlocked | For You</title>
+    <title>Entrance | An Eternal Story</title>
     <link rel="stylesheet" href="css/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
-<body class="entrance-loading">
+<body>
+    <div class="bg-image" id="bgImage"></div>
+    <div class="overlay"></div>
+    <div class="particles" id="particles"></div>
 
-    <!-- THE STAGE -->
-    <div class="cinematic-container">
-        <div class="bg-image"></div>
-        <div class="light-flare"></div>
-        <div class="vignette"></div>
-        <div class="emoji-layer" id="emoji-layer"></div>
-    </div>
+    <main class="gate-wrapper">
+        <h1 class="hero-title">An Eternal Story Begins… ✨</h1>
+        <p class="shayari">“Har kahaani sabke liye nahi hoti,<br>Kuch pal sirf do dilon ke liye hote hain… 💕”</p>
+        
+        <div class="pin-display">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
 
-    <main class="ui-wrapper">
-        <!-- TOP: Staggered Fade-in -->
-        <section class="header">
-            <h1 class="glow-text">An Eternal Story Begins… ✨</h1>
-        </section>
+        <p id="status-msg">Enter our little secret… 🔐</p>
 
-        <!-- MIDDLE: Emotional Soul -->
-        <section class="poetry">
-            <div class="poetry-inner">
-                <p class="hindi-shimmer">
-                    तेरा कुछ पल का आना… 🌸<br>
-                    मुझे हर पल तेरा कर जाता है 💖✨
-                </p>
-            </div>
-        </section>
-
-        <!-- BOTTOM: The Secret Gate -->
-        <section class="input-gate">
-            <div class="indicators" id="dot-row">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-
-            <p class="status" id="status-label">Enter our little secret… 🔐</p>
-
-            <div class="numpad">
-                <button onclick="tap(1)">1</button>
-                <button onclick="tap(2)">2</button>
-                <button onclick="tap(3)">3</button>
-                <button onclick="tap(4)">4</button>
-                <button onclick="tap(5)">5</button>
-                <button onclick="tap(6)">6</button>
-                <button onclick="tap(7)">7</button>
-                <button onclick="tap(8)">8</button>
-                <button onclick="tap(9)">9</button>
-                <div class="empty"></div>
-                <button onclick="tap(0)">0</button>
-                <button class="del" onclick="del()">⌫</button>
-            </div>
-        </section>
+        <div class="numpad">
+            <button onclick="pressKey(1)">1</button><button onclick="pressKey(2)">2</button><button onclick="pressKey(3)">3</button>
+            <button onclick="pressKey(4)">4</button><button onclick="pressKey(5)">5</button><button onclick="pressKey(6)">6</button>
+            <button onclick="pressKey(7)">7</button><button onclick="pressKey(8)">8</button><button onclick="pressKey(9)">9</button>
+            <div class="empty"></div><button onclick="pressKey(0)">0</button><button class="del" onclick="deleteKey()">✕</button>
+        </div>
     </main>
 
     <script src="js/index.js"></script>
