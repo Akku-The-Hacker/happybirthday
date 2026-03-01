@@ -1,192 +1,170 @@
 :root {
-    --pink-glow: #ffb7c5;
-    --gold-glow: #d4af37;
-    --text-white: rgba(255, 255, 255, 0.95);
+    --gold: #e2c08d;
+    --rose: #ffafbd;
+    --white: rgba(255, 255, 255, 0.9);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-body, html {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
+body {
+    height: 100vh;
     background: #000;
     font-family: 'Poppins', sans-serif;
+    color: white;
+    overflow: hidden;
 }
 
-/* --- BACKGROUND SYSTEM --- */
-.bg-wrapper {
+/* --- CINEMATIC BACKGROUND SYSTEM --- */
+.cinematic-container {
     position: fixed;
     inset: 0;
     z-index: -1;
+    overflow: hidden;
 }
 
 .bg-image {
     width: 100%;
     height: 100%;
     background: url('../images/Flower1.jpg') no-repeat center center/cover;
-    filter: blur(7px) brightness(0.65); /* Targeted blur */
-    transform: scale(1.05); /* Avoid white edges from blur */
-    transition: filter 1.5s ease, transform 2s cubic-bezier(0.2, 0, 0.2, 1);
+    /* Dramatically clearer starting point */
+    filter: blur(4px) brightness(0.8) contrast(1.1); 
+    transform: scale(1.1);
+    animation: lensFocus 2.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+}
+
+.light-flare {
+    position: absolute;
+    top: -10%; left: -10%;
+    width: 120%; height: 120%;
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+    animation: flareMove 10s infinite alternate;
 }
 
 .vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 100%);
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.6) 100%);
 }
 
-.gradient-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, 
-        rgba(0,0,0,0.5) 0%, 
-        transparent 30%, 
-        transparent 70%, 
-        rgba(0,0,0,0.8) 100%);
-}
-
-/* --- MAIN LAYOUT --- */
-.lock-screen {
+/* --- LAYOUT STRUCTURE --- */
+.ui-wrapper {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 10vh 20px 8vh;
-    text-align: center;
+    justify-content: space-around;
+    padding: 20px;
     z-index: 10;
 }
 
-/* --- TOP SECTION --- */
-.entry-title {
+.glow-text {
     font-family: 'Playfair Display', serif;
-    color: white;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    text-align: center;
     letter-spacing: 2px;
-    text-shadow: 0 0 15px rgba(255,255,255,0.4);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     opacity: 0;
-    animation: fadeInScale 1.8s forwards;
+    animation: dramaticFadeIn 2s forwards 0.5s;
 }
 
-/* --- CENTER SECTION --- */
-.hindi-line {
+/* --- THE POETRY AREA (SHIMMER) --- */
+.hindi-shimmer {
     font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    text-align: center;
     font-style: italic;
-    font-size: 1.45rem;
     line-height: 1.8;
-    color: var(--text-white);
-    opacity: 0;
-    animation: fadeInScale 2s forwards 0.8s;
-}
-
-/* Shimmer Animation */
-.shimmer {
-    background: linear-gradient(90deg, #fff, #ffb7c5, #fff);
+    background: linear-gradient(to right, #fff 20%, var(--rose) 40%, var(--gold) 60%, #fff 80%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shine 5s linear infinite, fadeInScale 2s forwards 0.8s;
+    animation: shine 4s linear infinite, dramaticFadeIn 2s forwards 1.2s;
+    opacity: 0;
 }
 
-/* --- PIN INDICATORS --- */
-.pin-indicators {
+/* --- THE PIN UI --- */
+.indicators {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 12px;
+    gap: 15px;
+    margin-bottom: 10px;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
-    border: 1px solid rgba(255,255,255,0.6);
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(255,255,255,0.4);
     border-radius: 50%;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.dot.filled {
-    background: var(--pink-glow);
-    border-color: var(--pink-glow);
-    box-shadow: 0 0 15px var(--pink-glow);
-    transform: scale(1.2);
+.dot.active {
+    background: white;
+    box-shadow: 0 0 20px white;
+    transform: scale(1.3) translateY(-5px);
 }
 
-.hint-text {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 1px;
+.status {
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
     margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-/* --- NUMPAD --- */
 .numpad {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: 100%;
+    gap: 15px;
     max-width: 280px;
     margin: 0 auto;
 }
 
 .numpad button {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.2);
     color: white;
     width: 65px;
     height: 65px;
     border-radius: 50%;
-    font-size: 1.4rem;
-    font-weight: 300;
-    transition: 0.2s;
-    outline: none;
+    font-size: 1.5rem;
+    transition: 0.3s;
 }
 
 .numpad button:active {
-    background: rgba(255,255,255,0.15);
-    transform: scale(0.92);
-    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    background: white;
+    color: black;
+    transform: scale(0.9);
 }
 
-.numpad .del { border: none; font-size: 1.1rem; }
+.numpad .del { border: none; background: transparent; font-size: 1.2rem; }
 
-/* --- KEYFRAMES --- */
-@keyframes fadeInScale {
-    from { opacity: 0; transform: scale(1.02) translateY(10px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+/* --- ANIMATIONS --- */
+@keyframes lensFocus {
+    0% { filter: blur(20px) brightness(0.2); transform: scale(1.4); }
+    100% { filter: blur(4px) brightness(0.8) contrast(1.1); transform: scale(1.1); }
 }
 
-@keyframes shine {
-    to { background-position: 200% center; }
+@keyframes shine { to { background-position: 200% center; } }
+
+@keyframes dramaticFadeIn {
+    from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
-/* Particles & Heartbeat Glow */
-.sparkles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
+@keyframes flareMove {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(10%, 10%) rotate(10deg); }
 }
 
-.lock-screen {
-    animation: heartPulse 6s ease-in-out infinite;
-}
-
-@keyframes heartPulse {
-    0%, 100% { filter: drop-shadow(0 0 0px transparent); }
-    50% { filter: drop-shadow(0 0 5px rgba(255,183,197,0.1)); }
-}
-
-/* Logic Classes */
-.shake { animation: shakeErr 0.4s ease; }
-@keyframes shakeErr {
+/* WRONG PIN EFFECT */
+.shake-dramatic { animation: shakeEffect 0.5s ease-in-out; }
+@keyframes shakeEffect {
     0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
+    20%, 60% { transform: translateX(-15px); }
+    40%, 80% { transform: translateX(15px); }
 }
 
-.red-tint::after {
-    content: "";
-    position: fixed; inset: 0;
-    background: rgba(255, 0, 0, 0.05);
-    pointer-events: none;
-    z-index: 100;
-}
+.bg-error { background: rgba(255,0,0,0.2) !important; transition: 0.3s; }
