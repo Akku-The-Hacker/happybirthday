@@ -30,7 +30,7 @@ body {
 }
 
 .main-heading {
-    font-family: 'Playfair Display', serif; font-weight: 400; font-size: 1.5rem;
+    font-family: 'Playfair Display', serif; font-weight: 400; font-size: 2.5rem;
     letter-spacing: 1px; text-shadow: 0 0 15px rgba(255,255,255,0.3);
 }
 
@@ -88,7 +88,7 @@ body {
 .float-2 { animation: float 4s ease-in-out infinite 1s; }
 
 .shimmer-gold {
-    font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic;
+    font-family: 'Playfair Display', serif; font-size: 2.5rem; font-style: italic;
     background: linear-gradient(90deg, #fff, #d4af37, #fff); background-size: 200%;
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     animation: glowMove 5s linear infinite; padding: 0 30px; line-height: 1.6;
