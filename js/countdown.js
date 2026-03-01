@@ -1,5 +1,7 @@
 // --- CONFIGURATION ---
-const TARGET_DATE = new Date("March 4, 2026 00:00:00").getTime();
+// Use the ISO format (YYYY-MM-DDTHH:MM:SS) for the best browser compatibility
+const TARGET_DATE_STRING = "2026-03-04T00:00:00";
+const TARGET_DATE = new Date(TARGET_DATE_STRING).getTime();
 const VIDEO_ID = "uBTEkj6Y2Kw";
 
 const SHAYARIS = [
@@ -9,6 +11,10 @@ const SHAYARIS = [
     "Meri duniya tumhare din ka intezaar kar rahi hai... 💫",
     "Saja rakhi hain yaadein, bas tumhaara din aana baaki hai... ❤️"
 ];
+
+// Debugging: View this in your browser console (F12) to see why it redirects
+console.log("Target Date:", new Date(TARGET_DATE));
+console.log("Current System Date:", new Date());
 
 // --- YOUTUBE API ---
 let player;
@@ -36,7 +42,7 @@ function onYouTubeIframeAPIReady() {
 
 function toggleMusic() {
     const btn = document.getElementById('music-icon');
-    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+    if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
         player.pauseVideo();
         btn.innerHTML = "🔇";
     } else {
@@ -50,7 +56,10 @@ function updateTimer() {
     const now = new Date().getTime();
     const diff = TARGET_DATE - now;
 
+    // Log the diff to see why it might be triggering redirect
+    // If diff is negative, it means the target date has passed
     if (diff <= 0) {
+        console.log("Redirect triggered. Diff is: " + diff);
         handleRedirect();
         return;
     }
@@ -66,40 +75,47 @@ function updateTimer() {
     document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
 }
 
+let redirecting = false;
 function handleRedirect() {
+    if (redirecting) return; // Prevent loop
+    redirecting = true;
+
     const timer = document.getElementById('timer');
     const bg = document.querySelector('.bg-image');
     
-    document.querySelector('.hero-header h1').innerHTML = "It's finally your day… 💖";
-    timer.style.transform = "scale(1.2)";
-    timer.style.opacity = "0";
-    timer.style.transition = "1s ease-in-out";
+    // Check if the timer element exists to avoid errors
+    if(timer) {
+        document.querySelector('.hero-header h1').innerHTML = "It's finally your day… 💖";
+        timer.style.transform = "scale(1.1)";
+        timer.style.opacity = "0.5";
+    }
     
-    bg.style.filter = "blur(2px) brightness(0.8)";
-    bg.style.transform = "scale(1.15)";
-    
+    // Emotional Pause: Wait 3 seconds before moving to main.html
     setTimeout(() => {
-        document.body.style.background = "white";
-        document.body.style.transition = "2s ease";
         document.body.style.opacity = "0";
+        document.body.style.transition = "2s ease";
         setTimeout(() => {
             window.location.href = "main.html";
         }, 2000);
-    }, 1500);
+    }, 3000);
 }
 
 // --- UI INIT ---
 function init() {
-    // Session Safety
+    // 1. Session Safety check
     if (!sessionStorage.getItem("unlocked")) {
         window.location.href = "index.html";
+        return;
     }
 
-    // Shayari
-    const randomShayari = SHAYARIS[Math.floor(Math.random() * SHAYARIS.length)];
-    document.getElementById('shayari-display').innerText = randomShayari;
+    // 2. Load Shayari
+    const shayariDisplay = document.getElementById('shayari-display');
+    if (shayariDisplay) {
+        const randomShayari = SHAYARIS[Math.floor(Math.random() * SHAYARIS.length)];
+        shayariDisplay.innerText = randomShayari;
+    }
 
-    // Particles
+    // 3. Generate Particles
     const sparkleContainer = document.getElementById('sparkles');
     for (let i = 0; i < 20; i++) {
         let s = document.createElement('div');
@@ -107,10 +123,12 @@ function init() {
         s.style.left = Math.random() * 100 + 'vw';
         s.style.width = Math.random() * 3 + 'px';
         s.style.height = s.style.width;
-        s.style.animationDelay = Math.random() * 10 + 's';
+        s.style.top = Math.random() * 100 + 'vh';
+        s.style.animation = `float ${10 + Math.random() * 10}s infinite linear`;
         sparkleContainer.appendChild(s);
     }
 
+    // 4. Start Interval
     setInterval(updateTimer, 1000);
     updateTimer();
 }
