@@ -5,57 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Counting the Moments...</title>
     <link rel="stylesheet" href="css/countdown.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="player"></div> <!-- YouTube Music -->
+    <div class="bg-image"></div>
+    <div class="overlay"></div>
 
-    <!-- Debug Log for troubleshooting (Hidden by default) -->
-    <div id="debug-box" style="display:none; position:fixed; top:0; background:rgba(255,0,0,0.8); color:#fff; z-index:9999; font-size:10px; width:100%;"></div>
+    <button class="music-toggle" onclick="toggleMusic()">🎵</button>
 
-    <!-- Background Cinema -->
-    <div class="bg-container">
-        <div class="main-bg-photo"></div>
-        <div class="dark-vignette"></div>
-        <div class="layer-fade"></div>
-    </div>
+    <main class="timer-viewport">
+        <h1 class="fade-up">Counting the moments until your day… 💖</h1>
 
-    <!-- Audio (Hidden) -->
-    <div id="audio-anchor"></div>
-    <button class="music-pill" onclick="handleAudioControl()">
-        <span id="music-icon-state">🎵</span>
-    </button>
+        <div class="hindi-line">
+            “तेरा कुछ पल का आना… 🌸<br>
+            मुझे हर पल तेरा कर जाता है 💖✨”
+        </div>
 
-    <main class="viewport-wrapper">
-        <header>
-            <h1 class="intro-title">Counting the moments until your day… 💖</h1>
-        </header>
-
-        <section class="timer-grid" id="countdown-view">
-            <div class="unit">
-                <span id="d_val">--</span>
-                <p>Days 💕</p>
-            </div>
+        <div class="timer-display">
+            <div class="unit"><span id="days">--</span><p>Days 💕</p></div>
             <div class="sep">:</div>
-            <div class="unit">
-                <span id="h_val">--</span>
-                <p>Hours 💫</p>
-            </div>
+            <div class="unit"><span id="hours">--</span><p>Hours 💫</p></div>
             <div class="sep">:</div>
-            <div class="unit">
-                <span id="m_val">--</span>
-                <p>Mins 🌸</p>
-            </div>
+            <div class="unit"><span id="minutes">--</span><p>Mins 🌸</p></div>
             <div class="sep">:</div>
-            <div class="unit">
-                <span id="s_val">--</span>
-                <p>Secs ✨</p>
-            </div>
-        </section>
+            <div class="unit"><span id="seconds">--</span><p>Secs ✨</p></div>
+        </div>
 
-        <footer class="footer-area">
-            <p class="waiting-line">Every second brings me closer to celebrating you… 💫</p>
-            <p id="shayari-inject" class="shimmer-gold"></p>
-        </footer>
+        <div class="shimmer-area">
+            <p id="shayari-text" class="shimmer"></p>
+        </div>
     </main>
 
     <script src="https://www.youtube.com/iframe_api"></script>
