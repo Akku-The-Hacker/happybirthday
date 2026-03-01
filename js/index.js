@@ -1,41 +1,63 @@
-const CORRECT_PIN = "7489";
+const PIN = "7489";
 let currentInput = "";
 
-function pressKey(num) {
+function keyPress(num) {
     if (currentInput.length < 4) {
         currentInput += num;
-        updateUI();
-        if (currentInput.length === 4) setTimeout(validate, 300);
+        updateDots();
+        
+        // Haptic feedback feel
+        if (currentInput.length === 4) {
+            setTimeout(validate, 400);
+        }
     }
 }
 
-function deleteKey() {
+function backspace() {
     currentInput = currentInput.slice(0, -1);
-    updateUI();
+    updateDots();
 }
 
-function updateUI() {
+function updateDots() {
     const dots = document.querySelectorAll('.dot');
-    dots.forEach((dot, i) => i < currentInput.length ? dot.classList.add('filled') : dot.classList.remove('filled'));
-    // Background clarity increases with dots
-    document.getElementById('bgImage').style.filter = `blur(${10 - (currentInput.length * 2.5)}px) brightness(0.6)`;
+    dots.forEach((dot, i) => {
+        if (i < currentInput.length) {
+            dot.classList.add('filled');
+        } else {
+            dot.classList.remove('filled');
+        }
+    });
 }
 
 function validate() {
-    if (currentInput === CORRECT_PIN) {
-        localStorage.setItem("birthday_access", "granted");
-        sessionStorage.setItem("birthday_access", "granted");
-        document.querySelector('.gate-wrapper').style.opacity = "0";
-        document.getElementById('bgImage').style.filter = "blur(0) brightness(0.8)";
-        setTimeout(() => window.location.href = "countdown.html", 1000);
-    } else {
-        document.querySelector('.gate-wrapper').classList.add('shake');
-        document.getElementById('status-msg').innerText = "Incorrect PIN 💔";
+    const mainUI = document.getElementById('mainUI');
+    const bg = document.getElementById('bgImage');
+    const dots = document.getElementById('dotsContainer');
+
+    if (currentInput === PIN) {
+        // SUCCESS SEQUENCE
+        sessionStorage.setItem("unlocked", "true");
+        localStorage.setItem("unlocked", "true");
+
+        // Moment of Clarity
+        bg.style.transition = "2s ease";
+        bg.style.filter = "blur(0px) brightness(0.9)";
+        mainUI.style.transition = "1s ease";
+        mainUI.style.opacity = "0";
+        mainUI.style.transform = "scale(0.9)";
+
         setTimeout(() => {
-            document.querySelector('.gate-wrapper').classList.remove('shake');
-            currentInput = "";
-            updateUI();
-            document.getElementById('status-msg').innerText = "Enter our little secret… 🔐";
+            window.location.href = "countdown.html";
+        }, 1200);
+
+    } else {
+        // ERROR SEQUENCE
+        dots.classList.add('shake');
+        currentInput = "";
+        
+        setTimeout(() => {
+            dots.classList.remove('shake');
+            updateDots();
         }, 500);
     }
 }
