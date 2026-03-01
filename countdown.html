@@ -9,50 +9,53 @@
 </head>
 <body>
 
-    <!-- Hidden Debug Overlay (Use only if testing, remove for final) -->
-    <div id="debug" style="display:none; color: red; position: fixed; top:0; z-index:1000; background:white;"></div>
+    <!-- Debug Log for troubleshooting (Hidden by default) -->
+    <div id="debug-box" style="display:none; position:fixed; top:0; background:rgba(255,0,0,0.8); color:#fff; z-index:9999; font-size:10px; width:100%;"></div>
 
-    <div class="bg-wrapper">
-        <div class="bg-image"></div>
-        <div class="vignette"></div>
-        <div class="overlay-grad"></div>
+    <!-- Background Cinema -->
+    <div class="bg-container">
+        <div class="main-bg-photo"></div>
+        <div class="dark-vignette"></div>
+        <div class="layer-fade"></div>
     </div>
 
-    <!-- YouTube Music -->
-    <div id="yt-player"></div>
-    <button class="music-toggle" onclick="handleMusic()">
-        <span id="music-state">🎵</span>
+    <!-- Audio (Hidden) -->
+    <div id="audio-anchor"></div>
+    <button class="music-pill" onclick="handleAudioControl()">
+        <span id="music-icon-state">🎵</span>
     </button>
 
-    <main class="timer-viewport">
-        <h1 class="header-text">Counting the moments until your day… 💖</h1>
+    <main class="viewport-wrapper">
+        <header>
+            <h1 class="intro-title">Counting the moments until your day… 💖</h1>
+        </header>
 
-        <div class="counter-row">
-            <div class="time-part">
-                <span id="days">00</span>
+        <section class="timer-grid" id="countdown-view">
+            <div class="unit">
+                <span id="d_val">--</span>
                 <p>Days 💕</p>
             </div>
-            <div class="blink-sep">:</div>
-            <div class="time-part">
-                <span id="hours">00</span>
+            <div class="sep">:</div>
+            <div class="unit">
+                <span id="h_val">--</span>
                 <p>Hours 💫</p>
             </div>
-            <div class="blink-sep">:</div>
-            <div class="time-part">
-                <span id="minutes">00</span>
+            <div class="sep">:</div>
+            <div class="unit">
+                <span id="m_val">--</span>
                 <p>Mins 🌸</p>
             </div>
-            <div class="blink-sep">:</div>
-            <div class="time-part">
-                <span id="seconds">00</span>
+            <div class="sep">:</div>
+            <div class="unit">
+                <span id="s_val">--</span>
                 <p>Secs ✨</p>
             </div>
-        </div>
+        </section>
 
-        <div class="bottom-soul">
-            <p class="emotional-sub">Every second brings me closer to celebrating you… 💫</p>
-            <p id="shayari-text" class="shimmer"></p>
-        </div>
+        <footer class="footer-area">
+            <p class="waiting-line">Every second brings me closer to celebrating you… 💫</p>
+            <p id="shayari-inject" class="shimmer-gold"></p>
+        </footer>
     </main>
 
     <script src="https://www.youtube.com/iframe_api"></script>
