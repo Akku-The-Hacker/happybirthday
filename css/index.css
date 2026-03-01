@@ -17,10 +17,22 @@ body { height:100vh; background:#000; font-family:'Poppins', sans-serif; overflo
 .ui-wrapper { height:100vh; display:flex; flex-direction:column; justify-content:space-around; align-items:center; text-align:center; padding:5vh 20px; }
 
 /* Staggered Entrance Animations */
+/* Update this in css/index.css */
 .main-title { 
-    font-family:'Playfair Display', serif; font-size:30px; letter-spacing:0.8px; 
-    text-shadow:0 0 25px rgba(255, 220, 200, 0.8), 0 4px 20px rgba(0,0,0,0.7);
-    opacity:0; animation: stagedFade 1.5s forwards 0.5s; 
+    font-family: 'Playfair Display', serif; 
+    font-size: 30px; 
+    letter-spacing: 0.8px; 
+    
+    /* 1. The Gold Color (using a gradient for premium look) */
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* 2. Adjusted Glow for Gold Text */
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 4px 15px rgba(0,0,0,0.8);
+    
+    opacity: 0; 
+    animation: stagedFade 1.5s forwards 0.5s; 
 }
 .hindi-shimmer {
     font-family:'Playfair Display', serif; font-size:24px; font-weight:500; line-height:1.7; font-style:italic;
