@@ -1,0 +1,106 @@
+:root {
+    --ring-size: 115px;
+    --rose: #ffafbd;
+    --blue: #a1c4fd;
+    --peach: #ffecd2;
+    --gold: #d4af37;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    height: 100vh; background: #000; overflow: hidden; 
+    font-family: 'Poppins', sans-serif; color: #fff;
+    transition: opacity 1.5s ease;
+}
+
+/* Background Layers */
+.bg-wrapper { position: fixed; inset: 0; z-index: -1; }
+.bg-image { 
+    width: 100%; height: 100%; 
+    background: url('../images/Handhold.jpg') no-repeat center center/cover;
+    filter: blur(6px) brightness(0.6); transition: 2s ease;
+}
+.vignette { position: absolute; inset: 0; background: radial-gradient(circle, transparent 20%, #000 100%); }
+
+/* Main Frame */
+.content-frame {
+    height: 100vh; display: flex; flex-direction: column; 
+    justify-content: space-evenly; align-items: center; text-align: center;
+}
+
+.main-heading {
+    font-family: 'Playfair Display', serif; font-weight: 400; font-size: 1.1rem;
+    letter-spacing: 1px; text-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+
+/* --- THE CIRCULAR TIMER GRID --- */
+.timer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Mobile First 2x2 */
+    gap: 25px;
+    perspective: 1000px;
+}
+
+.ring {
+    position: relative;
+    width: var(--ring-size);
+    height: var(--ring-size);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    display: flex; justify-content: center; align-items: center;
+}
+
+.ring-inner { z-index: 5; }
+
+.number-glow {
+    display: block; font-size: 42px; font-weight: 200;
+    line-height: 1; letter-spacing: 2px;
+    animation: numberPulse 2s infinite ease-in-out;
+}
+
+.unit-label {
+    font-size: 11px; text-transform: uppercase; 
+    letter-spacing: 3px; opacity: 0.7; margin-top: 5px;
+}
+
+/* --- ROTATING ARCS --- */
+.rotating-arc {
+    position: absolute; inset: -3px; border-radius: 50%;
+    mask: radial-gradient(transparent 65%, #000 66%);
+    -webkit-mask: radial-gradient(transparent 65%, #000 66%);
+    animation: rotateRing 8s linear infinite;
+}
+
+.arc-rose { background: conic-gradient(from 0deg, var(--rose), transparent 40%); }
+.arc-blue { background: conic-gradient(from 90deg, var(--blue), transparent 40%); }
+.arc-peach { background: conic-gradient(from 180deg, var(--peach), transparent 40%); }
+.arc-gold { background: conic-gradient(from 270deg, var(--gold), transparent 40%); }
+
+/* --- RING GLOWS --- */
+.rose-glow { box-shadow: 0 0 25px rgba(255, 175, 189, 0.2); color: var(--rose); }
+.blue-glow { box-shadow: 0 0 25px rgba(161, 196, 253, 0.2); color: var(--blue); }
+.peach-glow { box-shadow: 0 0 25px rgba(255, 236, 210, 0.2); color: var(--peach); }
+.gold-glow { box-shadow: 0 0 25px rgba(212, 175, 55, 0.2); color: #fff; } /* Number stays white, glow is gold */
+
+/* Floating & Shimmer */
+.float-1 { animation: float 4s ease-in-out infinite; }
+.float-2 { animation: float 4s ease-in-out infinite 1s; }
+
+.shimmer-gold {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic;
+    background: linear-gradient(90deg, #fff, #d4af37, #fff); background-size: 200%;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: glowMove 5s linear infinite; padding: 0 30px; line-height: 1.6;
+}
+
+.music-pill { position: fixed; top: 20px; right: 20px; font-size: 1.4rem; background: none; border: none; cursor: pointer; z-index: 100; }
+
+/* Animations */
+@keyframes rotateRing { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes glowMove { to { background-position: 200% center; } }
+@keyframes numberPulse { 0%, 100% { opacity: 0.9; transform: scale(1); } 50% { opacity: 1; transform: scale(1.03); } }
+
+/* Redirecting Burst */
+.zero-burst { transform: scale(1.1); transition: 2s ease; box-shadow: 0 0 50px #d4af37 !important; }
