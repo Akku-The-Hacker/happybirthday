@@ -2,63 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Counting the Moments...</title>
-    <link rel="stylesheet" href="css/countdown.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counting the Moments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { 
+            background: #000; 
+            color: #fff; 
+            font-family: 'Poppins', sans-serif; 
+            height: 100vh; 
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center; text-align: center;
+        }
+
+        /* Full Screen Background */
+        .bg {
+            position: fixed; inset: 0; z-index: -1;
+            background: url('images/Handhold.jpg') no-repeat center center/cover;
+            filter: blur(5px) brightness(0.7);
+        }
+
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: -1; }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 40px; }
+
+        /* Timer Grid */
+        .timer { display: flex; gap: 15px; justify-content: center; align-items: center; }
+        .unit { width: 70px; }
+        .unit span { font-size: 2.8rem; font-weight: 300; display: block; }
+        .unit p { font-size: 0.7rem; color: #d4af37; text-transform: uppercase; margin-top: 10px; }
+        .sep { font-size: 2rem; opacity: 0.3; padding-bottom: 25px; }
+
+        .shayari { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; margin-top: 50px; padding: 0 20px; color: #ffafbd; }
+    </style>
 </head>
 <body>
 
-    <!-- Debug Log for troubleshooting (Hidden by default) -->
-    <div id="debug-box" style="display:none; position:fixed; top:0; background:rgba(255,0,0,0.8); color:#fff; z-index:9999; font-size:10px; width:100%;"></div>
+    <div class="bg"></div>
+    <div class="overlay"></div>
 
-    <!-- Background Cinema -->
-    <div class="bg-container">
-        <div class="main-bg-photo"></div>
-        <div class="dark-vignette"></div>
-        <div class="layer-fade"></div>
-    </div>
+    <main>
+        <h1>Counting the moments until your day… 💖</h1>
 
-    <!-- Audio (Hidden) -->
-    <div id="audio-anchor"></div>
-    <button class="music-pill" onclick="handleAudioControl()">
-        <span id="music-icon-state">🎵</span>
-    </button>
-
-    <main class="viewport-wrapper">
-        <header>
-            <h1 class="intro-title">Counting the moments until your day… 💖</h1>
-        </header>
-
-        <section class="timer-grid" id="countdown-view">
-            <div class="unit">
-                <span id="d_val">--</span>
-                <p>Days 💕</p>
-            </div>
+        <div class="timer">
+            <div class="unit"><span id="days">00</span><p>Days 💕</p></div>
             <div class="sep">:</div>
-            <div class="unit">
-                <span id="h_val">--</span>
-                <p>Hours 💫</p>
-            </div>
+            <div class="unit"><span id="hours">00</span><p>Hours 💫</p></div>
             <div class="sep">:</div>
-            <div class="unit">
-                <span id="m_val">--</span>
-                <p>Mins 🌸</p>
-            </div>
+            <div class="unit"><span id="minutes">00</span><p>Mins 🌸</p></div>
             <div class="sep">:</div>
-            <div class="unit">
-                <span id="s_val">--</span>
-                <p>Secs ✨</p>
-            </div>
-        </section>
+            <div class="unit"><span id="seconds">00</span><p>Secs ✨</p></div>
+        </div>
 
-        <footer class="footer-area">
-            <p class="waiting-line">Every second brings me closer to celebrating you… 💫</p>
-            <p id="shayari-inject" class="shimmer-gold"></p>
-        </footer>
+        <p class="shayari" id="quote">Saja rakhi hain yaadein, bas tera intezaar hai... ❤️</p>
     </main>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="js/countdown.js"></script>
+    <script>
+        // Set your Target Date Here (Year, Month (0-11), Day, Hour, Min, Sec)
+        const targetDate = new Date(2026, 2, 4, 0, 0, 0).getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            // If time is remaining
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = d.toString().padStart(2, '0');
+                document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+            } else {
+                // If countdown finishes, go to birthday page
+                window.location.href = "main.html";
+            }
+        }
+
+        // Run every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial run
+    </script>
 </body>
 </html>
