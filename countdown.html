@@ -3,66 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Counting the Moments... ❤️</title>
+    <title>Counting the Moments...</title>
     <link rel="stylesheet" href="css/countdown.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- YouTube Hidden Player -->
-    <div id="player"></div>
-
-    <!-- Background System -->
-    <div class="bg-wrapper">
-        <div class="bg-image"></div>
-        <div class="vignette"></div>
-        <div class="gradient-overlay"></div>
-        <div class="sparkles" id="sparkles"></div>
+    <!-- Background Engine -->
+    <div class="background-cinema">
+        <div class="handhold-bg"></div>
+        <div class="fx-vignette"></div>
+        <div class="fx-gradient"></div>
+        <div class="particle-field" id="particles"></div>
     </div>
 
-    <!-- UI Overlay -->
-    <button id="music-toggle" class="music-btn" onclick="toggleMusic()">
-        <span id="music-icon">🎵</span>
+    <!-- YouTube Music Engine (Hidden) -->
+    <div id="yt-music-player"></div>
+    <button id="toggle-music" class="music-controller" onclick="musicToggle()">
+        <span id="music-label">🎵</span>
     </button>
 
-    <main class="countdown-container">
-        
-        <header class="hero-header">
-            <h1 class="fade-up">Counting the moments until your day… 💖</h1>
-        </header>
+    <main class="timer-wrapper">
+        <h1 class="top-heading">Counting the moments until your day… 💖</h1>
 
-        <section class="timer-display" id="timer">
-            <div class="time-unit">
-                <span id="days" class="pulse">00</span>
-                <p>Days 💕</p>
+        <!-- The Numeric Timer -->
+        <div class="countdown-grid" id="main-timer">
+            <div class="time-block">
+                <span id="d" class="number pulse">00</span>
+                <p class="label">Days 💕</p>
             </div>
-            <div class="separator">:</div>
-            <div class="time-unit">
-                <span id="hours" class="pulse">00</span>
-                <p>Hours 💫</p>
+            <div class="sep">:</div>
+            <div class="time-block">
+                <span id="h" class="number pulse">00</span>
+                <p class="label">Hours 💫</p>
             </div>
-            <div class="separator">:</div>
-            <div class="time-unit">
-                <span id="minutes" class="pulse">00</span>
-                <p>Mins 🌸</p>
+            <div class="sep">:</div>
+            <div class="time-block">
+                <span id="m" class="number pulse">00</span>
+                <p class="label">Minutes 🌸</p>
             </div>
-            <div class="separator">:</div>
-            <div class="time-unit">
-                <span id="seconds" class="pulse">00</span>
-                <p>Secs ✨</p>
+            <div class="sep">:</div>
+            <div class="time-block">
+                <span id="s" class="number pulse">00</span>
+                <p class="label">Seconds ✨</p>
             </div>
-        </section>
+        </div>
 
-        <footer class="emotional-footer">
-            <p class="tagline">Every second brings me closer to celebrating you… 💫</p>
-            <div class="shayari-box">
-                <p id="shayari-display" class="shimmer-text"></p>
-            </div>
+        <footer class="romantic-content">
+            <p class="celebration-line">Every second brings me closer to celebrating you… 💫</p>
+            <p id="shayari-box" class="shimmer-text"></p>
         </footer>
-
     </main>
 
-    <!-- YouTube API -->
+    <!-- External API -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="js/countdown.js"></script>
 </body>
