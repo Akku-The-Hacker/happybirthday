@@ -1,68 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Our Eternal Story</title>
-    <link rel="stylesheet" href="css/index.css">
-    <!-- Playfair for Serifs, Poppins for UI -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An Eternal Story</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+
+<style>
+
+/* ------------------ RESET ------------------ */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Cormorant Garamond', serif;
+  height:100vh;
+  overflow:hidden;
+  color:white;
+}
+
+/* ------------------ BACKGROUND ------------------ */
+.background{
+  position:fixed;
+  inset:0;
+  background:url("images/Flower1.jpg") center/cover no-repeat;
+  filter:blur(7px);
+  transform:scale(1.1);
+  z-index:-3;
+}
+
+/* dark overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.7));
+  z-index:-2;
+}
+
+/* floating sparkles */
+.sparkle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  opacity:0.3;
+  animation:float 8s infinite linear;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+/* ------------------ CONTENT ------------------ */
+.container{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+  padding:40px 20px;
+  text-align:center;
+}
+
+/* heading */
+.heading{
+  font-size:26px;
+  font-weight:600;
+  text-shadow:0 0 15px rgba(255,215,180,0.6);
+  animation:fadeIn 1.5s ease forwards;
+  opacity:0;
+}
+
+/* emotional line */
+.line{
+  font-family:'Playfair Display', serif;
+  font-style:italic;
+  font-size:20px;
+  line-height:1.6;
+  margin-top:20px;
+  background:linear-gradient(45deg,#ffd6d6,#fff,#ffb6c1);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:fadeIn 2s ease forwards;
+  opacity:0;
+}
+
+/* dots */
+.dots{
+  display:flex;
+  gap:15px;
+  margin:20px 0;
+}
+
+.dot{
+  width:14px;
+  height:14px;
+  border:1px solid white;
+  border-radius:50%;
+  transition:all 0.3s ease;
+}
+
+.dot.filled{
+  background:#ff9ecb;
+  box-shadow:0 0 12px #ff9ecb;
+  transform:scale(1.2);
+}
+
+/* hint */
+.hint{
+  font-size:14px;
+  opacity:0.6;
+  margin-bottom:10px;
+}
+
+/* numpad */
+.numpad{
+  display:grid;
+  grid-template-columns:repeat(3,80px);
+  gap:15px;
+  justify-content:center;
+  margin-bottom:20px;
+}
+
+.key{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  border:1px solid white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:20px;
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+
+.key:active{
+  transform:scale(0.9);
+  box-shadow:0 0 15px rgba(255,182,193,0.8);
+}
+
+/* animations */
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+/* shake effect */
+.shake{
+  animation:shake 0.4s;
+}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-8px);}
+  75%{transform:translateX(8px);}
+}
+
+</style>
 </head>
 <body>
 
-    <!-- Cinematic Background Layers -->
-    <div class="bg-wrapper">
-        <div class="bg-image"></div>
-        <div class="vignette"></div>
-        <div class="gradient-overlay"></div>
+<div class="background"></div>
+<div class="overlay"></div>
+
+<!-- sparkles -->
+<script>
+for(let i=0;i<25;i++){
+  let s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=5+Math.random()*5+"s";
+  document.body.appendChild(s);
+}
+</script>
+
+<div class="container">
+
+  <div>
+    <div class="heading">An Eternal Story Begins… ✨</div>
+    <div class="line">
+      तेरा कुछ पल का आना… 🌸 <br>
+      मुझे हर पल तेरा कर जाता है 💖✨
     </div>
-    
-    <div class="sparkles" id="sparkles"></div>
+  </div>
 
-    <main class="lock-screen" id="lock-screen">
-        
-        <!-- TOP SECTION: Hero Text -->
-        <header class="hero-area">
-            <h1 class="entry-title">An Eternal Story Begins… ✨</h1>
-        </header>
+  <div>
+    <div class="dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
 
-        <!-- CENTER SECTION: Emotional Anchor -->
-        <article class="poem-area">
-            <p class="hindi-line shimmer">
-                तेरा कुछ पल का आना… 🌸<br>
-                मुझे हर पल तेरा कर जाता है 💖✨
-            </p>
-        </article>
+    <div class="hint">Enter our little secret… ✨</div>
 
-        <!-- PIN SECTION: Indicators & Input -->
-        <section class="auth-area">
-            <div class="pin-indicators" id="pin-dots">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-            
-            <p class="hint-text" id="status-msg">Enter our little secret… ✨</p>
+    <div class="numpad">
+      <div class="key">1</div>
+      <div class="key">2</div>
+      <div class="key">3</div>
+      <div class="key">4</div>
+      <div class="key">5</div>
+      <div class="key">6</div>
+      <div class="key">7</div>
+      <div class="key">8</div>
+      <div class="key">9</div>
+      <div></div>
+      <div class="key">0</div>
+      <div class="key">⌫</div>
+    </div>
+  </div>
 
-            <div class="numpad">
-                <button onclick="append(1)">1</button>
-                <button onclick="append(2)">2</button>
-                <button onclick="append(3)">3</button>
-                <button onclick="append(4)">4</button>
-                <button onclick="append(5)">5</button>
-                <button onclick="append(6)">6</button>
-                <button onclick="append(7)">7</button>
-                <button onclick="append(8)">8</button>
-                <button onclick="append(9)">9</button>
-                <div class="empty"></div>
-                <button onclick="append(0)">0</button>
-                <button class="del" onclick="backspace()">⌫</button>
-            </div>
-        </section>
+</div>
 
-    </main>
+<script>
 
-    <script src="js/index.js"></script>
+const correctPin="7489";
+let input="";
+const dots=document.querySelectorAll(".dot");
+const keys=document.querySelectorAll(".key");
+
+keys.forEach(key=>{
+  key.addEventListener("click",()=>{
+    let val=key.textContent;
+
+    if(val==="⌫"){
+      input=input.slice(0,-1);
+    }else{
+      if(input.length<4){
+        input+=val;
+      }
+    }
+
+    updateDots();
+
+    if(input.length===4){
+      if(input===correctPin){
+        document.querySelector(".line").innerHTML="Unlocking our world… 💫";
+        setTimeout(()=>{
+          window.location.href="countdown.html";
+        },1200);
+      }else{
+        document.body.classList.add("shake");
+        setTimeout(()=>{
+          document.body.classList.remove("shake");
+        },400);
+        input="";
+        updateDots();
+      }
+    }
+
+  });
+});
+
+function updateDots(){
+  dots.forEach((dot,index)=>{
+    dot.classList.toggle("filled",index<input.length);
+  });
+}
+
+</script>
+
 </body>
 </html>
