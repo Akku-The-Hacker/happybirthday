@@ -3,37 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Counting the Moments...</title>
+    <title>The Wait...</title>
     <link rel="stylesheet" href="css/countdown.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="player"></div> <!-- YouTube Music -->
-    <div class="bg-image"></div>
-    <div class="overlay"></div>
+    <div id="yt-player"></div>
+    <div class="bg-wrapper">
+        <div class="bg-image"></div>
+        <div class="vignette"></div>
+    </div>
 
-    <button class="music-toggle" onclick="toggleMusic()">🎵</button>
+    <button class="m-btn" onclick="toggleAudio()">🎵</button>
 
-    <main class="timer-viewport">
-        <h1 class="fade-up">Counting the moments until your day… 💖</h1>
+    <main class="timer-view">
+        <h1 class="header">Counting the moments until your day… 💖</h1>
 
-        <div class="hindi-line">
-            “तेरा कुछ पल का आना… 🌸<br>
-            मुझे हर पल तेरा कर जाता है 💖✨”
+        <div class="timer-numbers" id="timer">
+            <div class="t-block"><span id="days">--</span><p>Days 💕</p></div>
+            <div class="s-sep">:</div>
+            <div class="t-block"><span id="hours">--</span><p>Hours 💫</p></div>
+            <div class="s-sep">:</div>
+            <div class="t-block"><span id="mins">--</span><p>Mins 🌸</p></div>
+            <div class="s-sep">:</div>
+            <div class="t-block"><span id="secs">--</span><p>Secs ✨</p></div>
         </div>
 
-        <div class="timer-display">
-            <div class="unit"><span id="days">--</span><p>Days 💕</p></div>
-            <div class="sep">:</div>
-            <div class="unit"><span id="hours">--</span><p>Hours 💫</p></div>
-            <div class="sep">:</div>
-            <div class="unit"><span id="minutes">--</span><p>Mins 🌸</p></div>
-            <div class="sep">:</div>
-            <div class="unit"><span id="seconds">--</span><p>Secs ✨</p></div>
-        </div>
-
-        <div class="shimmer-area">
-            <p id="shayari-text" class="shimmer"></p>
+        <div class="shayari-box">
+            <p id="shayari" class="shimmer"></p>
         </div>
     </main>
 
