@@ -5,55 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Counting the Moments... ❤️</title>
     <link rel="stylesheet" href="css/countdown.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Cinematic Background -->
+    <!-- YouTube Hidden Player -->
+    <div id="player"></div>
+
+    <!-- Background System -->
     <div class="bg-wrapper">
         <div class="bg-image"></div>
-        <div class="overlay"></div>
+        <div class="vignette"></div>
+        <div class="gradient-overlay"></div>
+        <div class="sparkles" id="sparkles"></div>
     </div>
 
-    <!-- Main Experience -->
-    <main class="content-wrapper">
+    <!-- UI Overlay -->
+    <button id="music-toggle" class="music-btn" onclick="toggleMusic()">
+        <span id="music-icon">🎵</span>
+    </button>
+
+    <main class="countdown-container">
         
-        <header class="top-text">
-            <h2 class="fade-in">Wait for the Magic... ✨</h2>
+        <header class="hero-header">
+            <h1 class="fade-up">Counting the moments until your day… 💖</h1>
         </header>
 
-        <!-- Glass Countdown -->
-        <div class="timer-container">
-            <div class="timer-box">
-                <span id="days">00</span>
+        <section class="timer-display" id="timer">
+            <div class="time-unit">
+                <span id="days" class="pulse">00</span>
                 <p>Days 💕</p>
             </div>
-            <div class="timer-box">
-                <span id="hours">00</span>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span id="hours" class="pulse">00</span>
                 <p>Hours 💫</p>
             </div>
-            <div class="timer-box">
-                <span id="minutes">00</span>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span id="minutes" class="pulse">00</span>
                 <p>Mins 🌸</p>
             </div>
-            <div class="timer-box">
-                <span id="seconds">00</span>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span id="seconds" class="pulse">00</span>
                 <p>Secs ✨</p>
             </div>
-        </div>
+        </section>
 
-        <!-- Heartbeat Pulse Center -->
-        <div class="heart-container">
-            <div class="main-heart">❤️</div>
-        </div>
-
-        <!-- Dynamic Shayari System -->
-        <div class="poetry-reveal">
-            <p id="shayari-text" class="shimmer-text"></p>
-        </div>
+        <footer class="emotional-footer">
+            <p class="tagline">Every second brings me closer to celebrating you… 💫</p>
+            <div class="shayari-box">
+                <p id="shayari-display" class="shimmer-text"></p>
+            </div>
+        </footer>
 
     </main>
 
+    <!-- YouTube API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="js/countdown.js"></script>
 </body>
 </html>
