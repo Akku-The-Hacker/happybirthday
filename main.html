@@ -2,115 +2,109 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Only Yours | Happy Birthday Shona</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Our Eternal Story | Main</title>
     <link rel="stylesheet" href="css/main.css">
-    <!-- Luxury Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Particle Layer (Global Luxury Gold Dust) -->
+    <!-- Global Cinematic Layer -->
     <div id="gold-dust"></div>
 
-    <main class="story-film">
+    <main class="story-scroller">
         
-        <!-- SECTION 1: THE OPENING -->
-        <section class="scene scene-rose active">
-            <div class="media-layer zoom-init" style="background-image: url('images/Handhold.jpg');"></div>
-            <div class="color-grade grading-rose"></div>
-            <div class="vignette"></div>
-            
-            <div class="message-layer">
-                <div class="text-strip">
-                    <p class="stagger-line">Wish you a very, very Happy Birthday, Baccha… 🎂💖</p>
-                    <p class="stagger-line">You may act all mature and strong 💫🤍,</p>
-                    <p class="stagger-line">but you’ll always be my little Baccha at heart 🥺🌸💕</p>
-                    <p class="stagger-line">I hope life gives you everything your heart quietly wishes for 🌷💭</p>
-                </div>
+        <!-- SECTION 1: THE HERO ENTRANCE -->
+        <section class="scene scene-parallax" id="hero">
+            <div class="media-container">
+                <div class="cinematic-img" style="background-image: url('images/Handhold.jpg');"></div>
+                <div class="grade rose-overlay"></div>
+                <div class="heartbeat-aura"></div>
+            </div>
+            <div class="text-content">
+                <div id="hero-typewriter" class="luxury-typewriter"></div>
             </div>
         </section>
 
-        <!-- SECTION 2: THE TEA -->
-        <section class="scene scene-amber">
-            <div class="media-layer" style="background-image: url('images/Tea.jpg');"></div>
-            <div class="steam-wrap"><span></span><span></span><span></span></div>
-            <div class="color-grade grading-amber"></div>
-            <div class="vignette"></div>
-
-            <div class="message-layer">
-                <h2 class="scene-title">Chai aur Tum</h2>
-                <div class="text-strip">
-                    <p class="shayari">
-                        चाय की वो छोटी सी प्याली, और सामने बैठी तुम… ☕🌸<br>
-                        हर घूँट में बस एक ही एहसास था —<br>
-                        <span class="highlight-shimmer">तुम साथ हो</span>, तो हर लम्हा खास है… 💖✨
-                    </p>
-                </div>
+        <!-- SECTION 2: CHAI AUR TUM -->
+        <section class="scene scene-parallax" id="tea">
+            <div class="media-container">
+                <div class="cinematic-img" style="background-image: url('images/Tea.jpg');"></div>
+                <div class="steam-container"><span></span><span></span><span></span></div>
+                <div class="grade amber-overlay"></div>
+            </div>
+            <div class="header-top">
+                <h2 class="scene-title-top gold-sweep">Chai aur Tum</h2>
+            </div>
+            <div class="text-content">
+                <p class="shayari-fade-up">
+                    चाय की वो छोटी सी प्याली, और सामने बैठी तुम… ☕🌸<br>
+                    हर घूँट में बस एक ही एहसास था —<br>
+                    <span class="gold-shimmer-text">तुम साथ हो</span>, तो हर लम्हा खास है… 💖✨
+                </p>
             </div>
         </section>
 
-        <!-- SECTION 3: THE PROMISE -->
-        <section class="scene scene-shadow">
-            <div class="media-layer" style="background-image: url('images/HandonHand.jpg'); object-position: center;"></div>
-            <div class="color-grade grading-cool"></div>
-            <div class="vignette"></div>
-            <div class="glow-halo"></div>
-
-            <div class="message-layer">
-                <div class="text-strip">
-                    <p class="shayari">
-                        हाथों की ये पकड़ बस आज की नहीं… 🤍<br>
-                        ये वादा है हर आने वाले कल का 💫<br>
-                        सफर लंबा हो या मुश्किल, मैं हमेशा साथ रहूँगा… 💖
-                    </p>
-                </div>
+        <!-- SECTION 3: TOGETHER (HAND ON HAND) -->
+        <section class="scene scene-parallax" id="together">
+            <div class="media-container">
+                <div class="cinematic-img" style="background-image: url('images/HandonHand.jpg'); object-position: center;"></div>
+                <div class="hand-halo"></div>
+                <div class="grade shadow-overlay"></div>
+            </div>
+            <div class="text-content bottom-aligned">
+                <p class="shayari-fade-up">
+                    हाथों की ये पकड़ बस आज की नहीं… 🤍<br>
+                    ये वादा है हर आने वाले कल का 💫<br>
+                    सफर लंबा हो या मुश्किल,<br>
+                    मैं हमेशा तुम्हारे साथ रहूँगा… 💖✨
+                </p>
             </div>
         </section>
 
-        <!-- SECTION 4: THE INTIMACY -->
-        <section class="scene scene-crimson" id="intimate-scene">
-            <div class="media-layer interactive-zoom" style="background-image: url('images/Hikkey.jpg');" onclick="triggerIntimacy()"></div>
-            <div class="color-grade grading-crimson" id="crimson-pulse"></div>
-            <div class="vignette"></div>
-
-            <div class="message-layer">
-                <div class="text-strip">
-                    <p class="shayari">
-                        ये बस एक निशान नहीं… 🌹<br>
-                        ये उस पल की कहानी है,<br>
-                        जब मोहब्बत ने शब्दों की ज़रूरत ही नहीं समझी… 💞✨
-                    </p>
-                </div>
+        <!-- SECTION 4: HICKEY (HORIZONTAL FIX) -->
+        <section class="scene scene-parallax horiz-section" id="hickey">
+            <!-- Blur Fill Layers for Horizontal Image -->
+            <div class="mirror-blur" style="background-image: url('images/Hikkey.jpg');"></div>
+            <div class="media-container aspect-respect">
+                <div class="cinematic-img horiz-fit" style="background-image: url('images/Hikkey.jpg');"></div>
+                <div class="grade crimson-pulse"></div>
+            </div>
+            <div class="text-content bottom-aligned">
+                <p class="shayari-fade-up-crimson">
+                    ये बस एक निशान नहीं… 🌹<br>
+                    ये उस पल की कहानी है,<br>
+                    जब मोहब्बत ने शब्दों की ज़रूरत ही नहीं समझी… 💞✨
+                </p>
             </div>
         </section>
 
-        <!-- SECTION 5: THE BLOOM -->
-        <section class="scene scene-pink">
-            <div class="media-layer bloom-effect" style="background-image: url('images/Flower2.jpg');"></div>
-            <div class="color-grade grading-pink"></div>
-            <div class="vignette"></div>
-
-            <div class="message-layer center-content">
-                <h1 class="main-wish-text">Happy Birthday Shona 💖</h1>
-                <p class="ivory-text">आज सिर्फ तुम्हारा दिन नहीं, मेरी खुशियों का भी जश्न है 🌸💫</p>
+        <!-- SECTION 5: THE EMOTIONAL ECHO (FLOWER) -->
+        <section class="scene scene-parallax" id="echo">
+            <div class="media-container">
+                <div class="cinematic-img" style="background-image: url('images/Flower2.jpg');"></div>
+                <div class="grade bloom-overlay"></div>
+            </div>
+            <div class="text-content center-aligned">
+                <h2 class="shimmer-echo-text">Once again wishing you a very very happy birthday Baccha. 💖</h2>
             </div>
         </section>
 
-        <!-- SECTION 6: THE FINALE -->
-        <section class="scene scene-wine">
-            <canvas id="luxury-fireworks"></canvas>
-            <div class="color-grade grading-wine"></div>
-            <div class="vignette"></div>
-            
-            <div class="message-layer center-content">
-                <div class="halo-circle"></div>
+        <!-- SECTION 6: THE FINALE (FOREVER STORY) -->
+        <section class="scene scene-parallax horiz-section" id="forever">
+            <div class="mirror-blur" style="background-image: url('images/Name.jpg');"></div>
+            <div class="media-container aspect-respect">
+                <div class="cinematic-img horiz-fit" style="background-image: url('images/Name.jpg');"></div>
+                <div class="gold-halo-back"></div>
+                <div class="grade wine-overlay"></div>
+                <canvas id="finale-sparkles"></canvas>
+            </div>
+            <div class="text-content center-aligned">
                 <h2 class="scene-title">Our Forever Story ❤️</h2>
-                <p class="ivory-text italic">हर जन्म में, हर मोड़ पर, बस तुम ही मेरी कहानी रहना…</p>
-                
-                <div class="signature-box">
-                    <p class="closing">Only Yours,</p>
-                    <p class="akki-name" id="sig-akki">Akki 🤍</p>
+                <p class="final-lines">हर जन्म में, हर मोड़ पर,<br>बस तुम ही मेरी कहानी रहना… 💖</p>
+                <div class="signature">
+                    <p class="closing-text">Only Yours,</p>
+                    <p class="akki-name">Akki 🤍</p>
                 </div>
             </div>
         </section>
