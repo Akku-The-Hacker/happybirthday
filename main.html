@@ -1,32 +1,79 @@
-<!-- SECTION 4: HICKEY -->
-<section class="cinematic-section horizontal-fix" id="section4" data-scene="hickey">
-    <div class="blur-fill-bg" style="background-image: url('images/Hikkey.jpg');"></div>
-    <div class="overlay-layer crimson-tint"></div>
-    
-    <div class="content-box">
-        <p class="spoiler-line colorful-stylish-text">“A private secret, meant only for us… 🌹”</p>
-        <!-- ADDED ID and ONCLICK FIX -->
-        <div class="bordered-photo-wrapper" id="hickey-reveal" onclick="revealPhoto(this)">
-            <img src="images/Hikkey.jpg" class="main-photo hickey-blur">
-            <div class="tap-hint">TAP TO UNLOCK</div>
-        </div>
-        <div class="typewriter-container" id="tw4"></div>
-    </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For My Baccha | Akki</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
 
-<!-- SECTION 6: FINALE -->
-<section class="cinematic-section horizontal-fix" id="section6" data-scene="closing">
-    <div class="blur-fill-bg" style="background-image: url('images/Name.jpg');"></div>
-    <div class="overlay-layer wine-tint"></div>
-    <canvas id="fireworks-finale"></canvas>
-
-    <div class="content-box">
-        <p class="spoiler-line italic" style="color:#d4af37">“Every ending is a new beginning... ❤️”</p>
-        <div class="bordered-photo-wrapper" onclick="revealPhoto(this)">
-            <img src="images/Name.jpg" class="main-photo hickey-blur">
-            <div class="tap-hint">CLICK TO SEE OUR FOREVER</div>
+    <!-- SECTION 1: ENTRANCE -->
+    <section class="st-scene s-handhold">
+        <canvas id="fw-canvas"></canvas>
+        <div class="full-img" style="background-image: url('images/Handhold.jpg');"></div>
+        <div class="color-layer"></div>
+        <div class="text-content">
+            <h1 class="mega-gold-title" id="typewriter1"></h1>
         </div>
-        <!-- CENTERED FINAL TEXT -->
-        <div class="typewriter-container" id="tw6"></div>
-    </div>
-</section>
+    </section>
+
+    <!-- SECTION 2: CHAI -->
+    <section class="st-scene s-tea">
+        <div id="star-layer"></div>
+        <div class="full-img" style="background-image: url('images/Tea.jpg');"></div>
+        <div class="color-layer tea-shade"></div>
+        <h2 class="top-right-header">Chai aur Tum</h2>
+        <div class="text-content">
+            <div id="typewriter2" class="fullscreen-text"></div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: TOGETHER -->
+    <section class="st-scene s-together">
+        <div id="heart-layer"></div>
+        <div class="full-img" style="background-image: url('images/HandonHand.jpg');"></div>
+        <div class="color-layer cool-shade"></div>
+        <div class="text-content">
+            <div id="typewriter3" class="fullscreen-text pink-shimmer"></div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: HICKEY (CENTERED REVEAL) -->
+    <section class="st-scene s-hickey">
+        <div class="mirror-fill" style="background-image: url('images/Hikkey.jpg');"></div>
+        <div class="text-content">
+            <p class="spoiler-text">“A private secret, meant only for us... 🌹”</p>
+            <div class="reveal-box" onclick="this.classList.toggle('unveiled')">
+                <img src="images/Hikkey.jpg">
+                <div class="mask">TAP TO SEE THE MOMENT</div>
+            </div>
+            <p class="bottom-poetry" id="typewriter4"></p>
+        </div>
+    </section>
+
+    <!-- SECTION 5: THE BIG LETTER (NICKNAMES) -->
+    <section class="st-scene s-letter">
+        <div class="full-img" style="background-image: url('images/Flower2.jpg'); opacity: 0.3;"></div>
+        <div class="text-content text-start">
+            <div id="typewriter5"></div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: FINALE (SIGNATURE) -->
+    <section class="st-scene s-finale">
+        <div class="mirror-fill" style="background-image: url('images/Name.jpg');"></div>
+        <div class="text-content center-finale">
+            <p class="spoiler-text">“Our Story is Infinite... ✨”</p>
+            <div class="reveal-box finale-reveal" onclick="this.classList.toggle('unveiled')">
+                <img src="images/Name.jpg">
+                <div class="mask">UNLOCK FOREVER</div>
+            </div>
+            <div id="typewriter6"></div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
