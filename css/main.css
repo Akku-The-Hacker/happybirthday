@@ -1,91 +1,83 @@
 :root {
-    --gold: #ffcf67;
-    --rose: #ffafbd;
-    --white: #fffcf9;
+    --bright-gold: #ffcf67;
+    --soft-white: #fff6f2;
+    --rose-pink: #ffafbd;
 }
 
 * { margin:0; padding:0; box-sizing: border-box; }
-body { background: #000; color: white; font-family: 'Poppins', sans-serif; }
+body { background: #000; color: #fff; font-family: 'Poppins', sans-serif; }
 
-.page-section {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    padding: 80px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
+.pg-sec { position: relative; width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 60px 0; }
 
-/* Background Handling */
-.media-container { position: absolute; inset:0; z-index: 1; pointer-events: none; }
-.full-img { 
-    width: 100%; height: 100%; 
-    background-size: cover; background-position: center; 
-    filter: brightness(0.5); 
-}
+.media-wrap { position: absolute; inset:0; z-index: 1; pointer-events: none; }
+.full-bg { width:100%; height:100%; background-size:cover; background-position:center; filter: brightness(0.4); }
 
-.content-overlay { position: relative; z-index: 10; width: 100%; text-align: center; }
+.text-layer { position: relative; z-index: 10; width: 100%; text-align: center; padding: 0 20px; }
 
-/* SECTION 1: GRAND GOLDEN */
-.grand-golden-text {
+/* 1️⃣ SECTION 1 */
+.big-gold-text {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    color: var(--gold);
-    text-shadow: 0 0 30px rgba(255, 207, 103, 0.6), 0 4px 15px #000;
-    line-height: 1.2;
+    font-size: 2.8rem;
+    color: var(--bright-gold);
+    text-shadow: 0 0 25px rgba(255, 207, 103, 0.7);
+    line-height: 1.3;
 }
 
-/* SCREEN FILLER TEXT (S2 & S3) */
-.screen-filler-text { padding: 20px; width: 100%; }
-.animate-reveal {
+/* 🔄 TEXT ANIMATION FOR S2 & S3 */
+.flex-v-center { display: flex; flex-direction: column; gap: 40px; }
+.reveal-text {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 1.5s ease;
+    font-size: 2.6rem;
+    opacity: 0; transform: translateY(30px); transition: 1.5s ease;
 }
-.page-section.active .animate-reveal { opacity: 1; transform: translateY(0); }
-.animate-reveal.delayed { transition-delay: 0.8s; }
-.spotlight { color: var(--rose); text-shadow: 0 0 20px var(--rose); }
+.pg-sec.active .reveal-text { opacity: 1; transform: translateY(0); }
+.reveal-text.delayed { transition-delay: 0.6s; }
+.reveal-text.highlight { color: var(--rose-pink); text-shadow: 0 0 20px var(--rose-pink); font-size: 2.8rem; }
 
-/* REVEAL SYSTEM (S4 & S6) */
-.reveal-container {
+/* 📸 HORIZONTAL FULL-WIDTH REVEAL (Fix) */
+.horizontal-reveal-box {
     position: relative;
-    width: 320px;
-    height: 400px;
-    margin: 30px auto;
-    border: 2px solid rgba(255,255,255,0.2);
-    border-radius: 20px;
+    width: 100vw;           /* Pure screen width */
+    height: 300px;         /* Horizontal look */
+    margin: 35px 0;
     overflow: hidden;
     cursor: pointer;
+    background: #111;
 }
-.reveal-photo { width: 100%; height: 100%; object-fit: cover; transition: 1.5s ease; filter: blur(40px); }
-.reveal-blur {
+
+.horizontal-reveal-box img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: blur(45px);     /* Starting blur */
+    transition: 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.blur-shield {
     position: absolute; inset:0;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(0,0,0,0.4); color: white; font-weight: 600; font-size: 14px;
+    background: rgba(0,0,0,0.3); color: #fff;
+    font-size: 0.8rem; letter-spacing: 4px; z-index: 2; transition: 0.5s;
 }
-.reveal-container.revealed .reveal-photo { filter: blur(0); }
-.reveal-container.revealed .reveal-blur { opacity: 0; }
 
-.spoiler-alert { font-size: 0.9rem; font-style: italic; color: var(--gold); margin-bottom: 10px; }
+.horizontal-reveal-box.active img { filter: blur(0); }
+.horizontal-reveal-box.active .blur-shield { opacity: 0; pointer-events: none; }
 
-/* SECTION 5: THE LETTER */
-.mega-letter { max-width: 500px; margin: auto; }
-.nicknames span { 
-    display: block; font-size: 1.8rem; font-weight: 700; margin: 10px 0; 
-    color: var(--white); text-shadow: 0 2px 10px rgba(0,0,0,0.5); 
-}
-.gold-shimmer { font-size: 1.6rem; color: var(--gold); margin-bottom: 40px; }
-.final-line { font-size: 1.5rem; color: var(--gold); margin-top: 30px; font-weight: bold; }
+.spoiler { color: var(--bright-gold); font-style: italic; font-size: 0.9rem; margin-bottom: 10px; }
+.sub-msg { font-size: 1rem; padding: 0 30px; opacity: 0.9; }
 
-/* SIGNATURE */
-.signature-title { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--gold); }
-.author-sign span { font-size: 2.5rem; font-family: 'Great Vibes', cursive; color: var(--gold); }
+/* 📜 S5 MESSAGE STYLE */
+.eco-line { color: #d4af37; font-size: 1.1rem; }
+.shimmer-gold-msg { font-size: 1.8rem; color: var(--bright-gold); margin: 25px 0 40px; line-height: 1.4; }
+.nicknames-list span { display: block; font-size: 2rem; font-weight: 700; margin: 15px 0; text-shadow: 0 4px 10px #000; }
+.long-para p { font-size: 1.2rem; line-height: 1.8; margin: 10px 0; font-style: italic; color: #eee; }
+.main-confess { font-size: 1.5rem !important; color: #ff9ecb !important; font-weight: 600; margin-top: 25px !important; }
+.last-bold { font-size: 1.5rem !important; color: var(--bright-gold) !important; font-weight: 700; }
+
+/* ✍️ S6 SIGNATURE */
+.grand-cursive { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--bright-gold); margin-bottom: 10px; }
+.final-hindi { font-style: italic; opacity: 0.8; font-size: 1.1rem; }
+.yours { margin-top: 30px; font-size: 1.2rem; }
+.yours span { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--bright-gold); }
 
 /* FX LAYERS */
-#fireworks-canvas, .star-field, .heart-field { position: absolute; inset: 0; pointer-events: none; }
+#fireworks-canvas, .star-layer, .heart-layer { position: absolute; inset:0; pointer-events:none; }
