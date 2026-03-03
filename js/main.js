@@ -1,111 +1,72 @@
-// CINEMATIC TEXT CONTENT
-const heroText = `Wish you a very, very Happy Birthday, Baccha… 🎂💖✨\n\nYou may act all mature and strong 💫🤍,\nbut you’ll always be my little Baccha at heart 🥺🌸💕\n\nI hope life gives you everything your heart quietly wishes for —\nand endless reasons to smile 😊✨\n\nThank you for being you… 🤍`;
-
-// Observer for triggering entrance effects
-const sceneOptions = { threshold: 0.5 };
-const sceneObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            if(entry.target.id === 'hero') triggerTypewriter();
-            if(entry.target.id === 'hickey') triggerCrimsonFade();
-            if(entry.target.id === 'forever') startFinalSparkles();
-        }
+// --- INTERSECTION OBSERVER TO TRIGGER FADES ---
+const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('active');
     });
-}, sceneOptions);
+}, { threshold: 0.5 });
 
-document.querySelectorAll('.scene').forEach(s => sceneObserver.observe(s));
+document.querySelectorAll('.page-section').forEach(s => obs.observe(s));
 
-// PARALLAX MOUSE/SCROLL TILT (Subtle 3D Feel)
-window.addEventListener('scroll', () => {
-    let scrolled = window.pageYOffset;
-    document.querySelectorAll('.media-container').forEach(media => {
-        media.style.transform = `translateY(${scrolled * 0.1}px)`;
-    });
-});
+// --- S1 FIREWORKS ENGINE ---
+const fwCanvas = document.getElementById('fireworks-canvas');
+const fwCtx = fwCanvas.getContext('2d');
+fwCanvas.width = window.innerWidth;
+fwCanvas.height = window.innerHeight;
 
-// TYPEWRITER ENGINE
-let typewriterRun = false;
-function triggerTypewriter() {
-    if (typewriterRun) return;
-    typewriterRun = true;
-    let i = 0;
-    const target = document.getElementById('hero-typewriter');
-    function type() {
-        if (i < heroText.length) {
-            target.innerHTML += heroText.charAt(i) === '\n' ? '<br>' : heroText.charAt(i);
-            i++;
-            setTimeout(type, 60);
-        }
+function createFirework() {
+    fwCtx.fillStyle = 'rgba(0,0,0,0.1)';
+    fwCtx.fillRect(0,0,fwCanvas.width, fwCanvas.height);
+    for(let i=0; i<3; i++) {
+        fwCtx.fillStyle = `hsl(${Math.random()*360}, 100%, 70%)`;
+        fwCtx.beginPath();
+        fwCtx.arc(Math.random()*fwCanvas.width, Math.random()*fwCanvas.height, 1.5, 0, Math.PI*2);
+        fwCtx.fill();
     }
-    setTimeout(type, 1500); // 1.5s delay after entrance
+    requestAnimationFrame(createFirework);
 }
+createFirework();
 
-// HICKEY TRANSITION
-function triggerCrimsonFade() {
-    const crimson = document.querySelector('.crimson-pulse');
-    setTimeout(() => {
-        crimson.style.opacity = "1";
-        crimson.style.background = "rgba(100, 0, 0, 0.3)";
-    }, 1000);
+// --- S2 STAR FIELD ---
+function initStars() {
+    const field = document.getElementById('star-field');
+    for(let i=0; i<100; i++){
+        let star = document.createElement('div');
+        star.style.position = 'absolute';
+        star.style.left = Math.random()*100 + '%';
+        star.style.top = Math.random()*100 + '%';
+        star.style.width = '2px'; star.style.height = '2px';
+        star.style.background = '#fff';
+        star.style.borderRadius = '50%';
+        star.style.animation = `twinkle ${Math.random()*5+2}s infinite alternate`;
+        field.appendChild(star);
+    }
 }
+initStars();
 
-// GOLD LUXURY SPARKLES FOR FINALE
-function startFinalSparkles() {
-    const canvas = document.getElementById('finale-sparkles');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particles = [];
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = canvas.height + 10;
-            this.speed = Math.random() * 1.5 + 0.5;
-            this.alpha = Math.random() * 0.8 + 0.2;
-            this.size = Math.random() * 1.5;
-        }
-        draw() {
-            ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
-            ctx.shadowBlur = 5;
-            ctx.shadowColor = "#d4af37";
-            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
-        }
-        update() {
-            this.y -= this.speed;
-            this.alpha -= 0.001;
-        }
+// --- S3 HEART FIELD ---
+function initHearts() {
+    const field = document.getElementById('heart-field');
+    const emojis = ['👩‍❤️‍👨', '💕', '❤️'];
+    for(let i=0; i<15; i++){
+        let heart = document.createElement('div');
+        heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+        heart.style.position = 'absolute';
+        heart.style.left = Math.random()*100 + '%';
+        heart.style.top = Math.random()*100 + '%';
+        heart.style.opacity = '0.2';
+        heart.style.fontSize = Math.random()*20+15 + 'px';
+        heart.style.animation = `float ${Math.random()*10+5}s infinite linear`;
+        field.appendChild(heart);
     }
-
-    function animate() {
-        if (particles.length < 50) particles.push(new Particle());
-        ctx.clearRect(0,0, canvas.width, canvas.height);
-        particles.forEach((p, i) => {
-            p.update(); p.draw();
-            if (p.alpha <= 0) particles.splice(i, 1);
-        });
-        requestAnimationFrame(animate);
-    }
-    animate();
 }
+initHearts();
 
-// 🪄 Gold Dust Generator
-(function initGoldDust() {
-    const dust = document.getElementById('gold-dust');
-    for (let i = 0; i < 15; i++) {
-        const dot = document.createElement('div');
-        dot.style.cssText = `
-            position: fixed; background: #d4af37; opacity: 0.15;
-            width: 1.5px; height: 1.5px; border-radius: 50%;
-            top: ${Math.random() * 100}vh; left: ${Math.random() * 100}vw;
-            pointer-events: none; z-index: 50;
-            animation: drift ${15 + Math.random() * 20}s infinite linear;
-        `;
-        dust.appendChild(dot);
-    }
-})();
-
-const driftStyle = document.createElement('style');
-driftStyle.innerHTML = `@keyframes drift { from { transform: translate(0,0); } to { transform: translate(100px, -200px); } }`;
-document.head.appendChild(driftStyle);
+// CSS Animations Injected
+const styles = `
+@keyframes twinkle { from { opacity: 0; } to { opacity: 0.8; transform: scale(1.2); } }
+@keyframes float { 
+    from { transform: translateY(0); }
+    to { transform: translateY(-100vh); opacity: 0; }
+}
+`;
+const sheet = document.createElement('style'); sheet.innerText = styles; document.head.appendChild(sheet);
