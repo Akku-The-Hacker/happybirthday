@@ -1,73 +1,71 @@
+:root {
+    --gold: #ffcf67;
+    --rose: #ffafbd;
+    --ivory: #fff6f2;
+}
+
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background: #000; color: #fff; font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+body { background: #000; color: #fff; font-family: 'Poppins', sans-serif; overflow-x: hidden; scroll-snap-type: y mandatory; }
 
-.st-scene {
-    min-height: 100vh; width: 100vw; position: relative;
-    display: flex; align-items: center; justify-content: center;
-    padding: 60px 0; /* Padding balanced for content flow */
-    transition: opacity 1.5s ease;
-}
+.scene { height: 100vh; width: 100vw; position: relative; scroll-snap-align: start; overflow: hidden; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 1.5s ease-in; }
+.scene.active { opacity: 1; }
 
-/* Background Fixes */
-.media-box { position: absolute; inset:0; z-index:-2; background-size:cover; background-position:center; filter:brightness(0.5); }
-.mirror-blur-bg { position: absolute; inset:0; background-size:cover; filter: blur(30px) brightness(0.3); z-index:-2; }
+/* 📽️ IMMERSIVE BACKGROUND ENGINE */
+.media-container { position: absolute; inset: 0; z-index: -1; transition: 2s ease-out; }
+.full-img { width: 100%; height: 100%; background-size: cover; background-position: center; filter: brightness(0.65); }
+.hand-focus { background-position: center 60%; }
+.bloom-blur { filter: blur(4px) brightness(0.5); }
 
-/* 1️⃣ SECTION 1 GOLDEN TEXT */
-.mega-gold-shimmer {
-    font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 800;
-    color: #ffcf67; text-shadow: 0 0 25px rgba(255, 207, 103, 0.7); line-height:1.2; padding:0 20px;
-}
+/* Horizontal Handling (Hickey/Name) */
+.horiz-fit .mirror-background { position: absolute; inset:0; background-size:cover; filter: blur(15px) brightness(0.2); transform: scale(1.1); }
+.center-photo { height: 350px !important; display: flex; align-items: center; justify-content: center; position: absolute; top: 25%; }
+.hickey-photo-box, .final-photo { width: 100vw; max-height: 280px; object-fit: cover; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
 
-/* 2️⃣ S2 TOP RIGHT HEADER */
-.top-right-header {
-    position: absolute; top: 40px; right: 25px;
-    font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #ffcf67; z-index: 100;
-}
+/* Zoom Loop Animation */
+.zoom-loop { animation: cinematicZoom 12s infinite alternate linear; }
+@keyframes cinematicZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
 
-/* FULLSCREEN TEXT STYLE (S2 & S3) */
-.screen-filler-style {
-    font-family: 'Playfair Display', serif; font-size: 2.5rem;
-    font-weight: 700; line-height: 1.4; font-style: italic; padding:0 20px;
-}
-.rose-color { color: #ffafbd !important; text-shadow: 0 0 20px #ffafbd; }
+/* 🎭 TEXT STYLING - INTENSE LUXURY */
+.text-layer { position: relative; z-index: 20; width: 85%; pointer-events: none; }
+.center-content { align-self: center; text-align: center; }
+.lower-third { align-self: flex-end; margin-bottom: 12vh; text-align: center; }
+.top-title-area { position: absolute; top: 5vh; width: 100%; text-align: center; z-index: 20; }
 
-/* 📸 HORIZONTAL FULL WIDTH BREADTH FIX */
-.horizontal-reveal-frame {
-    position: relative;
-    width: 100vw;           /* Mobile screen ki poori width legi */
-    height: 300px;         /* Wide cinematic height */
-    margin: 30px 0;
-    overflow: hidden; cursor: pointer;
-    border-top: 1.5px solid rgba(255, 207, 103, 0.5);
-    border-bottom: 1.5px solid rgba(255, 207, 103, 0.5);
-}
-.horizontal-reveal-frame img { width: 100%; height: 100%; object-fit: cover; filter: blur(45px); transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1); }
-.unlocked img { filter: blur(0); }
-.mask { position: absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; font-size:10px; letter-spacing:4px; z-index:5; transition: 0.5s; }
-.unlocked .mask { opacity:0; pointer-events:none; }
-
-/* S4 & S6 POSITIONING */
-.vertical-stack { display:flex; flex-direction:column; align-items:center; width:100%; }
-.spoiler-tag { font-family: 'Playfair Display', serif; color: #ffcf67; font-style: italic; margin-bottom:10px; font-size: 14px; }
-
-/* STYLISH COLORFUL TEXT S4/S5/S6 */
-.stylish-intimacy-msg { font-size: 1.5rem !important; line-height:1.6; color:#ffafbd !important; padding:0 30px; font-style:italic; }
-
-.nick-row { display:block; font-size: 2.1rem; font-weight: 800; margin: 15px 0; line-height:1.1; }
-.n1 { color: #a1c4fd; } .n2 { color: #ffafbd; } .n3 { color: #ffd1dc; } .n4 { color: #fff; } .n5 { color: #ffcf67; }
-
-/* 👑 MASSIVE FINAL SIGNATURE (Only Yours Akki) */
-.finale-box { width: 100%; padding-bottom: 50px; }
-.massive-finale-block { width: 100%; }
-.s6-sig-title { font-family: 'Great Vibes', cursive !important; font-size: 2.5rem !important; color: #ffcf67; margin: 20px 0; display:block; }
-.huge-akki {
-    font-family: 'Great Vibes', cursive !important;
-    font-size: 5rem !important; /* Tera signature bada kar diya bhai */
-    background: linear-gradient(to bottom, #fcf6ba, #bf953f, #aa771c);
+.luxury-title-glow {
+    font-family: 'Playfair Display', serif; font-size: 28px; line-height: 1.8;
+    background: linear-gradient(to right, #ffafbd, #ffecd2, #fff);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.8));
-    display:block; margin-top: 15px;
+    text-shadow: 0 0 25px rgba(255, 100, 160, 0.6), 0 4px 20px rgba(0,0,0,0.8);
 }
 
-/* Animations */
-#fw-canvas, #star-layer, #heart-layer { position: absolute; inset:0; pointer-events:none; z-index: 5; }
+.scene-header { font-family: 'Playfair Display', serif; font-size: 32px; letter-spacing: 2px; }
+.shimmer-gold { animation: goldShimmer 4s infinite linear; background: linear-gradient(90deg, #d4af37, #fff, #d4af37); background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+@keyframes goldShimmer { to { background-position: 200% center; } }
+
+/* Section FX */
+.heartbeat-overlay { position: absolute; inset: 0; background: radial-gradient(circle, rgba(255,0,50,0.1) 0%, transparent 70%); animation: heartbeat 4s infinite ease-in-out; }
+@keyframes heartbeat { 0%, 100% { opacity: 0; transform: scale(0.9); } 50% { opacity: 0.6; transform: scale(1.1); } }
+
+.golden-halo-hands { position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212,175,55,0.3), transparent 70%); z-index: 5; }
+
+/* 👄 HICKEY SCENE INTENSITY */
+.red-pulse-glow { position: absolute; inset:0; box-shadow: inset 0 0 50px rgba(200, 0, 0, 0.5); opacity: 0; transition: 2s; }
+.scene.active .brightness-ramp { animation: focusClear 2s forwards; }
+.scene.active .red-pulse-glow { animation: redGlowOnce 4s forwards 1s; }
+@keyframes focusClear { from { filter: brightness(0.2); } to { filter: brightness(1); } }
+@keyframes redGlowOnce { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
+
+/* 🖋️ SIGNATURE */
+.signature-box { font-family: 'Great Vibes', cursive; font-size: 65px; margin-top: 30px; }
+.akki-name { 
+    background: linear-gradient(to bottom, #fcf6ba, #bf953f);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    opacity: 0;
+}
+.active .akki-name { animation: signatureIn 3s forwards 2s; }
+@keyframes signatureIn { from { opacity: 0; filter: blur(5px); } to { opacity: 1; filter: blur(0); } }
+
+/* Particles */
+#gold-dust-particles span { position: fixed; width: 1.5px; height: 1.5px; background: white; border-radius: 50%; opacity: 0.15; animation: drift 15s infinite linear; pointer-events: none; z-index: 100; }
+@keyframes drift { from { transform: translateY(110vh) translateX(0); } to { transform: translateY(-10vh) translateX(100px); } }
