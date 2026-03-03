@@ -1,89 +1,94 @@
-const CONTENT_SOURCE = {
-    s1: `Wish you a very, very\nHappy Birthday, Baccha… 🎂💖✨\n\nYou may stand strong\nin front of the world 💫🤍,\n\nbut to me, you’ll always be\nmy little Baccha at heart 🥺🌸💕\n\nThank you for being you… 🤍`,
+const FILM_MESSAGES = {
+    s1: `Wish you a very, very Happy Birthday, Baccha… 🎂💖✨\nYou may stand strong in front of the world 💫🤍,\nbut to me, you’ll always be my little Baccha at heart 🥺🌸💕\nMay life gently give you everything your heart quietly dreams of —\nand countless reasons to smile every single day 😊✨\nThank you for being you… just the way you are 🤍`,
     
-    s2: `चाय की वो छोटी सी प्याली,\nऔर सामने बैठी तुम… ☕🌸\n\nहर घूँट में एहसास था —\nतुम साथ हो, तो लम्हा खास hai… 💖✨`,
+    s2: `चाय की वो छोटी सी प्याली, और सामने बैठी तुम… ☕🌸\nहर घूँट में एहसास था —\nतुम साथ हो, तो हर लम्हा खास है… 💖✨`,
     
-    s3: `हाथों की ये पकड़ बस आज की नहीं… 🤍\nये वादा hai हर आने वाले कल का 💫\nमैं हमेशा तुम्हारे साथ रहूँगा… 💖✨`,
+    s3: `हाथों की ये पकड़ बस आज की नहीं… 🤍\nये वादा है हर आने वाले कल का 💫\nमैं हमेशा तुम्हारे साथ रहूँगा… 💖✨`,
     
-    s4: `ये बस एक निशान नहीं… 🌹\nये उस पल ki kahani hai,\njab mohabbat ne shabdo ki zaroorat nahi samjhi… 💞✨`,
+    s4: `ये बस एक निशान नहीं… 🌹\nये उस पल की कहानी है,\nजब मोहब्बत ने शब्दों की ज़रूरत ही नहीं समझी… 💞✨`,
     
-    s5: `<span style="font-size:1.4rem; color:#ffcf67">Once again… 💫</span>\n<span style="font-size:1.8rem; font-weight:800; display:block; margin-bottom:20px;">Wishing You a Very Very Happy Birthday, Baccha… 🎂❤️</span>\n<span class="nick-row n1">Mera Betu… 💙</span><span class="nick-row n2">Meri Shona… 💖</span><span class="nick-row n3">Meri Lado… 🌹</span><span class="nick-row n4">Mera Babu… 🤍</span><span class="nick-row n5">Mera Sabkuch… 💍✨</span>\n\n<span style="font-size:1.6rem; color:#ffafbd; font-weight:600">I Love You beyond words. 💖🔥</span>\n<span style="font-size:1.5rem">Bas tum hi ho. Aur tum hi rahogi. 🤍✨</span>`,
-    
-    s6: `<span class="s6-sig-title">Our Forever Story ❤️</span>\n<span style="font-style:italic; font-size:1.1rem; opacity:0.8">हर जन्म में, हर मोड़ पर,<br>बस तुम ही मेरी कहानी रहना… 💖</span>\n<div class="akki-box" style="margin-top:40px;">\n<span style="font-size:1.5rem">Only Yours,</span>\n<span class="huge-akki">Akki 🤍</span>\n</div>`
+    s5: `Once again... \nWishing You a Very Very Happy Birthday Baccha. 🎂❤️\n\n✨ Mera Betu, Meri Beti, Mera Baccha,\nMeri Shona, Meri Mona, Meri Lado,\nMera Babu, Mera Sabkuch…\n\nI Love You So Much Baccha… 💖`,
+
+    s6: `Our Forever Story ❤️✨\nहर जन्म में, हर मोड़ पर,\nबस तुम ही मेरी कहानी रहना… 💖\n\n<div class='signature-box'><span class='akki-name'>Akki 🤍</span></div>`
 };
 
-// Intersection Observer logic
+// Intersection Observer (Dramatic Triggers)
+const options = { threshold: 0.6 };
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-        if(e.isIntersecting && !e.target.dataset.run) {
-            e.target.dataset.run = "true";
-            const sId = e.target.getAttribute('data-id');
-            const target = document.getElementById(`tw${sId.substring(1)}`);
-            typeWriter(target, CONTENT_SOURCE[sId]);
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            const sceneNum = entry.target.dataset.scene;
+            typeEffect(`tw${sceneNum}`, FILM_MESSAGES[`s${sceneNum}`]);
+            if (sceneNum == 6) launchLuxuryFireworks();
         }
     });
-}, { threshold: 0.5 });
+}, options);
 
-document.querySelectorAll('.st-scene').forEach(s => observer.observe(s));
+document.querySelectorAll('.scene').forEach(scene => observer.observe(scene));
 
-function typeWriter(el, text) {
-    let i = 0;
-    function play() {
-        if (i < text.length) {
-            if (text.charAt(i) === '<') {
-                let end = text.indexOf('>', i) + 1;
-                el.innerHTML += text.substring(i, end);
-                i = end;
-            } else if (text.charAt(i) === '\n') {
-                el.innerHTML += '<br>'; i++;
-            } else {
-                el.innerHTML += text.charAt(i); i++;
-            }
-            setTimeout(play, 50);
+async function typeEffect(id, text) {
+    const el = document.getElementById(id);
+    if (!el || el.dataset.done) return;
+    el.dataset.done = "true";
+
+    const lines = text.split('\n');
+    for (let line of lines) {
+        let p = document.createElement('p');
+        p.style.marginBottom = "10px";
+        p.style.opacity = "0";
+        p.style.transform = "translateY(10px)";
+        p.style.transition = "1s ease";
+        el.appendChild(p);
+        
+        // Custom typewriter line logic
+        for (let i = 0; i <= line.length; i++) {
+            p.innerHTML = line.slice(0, i);
+            p.style.opacity = "1";
+            p.style.transform = "translateY(0)";
+            if(line.includes('तुम साथ हो')) p.style.color = '#ffcf67';
+            await new Promise(r => setTimeout(r, 45));
         }
-    }
-    play();
-}
-
-// Particle Layers Logic (Stars/Hearts/Fireworks)
-function initFx() {
-    // S2 Stars
-    const sLayer = document.getElementById('star-layer');
-    for(let i=0; i<60; i++) {
-        const star = document.createElement('div');
-        star.style.cssText = `position:absolute; width:2px; height:2px; background:white; left:${Math.random()*100}%; top:${Math.random()*100}%; border-radius:50%; animation: blink ${2+Math.random()*2}s infinite alternate; opacity:0.6;`;
-        sLayer.appendChild(star);
-    }
-    // S3 Hearts
-    const hLayer = document.getElementById('heart-layer');
-    for(let i=0; i<12; i++) {
-        const heart = document.createElement('div');
-        heart.innerHTML = "💕";
-        heart.style.cssText = `position:absolute; left:${Math.random()*100}%; top:${Math.random()*100}%; font-size:25px; animation: floatH 6s infinite linear; opacity:0.3;`;
-        hLayer.appendChild(heart);
+        await new Promise(r => setTimeout(r, 800)); // Pacing
     }
 }
-initFx();
 
-// Global Animation Canvas for Fireworks
-const canvas = document.getElementById('fw-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-function fireworks() {
-    ctx.fillStyle = 'rgba(0,0,0,0.08)';
-    ctx.fillRect(0,0,canvas.width, canvas.height);
-    for(let i=0; i<3; i++) {
-        ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 70%)`;
-        ctx.beginPath(); ctx.arc(Math.random()*canvas.width, Math.random()*canvas.height, 1, 0, Math.PI*2); ctx.fill();
+function launchLuxuryFireworks() {
+    const canvas = document.getElementById('luxury-fireworks');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    function create() {
+        if(particles.length > 50) return;
+        const x = Math.random() * canvas.width;
+        const color = Math.random() > 0.5 ? '#ffcf67' : '#ffafbd';
+        for(let i=0; i<30; i++) particles.push({ x, y: canvas.height, dx: Math.random()*4-2, dy: Math.random()*-8-5, c: color, alpha: 1 });
     }
-    requestAnimationFrame(fireworks);
-}
-fireworks();
 
-// Injected Keyframes
-const style = document.createElement('style');
-style.innerHTML = `
-@keyframes blink { from {opacity:0.2;} to {opacity:0.9; transform:scale(1.2);} }
-@keyframes floatH { from {transform:translateY(100vh); opacity:0;} to {transform:translateY(-10vh); opacity:0.5;} }
-`;
-document.head.appendChild(style);
+    function animate() {
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+        particles.forEach((p, i) => {
+            p.x += p.dx; p.y += p.dy; p.dy += 0.15; p.alpha -= 0.01;
+            ctx.fillStyle = p.c;
+            ctx.globalAlpha = p.alpha;
+            ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2); ctx.fill();
+            if(p.alpha <= 0) particles.splice(i, 1);
+        });
+        create();
+        requestAnimationFrame(animate);
+    }
+    animate();
+    setTimeout(() => { document.body.style.background = 'black'; document.body.style.transition='5s'; }, 10000);
+}
+
+// Global Dust Generator
+const dust = document.getElementById('gold-dust-particles');
+for(let i=0; i<30; i++) {
+    const s = document.createElement('span');
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 100 + 'vh';
+    s.style.animationDelay = Math.random() * 10 + 's';
+    dust.appendChild(s);
+}
