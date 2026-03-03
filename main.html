@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Shona | Akki</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,700;1,800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>For My Shona | Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,700;1,800&family=Poppins:wght@300;400;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --s1-gradient: linear-gradient(135deg, #fff 10%, #ffafbd 40%, #ffd700 70%, #ff85a2 100%);
-            --bright-gold: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-            --royal-color: linear-gradient(to right, #ffafbd, #ffc3a0, #ffafbd);
+            --s1-color: linear-gradient(135deg, #fff 10%, #ffafbd 40%, #ffd700 70%, #fff 100%);
+            --stylish-mix: linear-gradient(45deg, #ff9ecb, #fcf6ba, #ff9ecb, #d4af37);
+            --royal-gold: linear-gradient(to bottom, #fcf6ba, #bf953f);
         }
 
         * { margin:0; padding:0; box-sizing: border-box; }
@@ -21,55 +21,66 @@
             padding: 80px 0; text-align: center; overflow: hidden;
         }
 
-        .media-bg { position: absolute; inset:0; z-index: -2; background-size: cover; background-position: center; filter: brightness(0.65) contrast(1.1); }
+        .media-bg { position: absolute; inset:0; z-index: -2; background-size: cover; background-position: center; transition: 0.5s; }
         .content-wrap { position: relative; z-index: 10; width: 100%; padding: 0 25px; }
 
-        /* S1: TEXT DESIGN */
+        /* S1: TEXT DESIGN - Soft Stylish Rose Gold */
         .s1-text { 
-            font-family: 'Playfair Display', serif; font-style: italic; font-weight: 800; font-size: 1.85rem; line-height: 1.6;
-            background: var(--s1-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8)); min-height: 350px;
+            font-family: 'Playfair Display', serif; font-style: italic; font-weight: 800; font-size: 1.8rem; line-height: 1.6;
+            background: var(--s1-color); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.8)); min-height: 400px;
         }
 
         /* OTHERS */
         .header-top-right { position: absolute; top: 40px; right: 25px; font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #FCF6BA; }
         .fill-text { font-family: 'Playfair Display', serif; font-size: 2.2rem; line-height: 1.4; font-weight: 700; margin-bottom: 20px; min-height: 100px;}
-        .highlight { background: var(--royal-color); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .highlight { background: linear-gradient(to right, #ffafbd, #ffc3a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* FULL WIDTH HORIZONTAL BOX */
+        /* PHOTO BOX - Horizontal Aspect Ratio */
         .reveal-frame { 
-            position: relative; width: 100vw; height: 320px; margin: 25px 0; background: #111; overflow: hidden; cursor: pointer; border-top: 1px solid #FFD700; border-bottom: 1px solid #FFD700;
+            position: relative; width: 100vw; height: 300px; margin: 25px 0; background: #111; overflow: hidden; cursor: pointer; border-top: 1px solid rgba(255,255,255,0.2); border-bottom: 1px solid rgba(255,255,255,0.2);
         }
-        .reveal-frame img { width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; filter: blur(50px); transition: 1.2s; }
+        .reveal-frame img { width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; filter: blur(50px); transition: 1.5s; }
         .reveal-frame.active img { filter: blur(0); }
         .tap-msg { position: absolute; inset:0; z-index: 3; display: flex; align-items: center; justify-content: center; font-size: 10px; letter-spacing: 4px; color: #fff; background: rgba(0,0,0,0.4); }
 
-        .s4-poetic { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: #ffafbd; min-height: 80px;}
+        /* STYLISH GRADIENT TEXT FOR S4, S5, S6 */
+        .colorful-font {
+            font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700;
+            background: var(--stylish-mix); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5)); background-size: 200% auto; animation: textMove 5s infinite linear;
+        }
+        @keyframes textMove { to { background-position: 200% center; } }
 
-        /* NICKNAMES & CONFESSION */
+        /* S5 NICKNAMES - POP OF COLOR */
         .nick-box { margin: 20px 0; opacity: 0; transition: 2s ease; }
         .nick-box.visible { opacity: 1; }
         .nick-box span { display: block; font-size: 2.1rem; font-weight: 900; margin: 8px 0; font-family: 'Playfair Display', serif; }
 
-        .signature-box h2 { font-family: 'Great Vibes', cursive; font-size: 4.8rem; background: var(--bright-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px gold); margin-top: 15px; }
+        /* S6: MEGA SIGNATURE (KING SIZE) */
+        .signature-box h2 { 
+            font-family: 'Great Vibes', cursive; font-size: 6rem; /* Huge Size */
+            background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px gold); margin-top: 20px; animation: glowPulse 2s infinite alternate;
+        }
+        @keyframes glowPulse { from { filter: drop-shadow(0 0 10px gold); } to { filter: drop-shadow(0 0 25px #ffafbd); } }
 
-        /* MUSIC CONTROLS */
-        #music-btn { position: fixed; top: 25px; right: 25px; z-index: 1000; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 50%; color: white; cursor: pointer; backdrop-filter: blur(5px); }
+        /* MUSIC TOGGLE */
+        #music-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white; text-shadow: 0 0 10px #000;}
 
-        /* TYPEWRITER CURSOR */
+        /* Typewriter Cursor */
         .typing::after { content: '|'; animation: blinkCursor 0.8s infinite; color: #fff; }
         @keyframes blinkCursor { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- YouTube Hidden Player -->
-    <div id="main-player"></div>
-    <button id="music-btn" onclick="toggleMainMusic()">🎵</button>
+    <div id="yt-container"></div>
+    <button id="music-toggle" onclick="toggleMainMusic()">🎵</button>
 
-    <!-- 1️⃣ HERO -->
+    <!-- 1️⃣ HERO (Updated Clean BG & Message) -->
     <section data-type="type-s1">
-        <div class="media-bg" style="background-image: url('images/Handhold.jpg');"></div>
+        <div class="media-bg" style="background-image: url('images/Handhold.jpg'); filter: brightness(0.65);"></div>
         <div class="content-wrap">
             <h1 class="s1-text typing" id="text-s1"></h1>
         </div>
@@ -77,7 +88,7 @@
 
     <!-- 2️⃣ TEA -->
     <section data-type="type-s2">
-        <div id="star-layer" style="position:absolute; inset:0; pointer-events:none;"></div>
+        <div id="star-layer" style="position:absolute; inset:0;"></div>
         <div class="media-bg" style="background-image: url('images/Tea.jpg'); filter: brightness(0.3);"></div>
         <h2 class="header-top-right">Chai aur Tum</h2>
         <div class="content-wrap">
@@ -88,7 +99,7 @@
 
     <!-- 3️⃣ TOGETHER -->
     <section data-type="type-s3">
-        <div id="heart-layer" style="position:absolute; inset:0; pointer-events:none;"></div>
+        <div id="heart-layer" style="position:absolute; inset:0;"></div>
         <div class="media-bg" style="background-image: url('images/HandonHand.jpg'); filter: brightness(0.35);"></div>
         <div class="content-wrap">
             <p class="fill-text typing" id="text-s3"></p>
@@ -96,23 +107,24 @@
         </div>
     </section>
 
-    <!-- 4️⃣ HICKEY -->
+    <!-- 4️⃣ HICKEY REVEAL -->
     <section data-type="type-s4">
         <div class="content-wrap">
-            <p style="color:#FFD700; margin-bottom:15px; font-style:italic;">“A private secret, meant only for us… 🌹”</p>
+            <p style="color:#FFD700; margin-bottom:10px; font-style:italic;">“A private secret, meant only for us… 🌹”</p>
             <div class="reveal-frame" onclick="this.classList.toggle('active')">
                 <img src="images/Hikkey.jpg">
                 <div class="tap-msg">TAP TO UNLOCK MEMORY</div>
             </div>
-            <p class="s4-poetic typing" id="text-s4"></p>
+            <p class="colorful-font typing" id="text-s4" style="font-size:1.6rem;"></p>
         </div>
     </section>
 
-    <!-- 5️⃣ NICKNAMES -->
+    <!-- 5️⃣ NICKNAMES (STYLISH MESSAGES) -->
     <section data-type="type-s5">
         <div class="media-bg" style="background-image: url('images/Flower2.jpg'); filter: brightness(0.25);"></div>
         <div class="content-wrap">
-            <h2 class="typing" id="text-s5-title" style="font-size: 1.8rem; font-family:'Playfair Display'; color:gold;"></h2>
+            <h2 class="colorful-font typing" id="text-s5-title" style="font-size: 2.1rem; min-height: 120px;"></h2>
+            
             <div class="nick-box" id="nick-reveal">
                 <span style="color: #a1c4fd;">Mera Betu… 💙</span>
                 <span style="color: #ffafbd;">Meri Shona… 💖</span>
@@ -120,54 +132,60 @@
                 <span style="color: #fff;">Mera Babu… 🤍</span>
                 <span style="color: #ffd700;">Mera Sabkuch… 💍✨</span>
             </div>
+
             <div class="long-confession">
-                <p class="typing" id="text-s5-p1" style="font-size:1.1rem; font-style:italic; margin-bottom:10px;"></p>
-                <p class="typing" id="text-s5-p2" style="font-size:1.5rem; color:#ff9ecb; font-weight:700;"></p>
+                <p class="colorful-font typing" id="text-s5-p1" style="font-size:1.3rem; margin-bottom:10px;"></p>
+                <p class="colorful-font typing" id="text-s5-p2" style="font-size:1.7rem; font-weight:900;"></p>
             </div>
         </div>
     </section>
 
-    <!-- 6️⃣ FINALE -->
-    <section data-type="type-s6" id="final-sec">
-        <canvas id="fw-canvas" style="position:absolute; inset:0; z-index:1;"></canvas>
+    <!-- 6️⃣ FINALE (CENTERED SIGNATURE + FIREWORKS) -->
+    <section data-type="type-s6" id="final-page">
+        <canvas id="fw-canvas-s6" style="position:absolute; inset:0; z-index:1;"></canvas>
         <div class="content-wrap" style="display:flex; flex-direction:column; align-items:center;">
             <div class="reveal-frame" onclick="this.classList.toggle('active')">
                 <img src="images/Name.jpg">
                 <div class="tap-msg">REVEAL FOREVER</div>
             </div>
-            <div class="signature-box">
-                <p id="text-s6-msg" class="typing" style="font-size:1.6rem; color:gold;"></p>
-                <p style="margin-top:40px; opacity:0.8;">Only Yours,</p>
+            <div class="signature-box" style="margin-top:20px;">
+                <p id="text-s6-msg" class="colorful-font typing" style="font-size:1.8rem;"></p>
+                <p style="margin-top:50px; opacity:0.8; font-size:1.4rem;">Only Yours,</p>
                 <h2 id="text-s6-name" class="typing"></h2>
             </div>
         </div>
     </section>
 
-    <!-- YouTube API Scripts -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // --- 🎵 MUSIC LOGIC ---
-        const SONG_ID = "orYf6VDtj_k"; 
+        // --- 🎵 IMPROVED MUSIC ENGINE ---
         let player;
+        const SONG_ID = "orYf6VDtj_k";
 
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('main-player', {
-                height: '0', width: '0',
-                videoId: SONG_ID,
-                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': SONG_ID, 'controls': 0, 'modestbranding': 1 },
-                events: { 'onReady': e => { e.target.setVolume(35); e.target.playVideo(); } }
+            player = new YT.Player('yt-container', {
+                height: '0', width: '0', videoId: SONG_ID,
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': SONG_ID, 'controls': 0 },
+                events: { 'onReady': onPlayerReady }
             });
         }
 
-        function toggleMainMusic() {
-            const state = player.getPlayerState();
-            const btn = document.getElementById('music-btn');
-            if (state === 1) { player.pauseVideo(); btn.innerHTML = "🔇"; }
-            else { player.playVideo(); btn.innerHTML = "🎵"; }
+        function onPlayerReady(e) {
+            e.target.setVolume(45);
+            e.target.playVideo();
+            // Force play on first tap (browser hack)
+            const forcePlay = () => { if(player.getPlayerState() !== 1) player.playVideo(); };
+            document.addEventListener('click', forcePlay, { once: true });
+            document.addEventListener('scroll', forcePlay, { once: true });
         }
 
-        // --- ⌨️ TYPEWRITER CONTENT ---
-        const DATA = {
+        function toggleMainMusic() {
+            if(player.getPlayerState() === 1) player.pauseVideo();
+            else player.playVideo();
+        }
+
+        // --- ✍️ TYPEWRITER DATABASE ---
+        const MESSAGES = {
             "text-s1": `Wish you a very, very Happy Birthday, Baccha… 🎂💖✨\nAaj ka din mere liye sirf ek date nahi, ek ehsaas hai… 🌸\nTum ho toh meri duniya mein roshni hai, warna sab kuch adhura sa lagta hai… 💫\nMay life always hold you gently and give you more than you ever dream of… 🤍\nTum meri muskaan ho, meri dua ho, meri sabse khoobsurat wajah ho… 🌹\nStay happy, stay mine… always. 💞✨`,
             "text-s2": "चाय की वो छोटी सी प्याली, \n और सामने बैठी तुम… ☕🌸",
             "text-s2-hl": "तुम साथ ho, तो हर लम्हा खास hai… 💖✨",
@@ -181,72 +199,64 @@
             "text-s6-name": "Akki 🤍"
         };
 
-        async function writeText(id) {
+        async function typewriter(id) {
             const el = document.getElementById(id);
-            if (!el || el.dataset.done) return;
-            el.dataset.done = "true";
-            const msg = DATA[id];
-            for (let i = 0; i < msg.length; i++) {
-                if (msg[i] === "\n") el.innerHTML += "<br>";
-                else el.innerHTML += msg[i];
+            if (!el || el.dataset.ran) return;
+            el.dataset.ran = "true";
+            const text = MESSAGES[id];
+            for (let i = 0; i < text.length; i++) {
+                if (text[i] === "\n") el.innerHTML += "<br>";
+                else el.innerHTML += text[i];
                 await new Promise(r => setTimeout(r, 55));
             }
             el.classList.remove('typing');
-            if(id === 'text-s5-title') document.getElementById('nick-reveal').classList.add('visible');
+            if (id === 'text-s5-title') document.getElementById('nick-reveal').classList.add('visible');
         }
 
-        // Intersection Observer
+        // Intersection Observer (Dramatic Triggers)
         const obs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const sec = entry.target.dataset.type;
-                    if(sec === 'type-s1') writeText('text-s1');
-                    if(sec === 'type-s2') writeText('text-s2').then(() => writeText('text-s2-hl'));
-                    if(sec === 'type-s3') writeText('text-s3').then(() => writeText('text-s3-hl'));
-                    if(sec === 'type-s4') writeText('text-s4');
-                    if(sec === 'type-s5') writeText('text-s5-title').then(()=>writeText('text-s5-p1')).then(()=>writeText('text-s5-p2'));
-                    if(sec === 'type-s6') { 
-                        initFW(); 
-                        writeText('text-s6-msg').then(()=>writeText('text-s6-name')); 
-                    }
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const sec = e.target.dataset.type;
+                    if(sec === 'type-s1') typewriter('text-s1');
+                    if(sec === 'type-s2') typewriter('text-s2').then(()=>typewriter('text-s2-hl'));
+                    if(sec === 'type-s3') typewriter('text-s3').then(()=>typewriter('text-s3-hl'));
+                    if(sec === 'type-s4') typewriter('text-s4');
+                    if(sec === 'type-s5') typewriter('text-s5-title').then(()=>typewriter('text-s5-p1')).then(()=>typewriter('text-s5-p2'));
+                    if(sec === 'type-s6') { startS6FW(); typewriter('text-s6-msg').then(()=>typewriter('text-s6-name')); }
                 }
             });
         }, { threshold: 0.5 });
         document.querySelectorAll('section').forEach(s => obs.observe(s));
 
-        // FX - Star & Hearts
-        for(let i=0; i<50; i++) {
-            const s = document.createElement('div');
-            s.style.cssText = `position:absolute; width:2px; height:2px; background:#fff; left:${Math.random()*100}%; top:${Math.random()*100}%; animation: twinkle 2s infinite; opacity:${Math.random()}`;
+        // FX Engines (Stars & Hearts)
+        for(let i=0;i<40;i++) {
+            let s=document.createElement('div');
+            s.style.cssText=`position:absolute;width:2px;height:2px;background:#fff;left:${Math.random()*100}%;top:${Math.random()*100}%;animation:twinkle ${2+Math.random()*3}s infinite;`;
             document.getElementById('star-layer').appendChild(s);
         }
-        for(let i=0; i<10; i++) {
-            const h = document.createElement('div'); h.innerHTML = "💖";
-            h.style.cssText = `position:absolute; left:${Math.random()*100}%; top:${Math.random()*100}%; animation: float ${5+Math.random()*5}s infinite linear; opacity:0.3; font-size:20px;`;
+        for(let i=0;i<8;i++){
+            let h=document.createElement('div'); h.innerHTML="💖";
+            h.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;animation:fUp ${5+Math.random()*5}s infinite linear;opacity:0.3;font-size:25px;`;
             document.getElementById('heart-layer').appendChild(h);
         }
 
-        // Final Fireworks Logic
-        function initFW() {
-            const cv = document.getElementById('fw-canvas');
+        function startS6FW() {
+            const cv = document.getElementById('fw-canvas-s6');
             const cx = cv.getContext('2d');
             cv.width = window.innerWidth; cv.height = window.innerHeight;
-            function animate() {
+            function draw(){
                 cx.fillStyle = 'rgba(0,0,0,0.1)'; cx.fillRect(0,0,cv.width,cv.height);
                 for(let i=0;i<5;i++){
                     cx.fillStyle=`hsl(${Math.random()*360},100%,70%)`;
-                    cx.beginPath();cx.arc(Math.random()*cv.width,Math.random()*cv.height,1.2,0,Math.PI*2);cx.fill();
-                } requestAnimationFrame(animate);
-            } animate();
+                    cx.beginPath();cx.arc(Math.random()*cv.width,Math.random()*cv.height,1.3,0,Math.PI*2);cx.fill();
+                } requestAnimationFrame(draw);
+            } draw();
         }
 
-        // Global Styles Injection
-        const styleTag = document.createElement('style');
-        styleTag.innerHTML = `
-            @keyframes twinkle { 50% { opacity: 0.2; } }
-            @keyframes float { from { transform: translateY(100vh); } to { transform: translateY(-10vh); opacity:0; } }
-        `;
-        document.head.appendChild(styleTag);
+        const styles = document.createElement('style');
+        styles.innerHTML=`@keyframes twinkle{50%{opacity:0.2}} @keyframes fUp{from{transform:translateY(100vh)}to{transform:translateY(-10vh);opacity:0}}`;
+        document.head.appendChild(styles);
 
     </script>
 </body>
