@@ -2,111 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>An Eternal Story | My Shona</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For My Shona | Birthday</title>
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- SECTION 1: FIREWORKS & GOLDEN TEXT -->
-    <section class="page-section s-handhold">
+    <div id="particles-container"></div>
+
+    <!-- 1️⃣ HANDHOLD SECTION (Fireworks + Golden Text) -->
+    <section class="pg-sec s-hand">
         <canvas id="fireworks-canvas"></canvas>
-        <div class="media-container">
-            <div class="full-img" style="background-image: url('images/Handhold.jpg');"></div>
+        <div class="media-wrap">
+            <div class="full-bg" style="background-image: url('images/Handhold.jpg');"></div>
         </div>
-        <div class="content-overlay">
-            <h1 class="grand-golden-text">
-                Wish you a very, very <br>Happy Birthday, Baccha… 🎂✨
-            </h1>
+        <div class="text-layer">
+            <h1 class="big-gold-text fade-in-up">Wish you a very, very <br>Happy Birthday, Baccha… 🎂✨</h1>
         </div>
     </section>
 
-    <!-- SECTION 2: STARS & FULLSCREEN TEXT -->
-    <section class="page-section s-tea">
-        <div class="star-field" id="star-field"></div>
-        <div class="media-container">
-            <div class="full-img" style="background-image: url('images/Tea.jpg');"></div>
+    <!-- 2️⃣ TEA SECTION (Stars + Screen-Fill Text) -->
+    <section class="pg-sec s-tea">
+        <div class="media-wrap">
+            <div class="full-bg" style="background-image: url('images/Tea.jpg');"></div>
         </div>
-        <div class="content-overlay flex-center">
-            <div class="screen-filler-text">
-                <p class="animate-reveal">चाय की वो छोटी सी प्याली, <br> और सामने बैठी तुम… ☕🌸</p>
-                <p class="animate-reveal delayed">हर घूँट में बस एक ही एहसास था —</p>
-                <p class="animate-reveal spotlight">तुम साथ हो, तो हर लम्हा खास है… 💖✨</p>
+        <div class="star-layer" id="stars"></div>
+        <div class="text-layer flex-v-center">
+            <p class="reveal-text">चाय की वो छोटी सी प्याली, <br> और सामने बैठी तुम… ☕🌸</p>
+            <p class="reveal-text delayed">हर घूँट में बस एक ही एहसास था —</p>
+            <p class="reveal-text highlight">तुम साथ हो, तो हर लम्हा खास है… 💖✨</p>
+        </div>
+    </section>
+
+    <!-- 3️⃣ TOGETHER SECTION (Hearts + Screen-Fill Text) -->
+    <section class="pg-sec s-together">
+        <div class="media-wrap">
+            <div class="full-bg" style="background-image: url('images/HandonHand.jpg');"></div>
+        </div>
+        <div class="heart-layer" id="hearts"></div>
+        <div class="text-layer flex-v-center">
+            <p class="reveal-text">हाथों की ये पकड़ बस आज की नहीं… 🤍</p>
+            <p class="reveal-text delayed">ये वादा है हर आने वाले कल का 💫</p>
+            <p class="reveal-text highlight">मैं हमेशा तुम्हारे साथ रहूँगा… 💖✨</p>
+        </div>
+    </section>
+
+    <!-- 4️⃣ HICKEY SECTION (Horizontal Reveal Fix) -->
+    <section class="pg-sec s-hickey">
+        <div class="text-layer">
+            <p class="spoiler">“A private secret, meant only for us… 🌹”</p>
+            
+            <div class="horizontal-reveal-box" onclick="this.classList.toggle('active')">
+                <div class="blur-shield">TAP TO REVEAL MOMENT</div>
+                <img src="images/Hikkey.jpg" alt="Secret">
+            </div>
+
+            <p class="sub-msg">ये बस एक निशान नहीं… मोहब्बत की वो अनकही कहानी है। 💞✨</p>
+        </div>
+    </section>
+
+    <!-- 5️⃣ FLOWER SECTION (THE BIG MESSAGE) -->
+    <section class="pg-sec s-letter">
+        <div class="media-wrap">
+            <div class="full-bg" style="background-image: url('images/Flower2.jpg'); opacity: 0.3;"></div>
+        </div>
+        <div class="text-layer scroll-letter">
+            <p class="eco-line">Once again… 💫</p>
+            <h2 class="shimmer-gold-msg">Wishing You a Very Very Happy Birthday, Baccha… 🎂❤️</h2>
+            
+            <div class="nicknames-list">
+                <span>Mera Betu… 💙</span>
+                <span>Meri Shona… 💖</span>
+                <span>Meri Lado… 🌹</span>
+                <span>Mera Babu… 🤍</span>
+                <span>Mera Sabkuch… 💍✨</span>
+            </div>
+
+            <div class="long-para">
+                <p>Tum sirf meri mohabbat nahi ho… tum meri zarurat ho 💞</p>
+                <p>meri sukoon ho 🌙 meri dhadkan ho 💓</p>
+                <p>Aur shayad meri takdeer bhi… 🌟</p>
+                <p class="main-confess">I Love You beyond words, beyond time, beyond everything… 💖🔥</p>
+                <p class="last-bold">Bas tum hi ho. Aur tum hi rahogi. 🤍✨</p>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3: HEARTS & SCREEN FILLER -->
-    <section class="page-section s-together">
-        <div class="heart-field" id="heart-field"></div>
-        <div class="media-container">
-            <div class="full-img" style="background-image: url('images/HandonHand.jpg');"></div>
-        </div>
-        <div class="content-overlay flex-center">
-            <div class="screen-filler-text">
-                <p class="animate-reveal">हाथों की ये पकड़ बस आज की नहीं… 🤍</p>
-                <p class="animate-reveal delayed">ये वादा है हर आने वाले कल का 💫</p>
-                <p class="animate-reveal">मैं हमेशा तुम्हारे साथ रहूँगा… 💖✨</p>
+    <!-- 6️⃣ SIGNATURE SECTION (Name Image Reveal) -->
+    <section class="pg-sec s-sig">
+        <div class="text-layer">
+            <p class="spoiler italic">“Every ending is a new beginning of US... 💫”</p>
+            
+            <div class="horizontal-reveal-box" onclick="this.classList.toggle('active')">
+                <div class="blur-shield">UNLOCK OUR FOREVER</div>
+                <img src="images/Name.jpg" alt="Signature">
             </div>
-        </div>
-    </section>
 
-    <!-- SECTION 4: HICKEY REVEAL -->
-    <section class="page-section s-hickey">
-        <div class="content-overlay">
-            <p class="spoiler-alert">“A private secret, meant only for us… 🌹”</p>
-            <div class="reveal-container" onclick="this.classList.toggle('revealed')">
-                <img src="images/Hikkey.jpg" class="reveal-photo">
-                <div class="reveal-blur">TAP TO REVEAL MOMENT</div>
-            </div>
-            <p class="hindi-msg-bottom">ये बस एक निशान नहीं… मोहब्बत की वो अनकही कहानी है। 💞✨</p>
-        </div>
-    </section>
-
-    <!-- SECTION 5: THE BIG LOVE LETTER -->
-    <section class="page-section s-flower">
-        <div class="media-container">
-            <div class="full-img" style="background-image: url('images/Flower2.jpg'); opacity: 0.4;"></div>
-        </div>
-        <div class="content-overlay">
-            <div class="mega-letter">
-                <p class="echo">Once again… 💫</p>
-                <h2 class="gold-shimmer">Wishing You a Very Very Happy Birthday, Baccha… 🎂❤️</h2>
-                
-                <div class="nicknames">
-                    <span>Mera Betu… 💙</span>
-                    <span>Meri Shona… 💖</span>
-                    <span>Meri Lado… 🌹</span>
-                    <span>Mera Babu… 🤍</span>
-                    <span>Mera Sabkuch… 💍✨</span>
-                </div>
-
-                <div class="deep-confession">
-                    <p>Tum sirf meri mohabbat nahi ho… tum meri zarurat ho 💞</p>
-                    <p>meri sukoon ho 🌙 meri dhadkan ho 💓</p>
-                    <p>Aur shayad meri takdeer bhi… 🌟</p>
-                    <br>
-                    <p class="highlight-ivory">I Love You beyond words, beyond time, beyond everything… 💖🔥</p>
-                    <p class="final-line">Bas tum hi ho. Aur tum hi rahogi. 🤍✨</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 6: NAME SIGNATURE REVEAL -->
-    <section class="page-section s-signature">
-        <div class="content-overlay">
-            <p class="spoiler-alert italic">“Every ending is a new beginning of US... 💫”</p>
-            <div class="reveal-container" onclick="this.classList.toggle('revealed')">
-                <img src="images/Name.jpg" class="reveal-photo">
-                <div class="reveal-blur">UNLOCK OUR FOREVER</div>
-            </div>
-            <div class="dramatic-footer">
-                <h2 class="signature-title">Our Forever Story ❤️✨</h2>
-                <p class="final-wish">हर जन्म में, हर मोड़ पर, बस तुम ही मेरी कहानी रहना…</p>
-                <br>
-                <p class="author-sign">Only Yours, <br> <span>Akki 🤍</span></p>
+            <div class="finale-text">
+                <h2 class="grand-cursive">Our Forever Story ❤️✨</h2>
+                <p class="final-hindi">हर जन्म में, हर मोड़ पर, बस तुम ही मेरी कहानी रहना…</p>
+                <p class="yours">Only Yours, <br> <span>Akki 🤍</span></p>
             </div>
         </div>
     </section>
