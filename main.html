@@ -3,89 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Shona ❤️</title>
+    <title>Only Yours | Happy Birthday Shona</title>
     <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Luxury Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Shared Background Canvas for Global FX -->
-    <canvas id="fireworks-canvas"></canvas>
+    <!-- Particle Layer (Global Luxury Gold Dust) -->
+    <div id="gold-dust"></div>
 
-    <div class="story-scroll-container">
-
-        <!-- SECTION 1: HERO BIRTHDAY MESSAGE -->
-        <section class="st-section s-hero" id="sec1">
-            <div class="blurred-mirror" style="background-image: url('images/Handhold.jpg');"></div>
-            <div class="photo-container"><img src="images/Handhold.jpg" alt=""></div>
-            <div class="section-overlay"></div>
-            <div class="content">
-                <p id="long-message" class="typewriter-line"></p>
-                <div class="sparkles-fx"></div>
-            </div>
-        </section>
-
-        <!-- SECTION 2: TEA MEMORY -->
-        <section class="st-section s-tea" id="sec2">
-            <div class="blurred-mirror" style="background-image: url('images/Tea.jpg');"></div>
-            <div class="photo-container"><img src="images/Tea.jpg" alt=""></div>
-            <div class="section-overlay tea-tint"></div>
-            <div class="emoji-particles">☕ 🌸 ☕</div>
-            <div class="content">
-                <p class="hindi-shimmer" id="tea-shayari">चाय की वो छोटी सी प्याली,<br>और सामने बैठी तुम… ☕🌸<br>हर घूँट में बस एक ही एहसास था —<br><span class="glow-word">तुम साथ हो</span>, तो हर लम्हा खास है… 💖✨</p>
-            </div>
-        </section>
-
-        <!-- SECTION 3: ALWAYS TOGETHER -->
-        <section class="st-section s-together" id="sec3">
-            <div class="blurred-mirror" style="background-image: url('images/HandonHand.jpg');"></div>
-            <div class="photo-container zoom-focus"><img src="images/HandonHand.jpg" alt=""></div>
-            <div class="section-overlay"></div>
-            <div class="content">
-                <p class="fade-in-text">“हाथों की ये पकड़ बस आज की नहीं… 🤍<br>ये वादा है हर आने वाले कल का 💫<br>सफर लंबा हो या मुश्किल,<br>मैं हमेशा तुम्हारे साथ रहूँगा… 💖✨”</p>
-            </div>
-        </section>
-
-        <!-- SECTION 4: A SECRET MARK (CLASSY REVEAL) -->
-        <section class="st-section s-mark" id="sec4">
-            <div class="blurred-mirror" style="background-image: url('images/Hikkey.jpg');"></div>
-            <div class="photo-container tap-reveal" onclick="revealPhoto(this)">
-                <img src="images/Hikkey.jpg" class="hickey-img">
-                <div class="heartbeat-dot"></div>
-            </div>
-            <div class="section-overlay red-soft-tint"></div>
-            <div class="content">
-                <p class="hindi-shimmer-red">“ये बस एक निशान नहीं… 🌹<br>ये उस पल की कहानी है,<br>जब मोहब्बत ने शब्दों की ज़रूरत ही नहीं समझी… 💞✨”</p>
-            </div>
-        </section>
-
-        <!-- SECTION 5: BIRTHDAY WISH -->
-        <section class="st-section s-wish" id="sec5">
-            <div class="blurred-mirror" style="background-image: url('images/Flower2.jpg');"></div>
-            <div class="photo-container"><img src="images/Flower2.jpg" alt=""></div>
-            <div class="section-overlay"></div>
-            <div class="content">
-                <h2 class="shimmer-title">Happy Birthday Shona 💖✨</h2>
-                <p class="fade-up-text">आज सिर्फ तुम्हारा दिन नहीं…<br>मेरी खुशियों का भी जश्न है 🌸💫</p>
-            </div>
-        </section>
-
-        <!-- SECTION 6: CLOSING SIGNATURE -->
-        <section class="st-section s-closing" id="sec6">
-            <div class="blurred-mirror" style="background-image: url('images/Name.jpg');"></div>
-            <div class="photo-container"><img src="images/Name.jpg" alt=""></div>
-            <div class="section-overlay dark-romance"></div>
-            <div class="content">
-                <div class="signature-box">
-                    <h3>Our Forever Story ❤️✨</h3>
-                    <p class="poetic-closing">हर जन्म में, हर मोड़ पर,<br>बस तुम ही मेरी कहानी रहना… 💖</p>
-                    <br>
-                    <p class="sig-name">Only Yours,<br><span>Akki 🤍</span></p>
+    <main class="story-film">
+        
+        <!-- SECTION 1: THE OPENING -->
+        <section class="scene scene-rose active">
+            <div class="media-layer zoom-init" style="background-image: url('images/Handhold.jpg');"></div>
+            <div class="color-grade grading-rose"></div>
+            <div class="vignette"></div>
+            
+            <div class="message-layer">
+                <div class="text-strip">
+                    <p class="stagger-line">Wish you a very, very Happy Birthday, Baccha… 🎂💖</p>
+                    <p class="stagger-line">You may act all mature and strong 💫🤍,</p>
+                    <p class="stagger-line">but you’ll always be my little Baccha at heart 🥺🌸💕</p>
+                    <p class="stagger-line">I hope life gives you everything your heart quietly wishes for 🌷💭</p>
                 </div>
             </div>
         </section>
 
-    </div>
+        <!-- SECTION 2: THE TEA -->
+        <section class="scene scene-amber">
+            <div class="media-layer" style="background-image: url('images/Tea.jpg');"></div>
+            <div class="steam-wrap"><span></span><span></span><span></span></div>
+            <div class="color-grade grading-amber"></div>
+            <div class="vignette"></div>
+
+            <div class="message-layer">
+                <h2 class="scene-title">Chai aur Tum</h2>
+                <div class="text-strip">
+                    <p class="shayari">
+                        चाय की वो छोटी सी प्याली, और सामने बैठी तुम… ☕🌸<br>
+                        हर घूँट में बस एक ही एहसास था —<br>
+                        <span class="highlight-shimmer">तुम साथ हो</span>, तो हर लम्हा खास है… 💖✨
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THE PROMISE -->
+        <section class="scene scene-shadow">
+            <div class="media-layer" style="background-image: url('images/HandonHand.jpg'); object-position: center;"></div>
+            <div class="color-grade grading-cool"></div>
+            <div class="vignette"></div>
+            <div class="glow-halo"></div>
+
+            <div class="message-layer">
+                <div class="text-strip">
+                    <p class="shayari">
+                        हाथों की ये पकड़ बस आज की नहीं… 🤍<br>
+                        ये वादा है हर आने वाले कल का 💫<br>
+                        सफर लंबा हो या मुश्किल, मैं हमेशा साथ रहूँगा… 💖
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: THE INTIMACY -->
+        <section class="scene scene-crimson" id="intimate-scene">
+            <div class="media-layer interactive-zoom" style="background-image: url('images/Hikkey.jpg');" onclick="triggerIntimacy()"></div>
+            <div class="color-grade grading-crimson" id="crimson-pulse"></div>
+            <div class="vignette"></div>
+
+            <div class="message-layer">
+                <div class="text-strip">
+                    <p class="shayari">
+                        ये बस एक निशान नहीं… 🌹<br>
+                        ये उस पल की कहानी है,<br>
+                        जब मोहब्बत ने शब्दों की ज़रूरत ही नहीं समझी… 💞✨
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: THE BLOOM -->
+        <section class="scene scene-pink">
+            <div class="media-layer bloom-effect" style="background-image: url('images/Flower2.jpg');"></div>
+            <div class="color-grade grading-pink"></div>
+            <div class="vignette"></div>
+
+            <div class="message-layer center-content">
+                <h1 class="main-wish-text">Happy Birthday Shona 💖</h1>
+                <p class="ivory-text">आज सिर्फ तुम्हारा दिन नहीं, मेरी खुशियों का भी जश्न है 🌸💫</p>
+            </div>
+        </section>
+
+        <!-- SECTION 6: THE FINALE -->
+        <section class="scene scene-wine">
+            <canvas id="luxury-fireworks"></canvas>
+            <div class="color-grade grading-wine"></div>
+            <div class="vignette"></div>
+            
+            <div class="message-layer center-content">
+                <div class="halo-circle"></div>
+                <h2 class="scene-title">Our Forever Story ❤️</h2>
+                <p class="ivory-text italic">हर जन्म में, हर मोड़ पर, बस तुम ही मेरी कहानी रहना…</p>
+                
+                <div class="signature-box">
+                    <p class="closing">Only Yours,</p>
+                    <p class="akki-name" id="sig-akki">Akki 🤍</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <script src="js/main.js"></script>
 </body>
