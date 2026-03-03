@@ -3,75 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Baccha | Akki</title>
+    <title>My Eternal Story | Shona</title>
     <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="particles-overlay"></div>
-    <canvas id="fw-canvas"></canvas>
+    <div id="gold-dust-particles"></div>
 
-    <main class="story-container">
+    <main class="cinematic-film">
         
-        <!-- SECTION 1: HERO -->
-        <section class="st-scene" data-id="s1">
-            <div class="media-box" style="background-image: url('images/Handhold.jpg');"></div>
-            <div class="content">
-                <h1 id="tw1" class="mega-gold-shimmer"></h1>
+        <!-- SECTION 1: HERO BIRTHDAY -->
+        <section class="scene" id="s1" data-scene="1">
+            <div class="media-container">
+                <div class="full-img zoom-loop" style="background-image: url('images/Handhold.jpg');"></div>
+                <div class="heartbeat-overlay"></div>
+            </div>
+            <div class="text-layer center-content">
+                <div id="tw1" class="luxury-title-glow"></div>
             </div>
         </section>
 
-        <!-- SECTION 2: TEA -->
-        <section class="st-scene" data-id="s2">
-            <div id="star-layer"></div>
-            <div class="media-box" style="background-image: url('images/Tea.jpg');"></div>
-            <h2 class="top-right-header">Chai aur Tum</h2>
-            <div class="content flex-fill">
-                <div id="tw2" class="screen-filler-style"></div>
+        <!-- SECTION 2: CHAI AUR TUM -->
+        <section class="scene" id="s2" data-scene="2">
+            <div class="media-container">
+                <div class="full-img" style="background-image: url('images/Tea.jpg');"></div>
+                <div class="steam-wrap"><span></span><span></span><span></span></div>
+                <div class="color-grade amber-grade"></div>
+            </div>
+            <div class="top-title-area">
+                <h2 class="scene-header shimmer-gold">Chai aur Tum</h2>
+            </div>
+            <div class="text-layer lower-third">
+                <div id="tw2" class="poem-text"></div>
             </div>
         </section>
 
-        <!-- SECTION 3: TOGETHER -->
-        <section class="st-scene" data-id="s3">
-            <div id="heart-layer"></div>
-            <div class="media-box" style="background-image: url('images/HandonHand.jpg');"></div>
-            <div class="content flex-fill">
-                <div id="tw3" class="screen-filler-style rose-color"></div>
+        <!-- SECTION 3: TOGETHER (HANDS) -->
+        <section class="scene" id="s3" data-scene="3">
+            <div class="media-container">
+                <div class="full-img hand-focus zoom-loop" style="background-image: url('images/HandonHand.jpg');"></div>
+                <div class="golden-halo-hands"></div>
+                <div class="color-grade together-grade"></div>
+            </div>
+            <div class="text-layer lower-third">
+                <div id="tw3" class="poem-text promise-line"></div>
             </div>
         </section>
 
-        <!-- SECTION 4: HICKEY (IMAGE CENTER - TEXT BELOW) -->
-        <section class="st-scene horiz-fit" data-id="s4">
-            <div class="mirror-blur-bg" style="background-image: url('images/Hikkey.jpg');"></div>
-            <div class="content vertical-stack">
-                <p class="spoiler-tag">“A private secret, meant only for us... 🌹”</p>
-                <div class="horizontal-reveal-frame" onclick="this.classList.toggle('unlocked')">
-                    <img src="images/Hikkey.jpg">
-                    <div class="mask">TAP TO REVEAL</div>
+        <!-- SECTION 4: HICKEY (INTENSE HORIZONTAL) -->
+        <section class="scene horiz-fit" id="s4" data-scene="4">
+            <div class="mirror-background" style="background-image: url('images/Hikkey.jpg');"></div>
+            <div class="media-container center-photo brightness-ramp">
+                <div class="hickey-photo-box">
+                    <img src="images/Hikkey.jpg" alt="Memory">
+                    <div class="red-pulse-glow"></div>
                 </div>
-                <div id="tw4" class="stylish-intimacy-msg"></div>
+            </div>
+            <div class="color-grade crimson-grade"></div>
+            <div class="text-layer lower-third">
+                <div id="tw4" class="intense-crimson-text"></div>
             </div>
         </section>
 
-        <!-- SECTION 5: NICKNAMES (FLOWERS) -->
-        <section class="st-scene" data-id="s5">
-            <div class="media-box" style="background-image: url('images/Flower2.jpg'); opacity:0.3"></div>
-            <div class="content text-start">
-                <div id="tw5" class="nicknames-story"></div>
+        <!-- SECTION 5: THE BIG WISH (FLOWER) -->
+        <section class="scene" id="s5" data-scene="5">
+            <div class="media-container">
+                <div class="full-img bloom-blur zoom-loop" style="background-image: url('images/Flower2.jpg');"></div>
+                <div class="color-grade possessive-pink"></div>
+            </div>
+            <div class="text-layer center-content">
+                <div id="tw5" class="nicknames-letter"></div>
             </div>
         </section>
 
-        <!-- SECTION 6: FINALE (SIGNATURE - AKKI) -->
-        <section class="st-scene horiz-fit" data-id="s6">
-            <div class="mirror-blur-bg" style="background-image: url('images/Name.jpg');"></div>
-            <div class="content vertical-stack finale-box">
-                <p class="spoiler-tag gold-glow-text">“Our Story is Infinite... ✨”</p>
-                <div class="horizontal-reveal-frame" onclick="this.classList.toggle('unlocked')">
-                    <img src="images/Name.jpg">
-                    <div class="mask">UNLOCK FOREVER</div>
-                </div>
-                <div id="tw6" class="massive-finale-block"></div>
+        <!-- SECTION 6: FINALE (NAME SIGNATURE) -->
+        <section class="scene horiz-fit" id="s6" data-scene="6">
+            <div class="mirror-background" style="background-image: url('images/Name.jpg');"></div>
+            <canvas id="luxury-fireworks"></canvas>
+            <div class="media-container center-photo">
+                <div class="name-halo"></div>
+                <img src="images/Name.jpg" class="final-photo">
+            </div>
+            <div class="color-grade wine-grade"></div>
+            <div class="text-layer center-content finale-text-box">
+                <div id="tw6" class="forever-text"></div>
             </div>
         </section>
 
