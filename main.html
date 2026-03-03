@@ -3,96 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>My Eternal Story | Shona</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>An Eternal Story | My Shona</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,700&family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bright-gold: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            --royal-color: linear-gradient(to right, #ffafbd, #ffc3a0, #ffafbd);
+            --luxury-mix: linear-gradient(45deg, #FFD700, #FFF, #FF69B4, #87CEEB);
+        }
+
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: 'Poppins', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* General Section Layout */
+        section { 
+            position: relative; width: 100%; min-height: 100vh; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            padding: 80px 0; text-align: center; overflow: hidden;
+        }
+
+        .media-bg { position: absolute; inset:0; z-index: -2; background-size: cover; background-position: center; filter: brightness(0.4); }
+        .content-wrap { position: relative; z-index: 10; width: 100%; padding: 0 20px; }
+
+        /* S1 - FIREWORKS & BRIGHT GOLD */
+        .s1-text { 
+            font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 800;
+            background: var(--bright-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(184, 134, 11, 0.5); line-height: 1.2;
+        }
+        canvas { position: absolute; inset:0; z-index: -1; }
+
+        /* S2 & S3 - SCREEN FILLING TEXT */
+        .header-top-right { position: absolute; top: 40px; right: 25px; font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #FCF6BA; }
+        .fill-text { font-family: 'Playfair Display', serif; font-size: 2.5rem; line-height: 1.4; font-weight: 700; margin-bottom: 30px; }
+        .highlight { background: var(--royal-color); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .stars, .hearts { position: absolute; inset: 0; pointer-events: none; }
+
+        /* S4 & S6 - HORIZONTAL FULL WIDTH REVEAL */
+        .spoiler-alert { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #FFD700; margin-bottom: 15px; text-shadow: 0 0 10px gold; }
+        
+        .reveal-frame { 
+            position: relative; width: 100vw; height: 320px; margin: 25px 0; 
+            background: #111; overflow: hidden; cursor: pointer; border-top: 1px solid #FFD700; border-bottom: 1px solid #FFD700;
+        }
+        .reveal-frame .mirror-blur { position: absolute; inset: 0; background-size: cover; background-position: center; filter: blur(30px); opacity: 0.5; }
+        .reveal-frame img { width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; filter: blur(50px); transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); }
+        .reveal-frame.active img { filter: blur(0); }
+        .tap-msg { position: absolute; inset:0; z-index: 3; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 4px; color: #fff; background: rgba(0,0,0,0.3); transition: 0.5s; }
+        .reveal-frame.active .tap-msg { opacity: 0; }
+
+        /* S4 - STYLISH POETRY */
+        .s4-poetic { 
+            font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600;
+            background: linear-gradient(to right, #ff758c, #ff7eb3, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* S5 - MEGA MESSAGE (COLOURFUL & STYLISH) */
+        .echo-text { color: #d4af37; font-size: 1.1rem; letter-spacing: 2px; }
+        .big-bday-wish { 
+            font-size: 2rem; font-family: 'Playfair Display', serif; font-weight: 900; margin: 30px 0;
+            background: var(--luxury-mix); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .nick-box { margin: 30px 0; }
+        .nick-box span { display: block; font-size: 2.2rem; font-weight: 900; margin: 10px 0; font-family: 'Playfair Display', serif; }
+        .long-confession p { font-size: 1.2rem; line-height: 1.7; font-style: italic; color: #f2f2f2; margin-bottom: 15px; }
+        .shimmer-end { 
+            font-size: 1.6rem; font-weight: 800; 
+            background: linear-gradient(45deg, #ff00cc, #3333ff, #ff00cc); background-size: 200%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s infinite linear;
+        }
+
+        /* S6 - SPECIAL SIGNATURE (MASSIVE & ROYAL) */
+        .sig-container { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .signature-msg { font-size: 1.8rem; font-family: 'Playfair Display', serif; color: #ffd700; margin-top: 30px; text-shadow: 0 0 15px rgba(255,215,0,0.4); }
+        .the-signature { 
+            font-family: 'Great Vibes', cursive; font-size: 4rem; /* MASSIVE */
+            background: var(--bright-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px gold); margin-top: 20px; animation: float 4s infinite ease-in-out;
+        }
+        .yours-only { font-size: 1.4rem; color: #fff; margin-top: 50px; opacity: 0.8; }
+
+        @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+    </style>
 </head>
 <body>
 
-    <div id="gold-dust-particles"></div>
+    <!-- 1️⃣ HERO FIREWORKS -->
+    <section>
+        <canvas id="fw-canvas"></canvas>
+        <div class="media-bg" style="background-image: url('images/Handhold.jpg');"></div>
+        <div class="content-wrap">
+            <h1 class="s1-text">Wish you a very, very <br>Happy Birthday, Baccha… 🎂✨</h1>
+        </div>
+    </section>
 
-    <main class="cinematic-film">
-        
-        <!-- SECTION 1: HERO BIRTHDAY -->
-        <section class="scene" id="s1" data-scene="1">
-            <div class="media-container">
-                <div class="full-img zoom-loop" style="background-image: url('images/Handhold.jpg');"></div>
-                <div class="heartbeat-overlay"></div>
-            </div>
-            <div class="text-layer center-content">
-                <div id="tw1" class="luxury-title-glow"></div>
-            </div>
-        </section>
+    <!-- 2️⃣ TEA & STARS -->
+    <section>
+        <div class="stars" id="star-layer"></div>
+        <div class="media-bg" style="background-image: url('images/Tea.jpg');"></div>
+        <h2 class="header-top-right">Chai aur Tum</h2>
+        <div class="content-wrap">
+            <p class="fill-text">चाय की वो छोटी सी प्याली, <br> और सामने बैठी तुम… ☕🌸</p>
+            <p class="fill-text highlight">तुम साथ हो, तो हर लम्हा खास है… 💖✨</p>
+        </div>
+    </section>
 
-        <!-- SECTION 2: CHAI AUR TUM -->
-        <section class="scene" id="s2" data-scene="2">
-            <div class="media-container">
-                <div class="full-img" style="background-image: url('images/Tea.jpg');"></div>
-                <div class="steam-wrap"><span></span><span></span><span></span></div>
-                <div class="color-grade amber-grade"></div>
-            </div>
-            <div class="top-title-area">
-                <h2 class="scene-header shimmer-gold">Chai aur Tum</h2>
-            </div>
-            <div class="text-layer lower-third">
-                <div id="tw2" class="poem-text"></div>
-            </div>
-        </section>
+    <!-- 3️⃣ TOGETHER & HEARTS -->
+    <section>
+        <div class="hearts" id="heart-layer"></div>
+        <div class="media-bg" style="background-image: url('images/HandonHand.jpg');"></div>
+        <div class="content-wrap">
+            <p class="fill-text">हाथों की ये पकड़ बस आज की नहीं… 🤍</p>
+            <p class="fill-text highlight">मैं हमेशा तुम्हारे साथ रहूँगा… 💖✨</p>
+        </div>
+    </section>
 
-        <!-- SECTION 3: TOGETHER (HANDS) -->
-        <section class="scene" id="s3" data-scene="3">
-            <div class="media-container">
-                <div class="full-img hand-focus zoom-loop" style="background-image: url('images/HandonHand.jpg');"></div>
-                <div class="golden-halo-hands"></div>
-                <div class="color-grade together-grade"></div>
+    <!-- 4️⃣ HICKEY REVEAL -->
+    <section>
+        <div class="content-wrap">
+            <p class="spoiler-alert">“A private secret, meant only for us… 🌹”</p>
+            <div class="reveal-frame" onclick="this.classList.toggle('active')">
+                <div class="mirror-blur" style="background-image: url('images/Hikkey.jpg');"></div>
+                <img src="images/Hikkey.jpg">
+                <div class="tap-msg">TAP TO UNLOCK MEMORY</div>
             </div>
-            <div class="text-layer lower-third">
-                <div id="tw3" class="poem-text promise-line"></div>
-            </div>
-        </section>
+            <p class="s4-poetic">ये बस एक निशान नहीं… मोहब्बत की वो अनकही कहानी है। 💞✨</p>
+        </div>
+    </section>
 
-        <!-- SECTION 4: HICKEY (INTENSE HORIZONTAL) -->
-        <section class="scene horiz-fit" id="s4" data-scene="4">
-            <div class="mirror-background" style="background-image: url('images/Hikkey.jpg');"></div>
-            <div class="media-container center-photo brightness-ramp">
-                <div class="hickey-photo-box">
-                    <img src="images/Hikkey.jpg" alt="Memory">
-                    <div class="red-pulse-glow"></div>
-                </div>
+    <!-- 5️⃣ THE MEGA FLOWER MESSAGE -->
+    <section>
+        <div class="media-bg" style="background-image: url('images/Flower2.jpg'); opacity: 0.3;"></div>
+        <div class="content-wrap">
+            <p class="echo-text">Once again… 💫</p>
+            <h2 class="big-bday-wish">Wishing You a Very Very Happy Birthday, Baccha… 🎂❤️</h2>
+            
+            <div class="nick-box">
+                <span style="color: #a1c4fd;">Mera Betu… 💙</span>
+                <span style="color: #ffafbd;">Meri Shona… 💖</span>
+                <span style="color: #ffd1dc;">Meri Lado… 🌹</span>
+                <span style="color: #fff;">Mera Babu… 🤍</span>
+                <span style="color: #ffd700;">Mera Sabkuch… 💍✨</span>
             </div>
-            <div class="color-grade crimson-grade"></div>
-            <div class="text-layer lower-third">
-                <div id="tw4" class="intense-crimson-text"></div>
-            </div>
-        </section>
 
-        <!-- SECTION 5: THE BIG WISH (FLOWER) -->
-        <section class="scene" id="s5" data-scene="5">
-            <div class="media-container">
-                <div class="full-img bloom-blur zoom-loop" style="background-image: url('images/Flower2.jpg');"></div>
-                <div class="color-grade possessive-pink"></div>
+            <div class="long-confession">
+                <p>Tum sirf meri mohabbat nahi ho… tum meri zarurat ho 💞 sukoon ho 🌙 dhadkan ho 💓</p>
+                <p>Aur shayad meri takdeer bhi… 🌟</p>
+                <p class="shimmer-end">I Love You beyond words. Bas tum hi ho. 🤍✨</p>
             </div>
-            <div class="text-layer center-content">
-                <div id="tw5" class="nicknames-letter"></div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION 6: FINALE (NAME SIGNATURE) -->
-        <section class="scene horiz-fit" id="s6" data-scene="6">
-            <div class="mirror-background" style="background-image: url('images/Name.jpg');"></div>
-            <canvas id="luxury-fireworks"></canvas>
-            <div class="media-container center-photo">
-                <div class="name-halo"></div>
-                <img src="images/Name.jpg" class="final-photo">
+    <!-- 6️⃣ SIGNATURE NAME REVEAL -->
+    <section>
+        <div class="content-wrap sig-container">
+            <p class="spoiler-alert">“Every ending is a new beginning... ✨”</p>
+            <div class="reveal-frame" onclick="this.classList.toggle('active')">
+                <div class="mirror-blur" style="background-image: url('images/Name.jpg');"></div>
+                <img src="images/Name.jpg">
+                <div class="tap-msg">REVEAL FOREVER</div>
             </div>
-            <div class="color-grade wine-grade"></div>
-            <div class="text-layer center-content finale-text-box">
-                <div id="tw6" class="forever-text"></div>
+
+            <div class="signature-box">
+                <p class="signature-msg">हर जन्म में, बस तुम ही मेरी कहानी रहना… 💖</p>
+                <p class="yours-only">Only Yours,</p>
+                <h2 class="the-signature">Akki 🤍</h2>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+    <script>
+        // FIREWORKS S1
+        const canvas = document.getElementById('fw-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        function fw() {
+            ctx.fillStyle = 'rgba(0,0,0,0.1)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            for(let i=0;i<4;i++){
+                ctx.fillStyle = `hsl(${Math.random()*360},100%,70%)`;
+                ctx.beginPath(); ctx.arc(Math.random()*canvas.width,Math.random()*canvas.height,1.2,0,Math.PI*2); ctx.fill();
+            }
+            requestAnimationFrame(fw);
+        }
+        fw();
 
-    <script src="js/main.js"></script>
+        // STARS S2
+        const stars = document.getElementById('star-layer');
+        for(let i=0;i<60;i++){
+            const s = document.createElement('div');
+            s.style.cssText = `position:absolute; width:2px; height:2px; background:#fff; left:${Math.random()*100}%; top:${Math.random()*100}%; animation: blink ${2+Math.random()*3}s infinite; opacity:${Math.random()}`;
+            stars.appendChild(s);
+        }
+
+        // HEARTS S3
+        const hearts = document.getElementById('heart-layer');
+        for(let i=0;i<10;i++){
+            const h = document.createElement('div');
+            h.innerHTML = i%2==0 ? '💖' : '❤️';
+            h.style.cssText = `position:absolute; left:${Math.random()*100}%; top:${Math.random()*100}%; font-size:20px; animation: floatUp ${5+Math.random()*5}s infinite linear; opacity:0.3`;
+            hearts.appendChild(h);
+        }
+
+        // Inline Styles for Particles
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes blink { 50% { opacity: 0.1; } }
+            @keyframes floatUp { from { transform:translateY(100vh); opacity:0; } to { transform:translateY(-10vh); opacity:0.4; } }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
